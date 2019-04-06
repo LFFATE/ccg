@@ -16,7 +16,7 @@ use Config;
 final class AddonXmlGenerator extends \generators\AbstractGenerator implements ICanNotify
 {
     // readonly
-    private $path = '/app/addons/${addon}/addon.xml';
+    private $path_template = '/app/addons/${addon}/addon.xml';
     private $content;
     private $config;
     private $mediator;
@@ -52,7 +52,7 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
 
         $path = $this->config->get('path')
             . $this->config->get('filesystem.output_path_relative')
-            . str_replace('${addon}', $addon_id, $this->path);
+            . str_replace('${addon}', $addon_id, $this->path_template);
 
         return get_absolute_path($path);
     }
