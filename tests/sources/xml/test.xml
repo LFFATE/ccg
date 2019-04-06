@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+  <id>sd_new_addon</id>
+  <version>4.8.0.1</version>
+  <priority>1000</priority>
+  <position>1</position>
+  <status>active</status>
+  <has_icon>Y</has_icon>
+  <default_language>en</default_language>
+  <supplier>Simtech Development</supplier>
+  <supplier_link>http://www.simtechdev.com</supplier_link>
+  <compatibility>
+    <core_version>
+      <min>4.8.0</min>
+    </core_version>
+    <core_edition>ULTIMATE,MULTIVENDOR</core_edition>
+  </compatibility>
+  <settings layout="separate" edition_type="ROOT,ULT:VENDOR">
+    <sections>
+      <section id="section1">
+        <items></items>
+      </section>
+    </sections>
+  </settings>
+</addon>

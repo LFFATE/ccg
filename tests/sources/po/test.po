@@ -1,0 +1,1066 @@
+msgid ""
+msgstr "Project-Id-Version: tygh\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: English\n"
+"Language: en_US"
+
+msgctxt "Languages::3d_secure"
+msgid "3-D Secure"
+msgstr "3-D Secure"
+
+msgctxt "Languages::404"
+msgid "The 404 Not Found error message"
+msgstr "The 404 Not Found error message"
+
+msgctxt "Languages::block_manager.forbid_changing_layout_in_css_mode"
+msgid "Changing layout when the theme is converted to CSS is not permitted. Please enable LESS mode in the <a target=\"_blank\" class=\"cm-post\" href=\"[url]\">Theme editor</a>."
+msgstr "Changing layout when the theme is converted to CSS is not permitted. Please enable LESS mode in the <a target=\"_blank\" class=\"cm-post\" href=\"[url]\">Theme editor</a>."
+
+msgctxt "Languages::block_manager.add_layout_page"
+msgid "Add layout page"
+msgstr "Add layout page"
+
+msgctxt "Languages::block_manager.editing_layout_page"
+msgid "Editing layout page"
+msgstr "Editing layout page"
+
+msgctxt "Languages::delete_downloadable_product_files_tooltip"
+msgid "If you enable this setting, then importing downloadable products will delete their existing files. If the setting is disabled, the new files of downloadable products will simply be added to existing files."
+msgstr "If you enable this setting, then importing downloadable products will delete their existing files. If the setting is disabled, the new files of downloadable products will simply be added to existing files."
+
+msgctxt "Languages::payments.epdq.tbl_bgcolor"
+msgid "Table background color"
+msgstr "Table background color"
+
+msgctxt "Languages::search_tooltip"
+msgid "Search for products, customers, orders and CMS pages"
+msgstr "Search for products, customers, orders and CMS pages"
+
+msgctxt "Languages::storefront_url"
+msgid "Storefront URL"
+msgstr "Storefront URL"
+
+msgctxt "Languages::ttc_storefront_url"
+msgid "All the storefronts domain names must be associated with the same IP-address. Note: Switch to \"All stores\" to edit"
+msgstr "All the storefronts domain names must be associated with the same IP-address. Note: Switch to \"All stores\" to edit"
+
+msgctxt "Languages::tts_activate_menu_tab_for"
+msgid "The menu item will be shown activated for the specified dispatch."
+msgstr "The menu item will be shown activated for the specified dispatch."
+
+msgctxt "Languages::tts_generate_submenu"
+msgid "The submenu will include child elements of the selected object."
+msgstr "The submenu will include child elements of the selected object."
+
+msgctxt "Languages::tt_views_block_manager_update_block_width"
+msgid "Block width works for blocks located in the group having horizontal direction, for other cases this parameter does not work."
+msgstr "Block width works for blocks located in the group having horizontal direction, for other cases this parameter does not work."
+
+msgctxt "Languages::tt_views_block_manager_update_location_default"
+msgid "One location must be picked as default. Its Top and Bottom containers will be used in all locations."
+msgstr "One location must be picked as default. Its Top and Bottom containers will be used in all locations."
+
+msgctxt "Languages::tt_views_cart_components_carts_search_form_online_only"
+msgid "If enabled, search results include only users who are online at the moment."
+msgstr "If enabled, search results include only users who are online at the moment."
+
+msgctxt "SettingsSections::Appearance"
+msgid "Appearance"
+msgstr "Appearance"
+
+msgctxt "SettingsSections::Company"
+msgid "Company"
+msgstr "Company"
+
+msgctxt "SettingsSections::Emails"
+msgid "E-mails"
+msgstr "E-mails"
+
+msgctxt "SettingsSections::General"
+msgid "General"
+msgstr "General"
+
+msgctxt "SettingsSections::Image_verification"
+msgid "Image verification"
+msgstr "Image verification"
+
+msgctxt "SettingsSections::Logging"
+msgid "Logging"
+msgstr "Logging"
+
+msgctxt "SettingsSections::Reports"
+msgid "Reports"
+msgstr "Reports"
+
+msgctxt "SettingsSections::Security"
+msgid "Security settings"
+msgstr "Security settings"
+
+msgctxt "SettingsSections::Checkout"
+msgid "Checkout"
+msgstr "Checkout"
+
+msgctxt "SettingsSections::Sitemap"
+msgid "Sitemap"
+msgstr "Sitemap"
+
+msgctxt "SettingsSections::Stores"
+msgid "Stores"
+msgstr "Stores"
+
+msgctxt "SettingsSections::Thumbnails"
+msgid "Thumbnails"
+msgstr "Thumbnails"
+
+msgctxt "SettingsSections::Upgrade_center"
+msgid "Upgrade center"
+msgstr "Upgrade center"
+
+msgctxt "SettingsOptions::company_name"
+msgid "Company name"
+msgstr "Company name"
+
+msgctxt "SettingsOptions::secure_admin"
+msgid "Enable secure connection in the administration panel"
+msgstr "Enable secure connection in the administration panel"
+
+msgctxt "SettingsOptions::secure_storefront"
+msgid "Enable secure connection for the storefront"
+msgstr "Enable secure connection for the storefront"
+
+msgctxt "SettingsOptions::keep_https"
+msgid "Keep HTTPS connection once a secure page is visited"
+msgstr "Keep HTTPS connection once a secure page is visited"
+
+msgctxt "SettingsOptions::license_number"
+msgid "License number"
+msgstr "License number"
+
+msgctxt "SettingsOptions::alternative_currency"
+msgid "Alternative currency display format"
+msgstr "Alternative currency display format"
+
+msgctxt "SettingsOptions::company_address"
+msgid "Company address"
+msgstr "Company address"
+
+msgctxt "SettingsOptions::show_cats"
+msgid "Show the 'Categories' section"
+msgstr "Show the 'Categories' section"
+
+msgctxt "SettingsOptions::mailer_send_method"
+msgid "Method of sending e-mails"
+msgstr "Method of sending e-mails"
+
+msgctxt "SettingsOptions::width"
+msgid "Image width"
+msgstr "Image width"
+
+msgctxt "SettingsOptions::log_type_orders"
+msgid "Orders"
+msgstr "Orders"
+
+msgctxt "SettingsOptions::log_type_users"
+msgid "Users"
+msgstr "Users"
+
+msgctxt "SettingsOptions::log_type_products"
+msgid "Products"
+msgstr "Products"
+
+msgctxt "SettingsOptions::log_type_categories"
+msgid "Categories"
+msgstr "Categories"
+
+msgctxt "SettingsOptions::log_type_database"
+msgid "Database"
+msgstr "Database"
+
+msgctxt "SettingsTooltips::secure_storefront"
+msgid "SSL certificate is required to be installed on your server"
+msgstr "SSL certificate is required to be installed on your server"
+
+msgctxt "SettingsTooltips::secure_admin"
+msgid "SSL certificate is required to be installed on your server"
+msgstr "SSL certificate is required to be installed on your server"
+
+msgctxt "SettingsTooltips::store_access_key"
+msgid "Use: http://www.example.com/index.php?store_access_key=key_value"
+msgstr "Use: http://www.example.com/index.php?store_access_key=key_value"
+
+msgctxt "SettingsTooltips::order_start_id"
+msgid "Enter a number between 1 and 10,000,000 (use digits only) or leave empty for auto-filling."
+msgstr "Enter a number between 1 and 10,000,000 (use digits only) or leave empty for auto-filling."
+
+msgctxt "SettingsTooltips::user_multiple_profiles"
+msgid "Shipping and billing addresses"
+msgstr "Shipping and billing addresses"
+
+msgctxt "SettingsTooltips::thumbnail_background_color"
+msgid "Leave empty for transparent background"
+msgstr "Leave empty for transparent background"
+
+msgctxt "SettingsTooltips::secure_auth"
+msgid "SSL certificate is required to be installed on your server"
+msgstr "SSL certificate is required to be installed on your server"
+
+msgctxt "SettingsTooltips::checkout_redirect"
+msgid "When the customer clicks on any Checkout button/link in the store"
+msgstr "When the customer clicks on any Checkout button/link in the store"
+
+msgctxt "SettingsTooltips::store_optimization_dev"
+msgid "Track modifications in real-time and automatically re-cache modified files (works with files modified directly on server, too.) May slightly affect store performance. Recommended to disable on production."
+msgstr "Track modifications in real-time and automatically re-cache modified files (works with files modified directly on server, too.) May slightly affect store performance. Recommended to disable on production."
+
+msgctxt "SettingsTooltips::show_menu_descriptions"
+msgid "If you disable this check box, description of menu items will be hidden"
+msgstr "If you disable this check box, description of menu items will be hidden"
+
+msgctxt "SettingsTooltips::quick_registration"
+msgid "Require only contact information on registration"
+msgstr "Require only contact information on registration"
+
+msgctxt "SettingsVariants::default_products_sorting::position"
+msgid "Default"
+msgstr "Default"
+
+msgctxt "SettingsVariants::feedback_type::manual"
+msgid "Manual feedback"
+msgstr "Manual feedback"
+
+msgctxt "SettingsVariants::feedback_type::auto"
+msgid "Automatic feedback"
+msgstr "Automatic feedback"
+
+msgctxt "SettingsVariants::date_format::%d/%m/%Y"
+msgid "29/09/2005 (day/month/year)"
+msgstr "29/09/2005 (day/month/year)"
+
+msgctxt "SettingsVariants::time_format::%H:%M"
+msgid "15:43"
+msgstr "15:43"
+
+msgctxt "SettingsVariants::allow_anonymous_shopping::allow_shopping"
+msgid "Allow"
+msgstr "Allow"
+
+msgctxt "SettingsVariants::string_type::digits"
+msgid "Digits only"
+msgstr "Digits only"
+
+msgctxt "SettingsVariants::calendar_date_format::month_first"
+msgid "09/30/2008 (month/day/year)"
+msgstr "09/30/2008 (month/day/year)"
+
+msgctxt "SettingsVariants::calendar_week_format::sunday_first"
+msgid "Sunday"
+msgstr "Sunday"
+
+msgctxt "SettingsVariants::address_position::billing_first"
+msgid "Billing first"
+msgstr "Billing first"
+
+msgctxt "SettingsVariants::log_type_general::runtime"
+msgid "Runtime"
+msgstr "Runtime"
+
+msgctxt "SettingsVariants::default_state_update_for_all::not_active"
+msgid "Not Active"
+msgstr "Not Active"
+
+msgctxt "SettingsVariants::date_format::%d-%m-%Y"
+msgid "29-09-2005 (day-month-year)"
+msgstr "29-09-2005 (day-month-year)"
+
+msgctxt "SettingsVariants::time_format::%H.%M"
+msgid "15.43"
+msgstr "15.43"
+
+msgctxt "SettingsVariants::min_order_amount_type::products_with_shippings"
+msgid "Products with shipping"
+msgstr "Products with shipping"
+
+msgctxt "SettingsVariants::allow_anonymous_shopping::hide_add_to_cart"
+msgid "Hide the \"Add to cart\" button"
+msgstr "Hide the \"Add to cart\" button"
+
+msgctxt "SettingsVariants::string_type::letters"
+msgid "Letters only"
+msgstr "Letters only"
+
+msgctxt "SettingsVariants::calendar_date_format::day_first"
+msgid "30/09/2008 (day/month/year)"
+msgstr "30/09/2008 (day/month/year)"
+
+msgctxt "SettingsVariants::calendar_week_format::monday_first"
+msgid "Monday"
+msgstr "Monday"
+
+msgctxt "SettingsVariants::address_position::shipping_first"
+msgid "Shipping first"
+msgstr "Shipping first"
+
+msgctxt "SettingsVariants::log_type_general::deprecated"
+msgid "Deprecated features"
+msgstr "Deprecated features"
+
+msgctxt "SettingsVariants::default_state_update_for_all::active"
+msgid "Active"
+msgstr "Active"
+
+msgctxt "SettingsVariants::date_format::%d.%m.%Y"
+msgid "29.09.2005 (day.month.year)"
+msgstr "29.09.2005 (day.month.year)"
+
+msgctxt "SettingsVariants::time_format::%I:%M %p"
+msgid "3:43 PM"
+msgstr "3:43 PM"
+
+msgctxt "SettingsVariants::min_order_amount_type::only_products"
+msgid "Products"
+msgstr "Products"
+
+msgctxt "SettingsVariants::allow_anonymous_shopping::hide_price_and_add_to_cart"
+msgid "Hide price and the \"Add to cart\" button"
+msgstr "Hide price and the \"Add to cart\" button"
+
+msgctxt "SettingsVariants::string_type::mixed"
+msgid "Mixed"
+msgstr "Mixed"
+
+msgctxt "SettingsVariants::date_format::%m/%d/%Y"
+msgid "09/29/2005 (month/day/year)"
+msgstr "09/29/2005 (month/day/year)"
+
+msgctxt "SettingsVariants::time_format::%I.%M %p"
+msgid "3.43 PM"
+msgstr "3.43 PM"
+
+msgctxt "SettingsVariants::log_type_orders::create"
+msgid "Create"
+msgstr "Create"
+
+msgctxt "SettingsVariants::log_type_orders::delete"
+msgid "Delete"
+msgstr "Delete"
+
+msgctxt "SettingsVariants::log_type_orders::update"
+msgid "Update"
+msgstr "Update"
+
+msgctxt "SettingsVariants::log_type_products::create"
+msgid "Create"
+msgstr "Create"
+
+msgctxt "SettingsVariants::log_type_products::delete"
+msgid "Delete"
+msgstr "Delete"
+
+msgctxt "SettingsVariants::log_type_products::update"
+msgid "Update"
+msgstr "Update"
+
+msgctxt "SettingsVariants::log_type_users::create"
+msgid "Create"
+msgstr "Create"
+
+msgctxt "SettingsVariants::log_type_users::delete"
+msgid "Delete"
+msgstr "Delete"
+
+msgctxt "SettingsVariants::log_type_users::update"
+msgid "Update"
+msgstr "Update"
+
+msgctxt "SettingsVariants::log_type_categories::create"
+msgid "Create"
+msgstr "Create"
+
+msgctxt "SettingsVariants::log_type_categories::delete"
+msgid "Delete"
+msgstr "Delete"
+
+msgctxt "SettingsVariants::log_type_categories::update"
+msgid "Update"
+msgstr "Update"
+
+
+msgctxt "SettingsVariants::date_format::%m-%d-%Y"
+msgid "09-29-2005 (month-day-year)"
+msgstr "09-29-2005 (month-day-year)"
+
+msgctxt "SettingsVariants::time_format::%H:%M:%S"
+msgid "15:43:55"
+msgstr "15:43:55"
+
+msgctxt "SettingsVariants::month::%B, %Y"
+msgid "January, 2006"
+msgstr "January, 2006"
+
+msgctxt "SettingsVariants::log_type_orders::status"
+msgid "Change"
+msgstr "Change"
+
+msgctxt "SettingsVariants::log_type_users::session"
+msgid "Session"
+msgstr "Session"
+
+msgctxt "SettingsVariants::log_type_users::failed_login"
+msgid "Failed logins"
+msgstr "Failed logins"
+
+msgctxt "SettingsVariants::log_type_products::low_stock"
+msgid "Low stock"
+msgstr "Low stock"
+
+msgctxt "SettingsVariants::log_type_database::restore"
+msgid "Restore"
+msgstr "Restore"
+
+msgctxt "SettingsVariants::log_type_database::backup"
+msgid "Backup"
+msgstr "Backup"
+
+msgctxt "SettingsVariants::log_type_database::optimize"
+msgid "Optimize"
+msgstr "Optimize"
+
+msgctxt "SettingsVariants::log_type_database::error"
+msgid "Errors"
+msgstr "Errors"
+
+msgctxt "SettingsVariants::log_type_requests::http"
+msgid "HTTP/HTTPS"
+msgstr "HTTP/HTTPS"
+
+msgctxt "SettingsVariants::date_format::%m.%d.%Y"
+msgid "09.29.2005 (month.day.year)"
+msgstr "09.29.2005 (month.day.year)"
+
+msgctxt "SettingsVariants::time_format::%H.%M.%S"
+msgid "15.43.55"
+msgstr "15.43.55"
+
+msgctxt "SettingsVariants::date_format::%Y/%m/%d"
+msgid "2005/09/29 (year/month/day)"
+msgstr "2005/09/29 (year/month/day)"
+
+msgctxt "SettingsVariants::time_format::%I:%M:%S %p"
+msgid "3:43:55 PM"
+msgstr "3:43:55 PM"
+
+msgctxt "SettingsVariants::date_format::%Y-%m-%d"
+msgid "2005-09-29 (year-month-day)"
+msgstr "2005-09-29 (year-month-day)"
+
+msgctxt "SettingsVariants::time_format::%I.%M.%S %p"
+msgid "3.43.55 PM"
+msgstr "3.43.55 PM"
+
+msgctxt "SettingsVariants::date_format::%Y.%m.%d"
+msgid "2005.09.29 (year.month.day)"
+msgstr "2005.09.29 (year.month.day)"
+
+msgctxt "SettingsVariants::exception_style::hide"
+msgid "Hide exception"
+msgstr "Hide exception"
+
+msgctxt "SettingsVariants::alternative_currency::use_only_selected"
+msgid "Show prices in selected currency only"
+msgstr "Show prices in selected currency only"
+
+msgctxt "SettingsVariants::date_format::%b %e, %Y"
+msgid "Sep 29, 2005 (month day, year)"
+msgstr "Sep 29, 2005 (month day, year)"
+
+msgctxt "SettingsVariants::default_products_sorting::product"
+msgid "Product name"
+msgstr "Product name"
+
+msgctxt "SettingsVariants::day::%a, %b %e"
+msgid "Tue, Jan 3"
+msgstr "Tue, Jan 3"
+
+msgctxt "SettingsVariants::week::%U"
+msgid "1 week"
+msgstr "1 week"
+
+msgctxt "SettingsVariants::month::%B"
+msgid "January"
+msgstr "January"
+
+msgctxt "SettingsVariants::year::%Y"
+msgid "2006"
+msgstr "2006"
+
+msgctxt "SettingsVariants::mailer_send_method::smtp"
+msgid "via SMTP server"
+msgstr "via SMTP server"
+
+msgctxt "SettingsVariants::timezone::Etc/GMT+12"
+msgid "(GMT-12:00) International Date Line West"
+msgstr "(GMT-12:00) International Date Line West"
+
+msgctxt "SettingsVariants::tax_calculation::unit_price"
+msgid "Unit price"
+msgstr "Unit price"
+
+msgctxt "SettingsVariants::date_format::%d %b %Y"
+msgid "29 Sep 2005 (day month year)"
+msgstr "29 Sep 2005 (day month year)"
+
+msgctxt "SettingsVariants::date_format::%A, %B %e, %Y"
+msgid "Thursday, September 29, 2005 (day of week, month day, year)"
+msgstr "Thursday, September 29, 2005 (day of week, month day, year)"
+
+msgctxt "SettingsVariants::date_format::%A, %e %B %Y"
+msgid "Thursday, 29 September 2005 (day of week, day month year)"
+msgstr "Thursday, 29 September 2005 (day of week, day month year)"
+
+msgctxt "SettingsVariants::day::%B %e, %Y"
+msgid "January 3, 2006"
+msgstr "January 3, 2006"
+
+msgctxt "SettingsVariants::exception_style::warning"
+msgid "Show warning on exception"
+msgstr "Show warning on exception"
+
+msgctxt "SettingsVariants::alternative_currency::use_selected_and_alternative"
+msgid "Show prices in default and selected currencies"
+msgstr "Show prices in default and selected currencies"
+
+msgctxt "SettingsVariants::default_products_sorting::price"
+msgid "Price"
+msgstr "Price"
+
+msgctxt "SettingsVariants::day::%m.%e.%y"
+msgid "01.03.06"
+msgstr "01.03.06"
+
+msgctxt "SettingsVariants::week::%m.%e"
+msgid "01.03"
+msgstr "01.03"
+
+msgctxt "SettingsVariants::month::%m"
+msgid "01"
+msgstr "01"
+
+msgctxt "SettingsVariants::year::%y"
+msgid "06"
+msgstr "06"
+
+msgctxt "SettingsVariants::mailer_send_method::mail"
+msgid "via php mail function"
+msgstr "via php mail function"
+
+msgctxt "SettingsVariants::timezone::Pacific/Apia"
+msgid "(GMT-11:00) Midway Island, Samoa"
+msgstr "(GMT-11:00) Midway Island, Samoa"
+
+msgctxt "SettingsVariants::tax_calculation::subtotal"
+msgid "Subtotal"
+msgstr "Subtotal"
+
+msgctxt "SettingsVariants::default_products_sorting::null"
+msgid "None"
+msgstr "None"
+
+msgctxt "SettingsVariants::day::%a %b %e, %Y"
+msgid "Tue Jan 3, 2006"
+msgstr "Tue Jan 3, 2006"
+
+msgctxt "SettingsVariants::week::%U, %b"
+msgid "1, Jan"
+msgstr "1, Jan"
+
+msgctxt "SettingsVariants::month::%b"
+msgid "Jan"
+msgstr "Jan"
+
+msgctxt "SettingsVariants::mailer_send_method::sendmail"
+msgid "via sendmail program"
+msgstr "via sendmail program"
+
+msgctxt "SettingsVariants::timezone::Pacific/Honolulu"
+msgid "(GMT-10:00) Hawaii"
+msgstr "(GMT-10:00) Hawaii"
+
+msgctxt "SettingsVariants::day::%b %e"
+msgid "Jan 3"
+msgstr "Jan 3"
+
+msgctxt "SettingsVariants::month::%m-%Y"
+msgid "01-2006"
+msgstr "01-2006"
+
+msgctxt "SettingsVariants::timezone::America/Anchorage"
+msgid "(GMT-09:00) Alaska"
+msgstr "(GMT-09:00) Alaska"
+
+msgctxt "SettingsVariants::timezone::America/Los_Angeles"
+msgid "(GMT-08:00) Pacific Time (US & Canada); Tijuana"
+msgstr "(GMT-08:00) Pacific Time (US & Canada); Tijuana"
+
+msgctxt "SettingsVariants::timezone::America/Denver"
+msgid "(GMT-07:00) Mountain Time (US & Canada)"
+msgstr "(GMT-07:00) Mountain Time (US & Canada)"
+
+msgctxt "SettingsVariants::timezone::America/Chihuahua"
+msgid "(GMT-07:00) Chihuahua, La Paz, Mazatlan"
+msgstr "(GMT-07:00) Chihuahua, La Paz, Mazatlan"
+
+msgctxt "SettingsVariants::timezone::America/Phoenix"
+msgid "(GMT-07:00) Arizona"
+msgstr "(GMT-07:00) Arizona"
+
+msgctxt "SettingsVariants::timezone::America/Regina"
+msgid "(GMT-06:00) Saskatchewan"
+msgstr "(GMT-06:00) Saskatchewan"
+
+msgctxt "SettingsVariants::timezone::America/Mexico_City"
+msgid "(GMT-06:00) Guadalajara, Mexico City, Monterrey"
+msgstr "(GMT-06:00) Guadalajara, Mexico City, Monterrey"
+
+msgctxt "SettingsVariants::timezone::America/Chicago"
+msgid "(GMT-06:00) Central Time (US & Canada)"
+msgstr "(GMT-06:00) Central Time (US & Canada)"
+
+msgctxt "SettingsVariants::timezone::America/Guatemala"
+msgid "(GMT-06:00) Central America"
+msgstr "(GMT-06:00) Central America"
+
+msgctxt "SettingsVariants::timezone::Etc/GMT+5"
+msgid "(GMT-05:00) Indiana (East)"
+msgstr "(GMT-05:00) Indiana (East)"
+
+msgctxt "SettingsVariants::timezone::America/New_York"
+msgid "(GMT-05:00) Eastern Time (US & Canada)"
+msgstr "(GMT-05:00) Eastern Time (US & Canada)"
+
+msgctxt "SettingsVariants::timezone::America/Bogota"
+msgid "(GMT-05:00) Bogota, Lima, Quito"
+msgstr "(GMT-05:00) Bogota, Lima, Quito"
+
+msgctxt "SettingsVariants::timezone::America/Santiago"
+msgid "(GMT-04:00) Santiago"
+msgstr "(GMT-04:00) Santiago"
+
+msgctxt "SettingsVariants::timezone::America/La_Paz"
+msgid "(GMT-04:00) Caracas, La Paz"
+msgstr "(GMT-04:00) Caracas, La Paz"
+
+msgctxt "SettingsVariants::timezone::America/Halifax"
+msgid "(GMT-04:00) Atlantic Time (Canada)"
+msgstr "(GMT-04:00) Atlantic Time (Canada)"
+
+msgctxt "SettingsVariants::timezone::America/St_Johns"
+msgid "(GMT-03:30) Newfoundland"
+msgstr "(GMT-03:30) Newfoundland"
+
+msgctxt "SettingsVariants::timezone::America/Godthab"
+msgid "(GMT-03:00) Greenland"
+msgstr "(GMT-03:00) Greenland"
+
+msgctxt "SettingsVariants::timezone::Etc/GMT+3"
+msgid "(GMT-03:00) Buenos Aires, Georgetown"
+msgstr "(GMT-03:00) Buenos Aires, Georgetown"
+
+msgctxt "SettingsVariants::timezone::America/Sao_Paulo"
+msgid "(GMT-03:00) Brasilia"
+msgstr "(GMT-03:00) Brasilia"
+
+msgctxt "SettingsVariants::timezone::Atlantic/South_Georgia"
+msgid "(GMT-02:00) Mid-Atlantic"
+msgstr "(GMT-02:00) Mid-Atlantic"
+
+msgctxt "SettingsVariants::timezone::Atlantic/Cape_Verde"
+msgid "(GMT-01:00) Cape Verde Is."
+msgstr "(GMT-01:00) Cape Verde Is."
+
+msgctxt "SettingsVariants::timezone::Atlantic/Azores"
+msgid "(GMT-01:00) Azores"
+msgstr "(GMT-01:00) Azores"
+
+msgctxt "SettingsVariants::timezone::Atlantic/Reykjavik"
+msgid "(GMT) Casablanca, Monrovia"
+msgstr "(GMT) Casablanca, Monrovia"
+
+msgctxt "SettingsVariants::timezone::Europe/London"
+msgid "(GMT) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London"
+msgstr "(GMT) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London"
+
+msgctxt "SettingsVariants::timezone::Europe/Berlin"
+msgid "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+msgstr "(GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna"
+
+msgctxt "SettingsVariants::timezone::Europe/Budapest"
+msgid "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague"
+msgstr "(GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague"
+
+msgctxt "SettingsVariants::timezone::Europe/Paris"
+msgid "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris"
+msgstr "(GMT+01:00) Brussels, Copenhagen, Madrid, Paris"
+
+msgctxt "SettingsVariants::timezone::Europe/Warsaw"
+msgid "(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb"
+msgstr "(GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb"
+
+msgctxt "SettingsVariants::timezone::Africa/Lagos"
+msgid "(GMT+01:00) West Central Africa"
+msgstr "(GMT+01:00) West Central Africa"
+
+msgctxt "SettingsVariants::timezone::Europe/Istanbul"
+msgid "(GMT+03:00) Istanbul"
+msgstr "(GMT+03:00) Istanbul"
+
+msgctxt "SettingsVariants::timezone::Europe/Athens"
+msgid "(GMT+02:00) Athens"
+msgstr "(GMT+02:00) Athens"
+
+msgctxt "SettingsVariants::timezone::Asia/Beirut"
+msgid "(GMT+02:00) Beirut"
+msgstr "(GMT+02:00) Beirut"
+
+msgctxt "SettingsVariants::timezone::Europe/Bucharest"
+msgid "(GMT+02:00) Bucharest"
+msgstr "(GMT+02:00) Bucharest"
+
+msgctxt "SettingsVariants::timezone::Africa/Cairo"
+msgid "(GMT+02:00) Cairo"
+msgstr "(GMT+02:00) Cairo"
+
+msgctxt "SettingsVariants::timezone::Africa/Johannesburg"
+msgid "(GMT+02:00) Harare, Pretoria"
+msgstr "(GMT+02:00) Harare, Pretoria"
+
+msgctxt "SettingsVariants::timezone::Europe/Kiev"
+msgid "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius"
+msgstr "(GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius"
+
+msgctxt "SettingsVariants::timezone::Asia/Jerusalem"
+msgid "(GMT+02:00) Jerusalem"
+msgstr "(GMT+02:00) Jerusalem"
+
+msgctxt "SettingsVariants::timezone::Asia/Baghdad"
+msgid "(GMT+03:00) Baghdad"
+msgstr "(GMT+03:00) Baghdad"
+
+msgctxt "SettingsVariants::timezone::Asia/Riyadh"
+msgid "(GMT+03:00) Kuwait, Riyadh"
+msgstr "(GMT+03:00) Kuwait, Riyadh"
+
+msgctxt "SettingsVariants::timezone::Europe/Moscow"
+msgid "(GMT+03:00) Moscow, St. Petersburg, Volgograd"
+msgstr "(GMT+03:00) Moscow, St. Petersburg, Volgograd"
+
+msgctxt "SettingsVariants::timezone::Europe/Minsk"
+msgid "(GMT+03:00) Minsk"
+msgstr "(GMT+03:00) Minsk"
+
+msgctxt "SettingsVariants::timezone::Africa/Nairobi"
+msgid "(GMT+03:00) Nairobi"
+msgstr "(GMT+03:00) Nairobi"
+
+msgctxt "SettingsVariants::timezone::Asia/Tehran"
+msgid "(GMT+03:30) Tehran"
+msgstr "(GMT+03:30) Tehran"
+
+msgctxt "SettingsVariants::timezone::Asia/Dubai"
+msgid "(GMT+04:00) Abu Dhabi, Muscat"
+msgstr "(GMT+04:00) Abu Dhabi, Muscat"
+
+msgctxt "SettingsVariants::timezone::Asia/Yerevan"
+msgid "(GMT+04:00) Baku, Tbilisi, Yerevan"
+msgstr "(GMT+04:00) Baku, Tbilisi, Yerevan"
+
+msgctxt "SettingsVariants::timezone::Asia/Kabul"
+msgid "(GMT+04:30) Kabul"
+msgstr "(GMT+04:30) Kabul"
+
+msgctxt "SettingsVariants::timezone::Asia/Yekaterinburg"
+msgid "(GMT+05:00) Ekaterinburg"
+msgstr "(GMT+05:00) Ekaterinburg"
+
+msgctxt "SettingsVariants::timezone::Asia/Tashkent"
+msgid "(GMT+05:00) Islamabad, Karachi, Tashkent"
+msgstr "(GMT+05:00) Islamabad, Karachi, Tashkent"
+
+msgctxt "SettingsVariants::timezone::Asia/Kolkata"
+msgid "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi"
+msgstr "(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi"
+
+msgctxt "SettingsVariants::timezone::Asia/Kathmandu"
+msgid "(GMT+05:45) Kathmandu"
+msgstr "(GMT+05:45) Kathmandu"
+
+msgctxt "SettingsVariants::timezone::Asia/Novosibirsk"
+msgid "(GMT+06:00) Almaty, Novosibirsk"
+msgstr "(GMT+06:00) Almaty, Novosibirsk"
+
+msgctxt "SettingsVariants::timezone::Asia/Dhaka"
+msgid "(GMT+06:00) Astana, Dhaka"
+msgstr "(GMT+06:00) Astana, Dhaka"
+
+msgctxt "SettingsVariants::timezone::Asia/Colombo"
+msgid "(GMT+06:00) Sri Jayawardenepura"
+msgstr "(GMT+06:00) Sri Jayawardenepura"
+
+msgctxt "SettingsVariants::timezone::Asia/Rangoon"
+msgid "(GMT+06:30) Rangoon"
+msgstr "(GMT+06:30) Rangoon"
+
+msgctxt "SettingsVariants::timezone::Asia/Bangkok"
+msgid "(GMT+07:00) Bangkok, Hanoi, Jakarta"
+msgstr "(GMT+07:00) Bangkok, Hanoi, Jakarta"
+
+msgctxt "SettingsVariants::timezone::Asia/Krasnoyarsk"
+msgid "(GMT+07:00) Krasnoyarsk"
+msgstr "(GMT+07:00) Krasnoyarsk"
+
+msgctxt "SettingsVariants::timezone::Asia/Shanghai"
+msgid "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi"
+msgstr "(GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi"
+
+msgctxt "SettingsVariants::timezone::Asia/Irkutsk"
+msgid "(GMT+08:00) Irkutsk, Ulaan Bataar"
+msgstr "(GMT+08:00) Irkutsk, Ulaan Bataar"
+
+msgctxt "SettingsVariants::timezone::Asia/Singapore"
+msgid "(GMT+08:00) Kuala Lumpur, Singapore"
+msgstr "(GMT+08:00) Kuala Lumpur, Singapore"
+
+msgctxt "SettingsVariants::timezone::Australia/Perth"
+msgid "(GMT+08:00) Perth"
+msgstr "(GMT+08:00) Perth"
+
+msgctxt "SettingsVariants::timezone::Asia/Taipei"
+msgid "(GMT+08:00) Taipei"
+msgstr "(GMT+08:00) Taipei"
+
+msgctxt "SettingsVariants::timezone::Asia/Tokyo"
+msgid "(GMT+09:00) Osaka, Sapporo, Tokyo"
+msgstr "(GMT+09:00) Osaka, Sapporo, Tokyo"
+
+msgctxt "SettingsVariants::timezone::Asia/Seoul"
+msgid "(GMT+09:00) Seoul"
+msgstr "(GMT+09:00) Seoul"
+
+msgctxt "SettingsVariants::timezone::Asia/Yakutsk"
+msgid "(GMT+09:00) Yakutsk"
+msgstr "(GMT+09:00) Yakutsk"
+
+msgctxt "SettingsVariants::timezone::Australia/Adelaide"
+msgid "(GMT+09:30) Adelaide"
+msgstr "(GMT+09:30) Adelaide"
+
+msgctxt "SettingsVariants::timezone::Australia/Darwin"
+msgid "(GMT+09:30) Darwin"
+msgstr "(GMT+09:30) Darwin"
+
+msgctxt "SettingsVariants::timezone::Australia/Brisbane"
+msgid "(GMT+10:00) Brisbane"
+msgstr "(GMT+10:00) Brisbane"
+
+msgctxt "SettingsVariants::timezone::Australia/Sydney"
+msgid "(GMT+10:00) Canberra, Melbourne, Sydney"
+msgstr "(GMT+10:00) Canberra, Melbourne, Sydney"
+
+msgctxt "SettingsVariants::timezone::Pacific/Port_Moresby"
+msgid "(GMT+10:00) Guam, Port Moresby"
+msgstr "(GMT+10:00) Guam, Port Moresby"
+
+msgctxt "SettingsVariants::timezone::Australia/Hobart"
+msgid "(GMT+10:00) Hobart"
+msgstr "(GMT+10:00) Hobart"
+
+msgctxt "SettingsVariants::timezone::Asia/Vladivostok"
+msgid "(GMT+10:00) Vladivostok"
+msgstr "(GMT+10:00) Vladivostok"
+
+msgctxt "SettingsVariants::timezone::Pacific/Guadalcanal"
+msgid "(GMT+11:00) Magadan, Solomon Is., New Caledonia"
+msgstr "(GMT+11:00) Magadan, Solomon Is., New Caledonia"
+
+msgctxt "SettingsVariants::timezone::Pacific/Auckland"
+msgid "(GMT+12:00) Auckland, Wellington"
+msgstr "(GMT+12:00) Auckland, Wellington"
+
+msgctxt "SettingsVariants::timezone::Pacific/Fiji"
+msgid "(GMT+12:00) Fiji"
+msgstr "(GMT+12:00) Fiji"
+
+msgctxt "SettingsVariants::timezone::Asia/Kamchatka"
+msgid "(GMT+12:00) Kamchatka, Marshall Is."
+msgstr "(GMT+12:00) Kamchatka, Marshall Is."
+
+msgctxt "SettingsVariants::timezone::Pacific/Tongatapu"
+msgid "(GMT+13:00) Nuku'alofa"
+msgstr "(GMT+13:00) Nuku'alofa"
+
+msgctxt "SettingsVariants::email_templates::old"
+msgid "Old (stored on file system)"
+msgstr "Old (stored on file system)"
+
+msgctxt "SettingsVariants::email_templates::new"
+msgid "New (nice and editable via admin panel)"
+msgstr "New (nice and editable via admin panel)"
+
+msgctxt "SettingsTooltips::quick_registration"
+msgid "Require only contact information on registration"
+msgstr "Require only contact information on registration"
+
+msgctxt "Languages::views"
+msgid "Views"
+msgstr "Views"
+
+msgctxt "ProfileFields::firstname"
+msgid "First name"
+msgstr "First name"
+
+msgctxt "ProfileFields::lastname"
+msgid "Last name"
+msgstr "Last name"
+
+msgctxt "ProfileFields::company"
+msgid "Company"
+msgstr "Company"
+
+msgctxt "ProfileFields::phone"
+msgid "Phone"
+msgstr "Phone"
+
+msgctxt "ProfileFields::fax"
+msgid "Fax"
+msgstr "Fax"
+
+msgctxt "ProfileFields::url"
+msgid "URL"
+msgstr "URL"
+
+msgctxt "ProfileFields::b_firstname"
+msgid "First name"
+msgstr "First name"
+
+msgctxt "ProfileFields::s_firstname"
+msgid "First name"
+msgstr "First name"
+
+msgctxt "ProfileFields::b_lastname"
+msgid "Last name"
+msgstr "Last name"
+
+msgctxt "ProfileFields::s_lastname"
+msgid "Last name"
+msgstr "Last name"
+
+msgctxt "ProfileFields::b_address"
+msgid "Address"
+msgstr "Address"
+
+msgctxt "ProfileFields::b_address_2"
+msgid "Address"
+msgstr "Address"
+
+msgctxt "ProfileFields::s_address"
+msgid "Address"
+msgstr "Address"
+
+msgctxt "ProfileFields::s_address_2"
+msgid "Address"
+msgstr "Address"
+
+msgctxt "ProfileFields::b_city"
+msgid "City"
+msgstr "City"
+
+msgctxt "ProfileFields::s_city"
+msgid "City"
+msgstr "City"
+
+msgctxt "ProfileFields::b_state"
+msgid "State/province"
+msgstr "State/province"
+
+msgctxt "ProfileFields::s_state"
+msgid "State/province"
+msgstr "State/province"
+
+msgctxt "ProfileFields::b_country"
+msgid "Country"
+msgstr "Country"
+
+msgctxt "ProfileFields::s_country"
+msgid "Country"
+msgstr "Country"
+
+msgctxt "ProfileFields::b_zipcode"
+msgid "Zip/postal code"
+msgstr "Zip/postal code"
+
+msgctxt "ProfileFields::s_zipcode"
+msgid "Zip/postal code"
+msgstr "Zip/postal code"
+
+msgctxt "ProfileFields::b_phone"
+msgid "Phone"
+msgstr "Phone"
+
+msgctxt "ProfileFields::s_phone"
+msgid "Phone"
+msgstr "Phone"
+
+msgctxt "ProfileFields::email"
+msgid "E-mail"
+msgstr "E-mail"
+
+msgctxt "ProfileFields::s_address_type"
+msgid "Address type"
+msgstr "Address type"
+
+msgctxt "Languages::product_must_have_owner_category"
+msgid "Product must belong to some category created by the owner company."
+msgstr "Product must belong to some category created by the owner company."
+
+msgctxt "SettingsVariants::mailer_smtp_ecrypted_connection::none"
+msgid "None"
+msgstr "None"
+
+msgctxt "SettingsVariants::mailer_smtp_ecrypted_connection::tls"
+msgid "TLS"
+msgstr "TLS"
+
+msgctxt "SettingsVariants::mailer_smtp_ecrypted_connection::ssl"
+msgid "SSL"
+msgstr "SSL"
+
+msgctxt "SettingsVariants::configure_sign_in_step::new_customer_first"
+msgid "Display \"New customer\" first"
+msgstr "Display \"New customer\" first"
+
+msgctxt "SettingsVariants::configure_sign_in_step::returning_customer_first"
+msgid "Display \"Returning customer\" first"
+msgstr "Display \"Returning customer\" first"
+
+msgctxt "SettingsVariants::configure_sign_in_step::hide"
+msgid "Hide step completely"
+msgstr "Hide step completely"
+
+msgctxt "SettingsVariants::sign_in_default_action::register"
+msgid "Register"
+msgstr "Register"
+
+msgctxt "SettingsVariants::sign_in_default_action::checkout_as_guest"
+msgid "Checkout as guest"
+msgstr "Checkout as guest"
+
+msgctxt "SettingsVariants::secure_storefront::none"
+msgid "Disable"
+msgstr "Disable"
+
+msgctxt "SettingsVariants::secure_storefront::partial"
+msgid "Secure profile, checkout and order pages"
+msgstr "Secure profile, checkout and order pages"
+
+msgctxt "SettingsVariants::secure_storefront::full"
+msgid "Secure full site"
+msgstr "Secure full site"
