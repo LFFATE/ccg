@@ -1,27 +1,17 @@
-# Название модуля #
+# ${addon.id} #
 
-Здесь всегда должно быть актуальное описание функциональности модуля. Кратко, по пунктам.
+Short addon description
 
-### Детально ###
+### Features and functionality ###
+- List of features
 
-* Разработано для CS-Cart или Multi-Vendor
-* Версии 4.8.0+
-* ID тикета в HelpDesk
+### Install and configure the addon should include steps: ###
+- Steps to configure your addon
 
-### Как установить и настроить модуль? ###
+### Check after install ###
+- Steps to check your addon
 
-* Распаковать архив
-* Запустить установку на странице "Модули"
-* Настроить блоки на странице "Макеты"
-* Выполнить конфигурацию модуля в настройках
+### Developers ###
 
-### Что проверить после установки? ###
-
-* Оформление заказа
-* Регистрацию покупателя
-* Создание товара
-
-### Кому задавать вопросы? ###
-
-* Ведущий разработчик: Баженов Даниил
-* Менеджер: Баженов Даниил
+- Company: ${developer.company}
+- Lead developer: ${developer.name}
