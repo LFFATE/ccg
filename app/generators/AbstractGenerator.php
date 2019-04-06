@@ -19,4 +19,9 @@ abstract class AbstractGenerator {
     abstract public function toString(): string;
 
     abstract public function setMediator(AbstractMediator $mediator): void;
+
+    /**
+     * Get full filename
+     */
+    abstract public function getPath(): string;
 }
