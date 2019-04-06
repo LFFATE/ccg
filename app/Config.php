@@ -33,7 +33,12 @@ class Config
 
     public function get(string $key)
     {
-        return @$this->params[$key] ?: null;
+        $result = @$this->params[$key] ?: null;
+        $config = $this;
+
+        return preg_replace_callback('/(\$\{([\w\.-_]+)\})/', function($matches) use ($config) {
+            return $config->get($matches[2]);
+        }, $result);
     }
 
     public function getOr(string ...$keys)

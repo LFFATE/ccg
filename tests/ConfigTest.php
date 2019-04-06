@@ -15,11 +15,11 @@ final class ConfigTest extends TestCase
             'addon=sd_new'
         ];
 
-        $Config = new Config($argsArray);
+        $config = new Config($argsArray);
 
         $this->assertInstanceOf(
             Config::class,
-            $Config
+            $config
         );
     }
 
@@ -29,67 +29,74 @@ final class ConfigTest extends TestCase
             '_tools/ccg/generator.php',
             'addonXml',
             'remove',
-            'addon=sd_new'
+            'addon.id=sd_new',
+            'subpath=cscart',
+            'path=/var/path/${subpath}/${addon.id}'
         ];
 
-        $Config = new Config($argsArray);
+        $config = new Config($argsArray);
 
         $this->assertEquals(
-            $Config->get('generator'),
-            'addonXml'
+            'addonXml',
+            $config->get('generator')
         );
 
         $this->assertEquals(
-            $Config->get('command'),
-            'remove'
+            'remove',
+            $config->get('command')
         );
 
         $this->assertEquals(
-            $Config->get('addon'),
-            'sd_new'
+            'sd_new',
+            $config->get('addon.id')
+        );
+
+        $this->assertEquals(
+            '/var/path/cscart/sd_new',
+            $config->get('path')
         );
     }
     public function testCanSetValue(): void
     {
-        $Config = new Config([]);
-        $Config->set('string', 'value');
-        $Config->set('array', ['key' => 'val']);
+        $config = new Config([]);
+        $config->set('string', 'value');
+        $config->set('array', ['key' => 'val']);
 
         $this->assertEquals(
-            $Config->get('string'),
+            $config->get('string'),
             'value'
         );
 
         $this->assertEquals(
-            $Config->get('array'),
+            $config->get('array'),
             ['key' => 'val']
         );
     }
 
     public function testCanGetOr(): void
     {
-        $Config = new Config([]);
-        $Config->set('string', 'value');
+        $config = new Config([]);
+        $config->set('string', 'value');
 
         $this->assertEquals(
-            $Config->getOr('string', 's'),
+            $config->getOr('string', 's'),
             'value'
         );
 
         $this->assertEquals(
-            $Config->getOr('s', 'string'),
+            $config->getOr('s', 'string'),
             'value'
         );
 
         $this->assertEquals(
-            $Config->getOr('findSome', 's', 'string'),
+            $config->getOr('findSome', 's', 'string'),
             'value'
         );
     }
 
     public function testCanGetAll(): void
     {
-        $Config = new Config([
+        $config = new Config([
             '',
             'generator',
             'command',
@@ -99,10 +106,10 @@ final class ConfigTest extends TestCase
             'check=exists'
         ]);
 
-        $Config->set('string', 'value');
+        $config->set('string', 'value');
 
         $this->assertEquals(
-            array_filter($Config->getAll(), function($key) {
+            array_filter($config->getAll(), function($key) {
                 return $key !== 'path'; // Don't test path item
             }, ARRAY_FILTER_USE_KEY),
             [
