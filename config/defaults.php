@@ -13,3 +13,8 @@ $defaults['addon'] = [
     'supplier_link'     => 'http://www.simtechdev.com',
     'auto_install'      => 'MULTIVENDOR,ULTIMATE'
 ];
+
+$defaults['developer'] = [
+    'name'      => 'John Doe',
+    'company'   => 'Simtech'
+];
