@@ -51,4 +51,9 @@ class TestGenerator extends AbstractGenerator
     public function setMediator(AbstractMediator $mediator): void
     {
     }
+
+    public function getPath(): string
+    {
+        return '';
+    }
 }
