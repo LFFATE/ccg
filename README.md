@@ -18,6 +18,10 @@ Get help
 ~: phpunit --testdox
 ```
 ## Contributing
+- Fork
+- Code
+- Pull request
+
 
 ## TODO
 - Change namespaces to PSR-0
