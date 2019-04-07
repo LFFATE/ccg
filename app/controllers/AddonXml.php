@@ -36,7 +36,7 @@ class AddonXml extends AbstractController
      * creates addonXml structure and write it to file
      * @throws Exception if file already exists
      */
-    private function create()
+    public function create()
     {
         $addonXmlGenerator  = new AddonXmlGenerator($this->config);
         $generatorMediator  = new GeneratorMediator();
@@ -67,7 +67,7 @@ class AddonXml extends AbstractController
      * removes file addon.xml
      * @throws Exception if file doesn't exists
      */
-    private function remove()
+    public function remove()
     {
         $addonXmlGenerator      = new AddonXmlGenerator($this->config);
         $languageGenerator      = new LanguageGenerator($this->config);
@@ -117,7 +117,7 @@ class AddonXml extends AbstractController
      * see more @link [https://www.cs-cart.ru/docs/4.9.x/developer_guide/addons/scheme/scheme3.0_structure.html]
      * @throws Exception if file doesn't exists
      */
-    private function update()
+    public function update()
     {
         $addonXmlGenerator      = new AddonXmlGenerator($this->config);
         $languageGenerator      = new LanguageGenerator($this->config);
