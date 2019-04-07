@@ -27,7 +27,9 @@ Open `config/custom.php` and override config values:
 ```
 <?php
 
-$defaults['addon']['id'] = 'my_default_addon_name';
+$customs['addon'] = [
+    'id' => 'my_default_addon_name'
+];
 
 ```
 All other configs you can find at `config/defaults.php`, `config/filesystem.php` and others.
