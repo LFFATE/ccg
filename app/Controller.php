@@ -4,6 +4,7 @@ use exceptions\FileAlreadyExistsException;
 use readers\AddonXmlReader;
 use generators\AddonXml\AddonXmlGenerator;
 use generators\Language\LanguageGenerator;
+use generators\Readme\ReadmeGenerator;
 use generators\FileGenerator;
 use enums\Config as EnumConfig;
 use terminal\Terminal;
@@ -98,25 +99,28 @@ class Controller
 
     /*
     +-------------------------------------------------------+
-    | AddonXml                                              |
+    | Addon                                              |
     +-------------------------------------------------------+
     +-------------------------------------------------------+*/
     /**
      * help:
-     * addonXml create
-     * creates addonXml structure and write it to file
+     * addon create
+     * creates addon.xml, language file, readme and other
      * @throws Exception if file already exists
      */
-    private function addonXmlCreate()
+    private function addonCreate()
     {
-        $addonXmlGenerator = new AddonXmlGenerator($this->config);
-        $languageGenerator = new LanguageGenerator($this->config);
-        $generatorMediator = new GeneratorMediator();
+        $addonXmlGenerator  = new AddonXmlGenerator($this->config);
+        $languageGenerator  = new LanguageGenerator($this->config);
+        $readmeGenerator    = new ReadmeGenerator($this->config);
+        $generatorMediator  = new GeneratorMediator();
         $generatorMediator->addGenerator($addonXmlGenerator);
         $generatorMediator->addGenerator($languageGenerator);
+        $generatorMediator->addGenerator($readmeGenerator);
 
-        $addonXmlFileGenerator = new FileGenerator($addonXmlGenerator, $this->filesystem);
-        $languageFileGenerator = new FileGenerator($languageGenerator, $this->filesystem);
+        $addonXmlFileGenerator  = new FileGenerator($addonXmlGenerator, $this->filesystem);
+        $languageFileGenerator  = new FileGenerator($languageGenerator, $this->filesystem);
+        $readmeFileGenerator    = new FileGenerator($readmeGenerator, $this->filesystem);
 
         $addonXmlFileGenerator->throwIfExists($addonXmlGenerator->getPath() . ' already exists. Remove it first if you want to replace it.');
         $languageFileGenerator->throwIfExists($languageGenerator->getPath() . ' already exists. Remove it first if you want to replace it.');
@@ -129,6 +133,9 @@ class Controller
         $languageFileGenerator
             ->write()
             ->throwIfNotExists($languageGenerator->getPath() . ' cannot be created.');
+        $readmeFileGenerator
+            ->readFromTemplate()
+            ->write();
 
         /**
          * results
@@ -141,6 +148,64 @@ class Controller
         $this->terminal->success($languageGenerator->getPath() . ' was created');
         $this->terminal->diff(
             \Diff::toString(\Diff::compare('', $languageGenerator->toString()))
+        );
+
+        $this->terminal->success($readmeGenerator->getPath() . ' was created');
+        $this->terminal->diff(
+            \Diff::toString(\Diff::compare('', $readmeGenerator->toString()))
+        );
+    }
+
+    /**
+     * help:
+     * addon remove
+     * removes entire path of the addon
+     */
+    private function addonRemove()
+    {
+        $addonPath = $this->config->get('path')
+            . $this->config->get('filesystem.output_path_relative');
+
+        $this->filesystem->delete($addonPath);
+
+        if ($this->filesystem->exists($addonPath)) {
+            throw new \Exception($addonPath . ' cannot be removed');
+        }
+    }
+
+    /*
+    +-------------------------------------------------------+
+    | AddonXml                                              |
+    +-------------------------------------------------------+
+    +-------------------------------------------------------+*/
+    /**
+     * help:
+     * addonXml create
+     * creates addonXml structure and write it to file
+     * @throws Exception if file already exists
+     */
+    private function addonXmlCreate()
+    {
+        $addonXmlGenerator  = new AddonXmlGenerator($this->config);
+        $generatorMediator  = new GeneratorMediator();
+        $generatorMediator->addGenerator($addonXmlGenerator);
+
+        $addonXmlFileGenerator  = new FileGenerator($addonXmlGenerator, $this->filesystem);
+
+        $addonXmlFileGenerator->throwIfExists($addonXmlGenerator->getPath() . ' already exists. Remove it first if you want to replace it.');
+
+        $addonXmlGenerator->create();
+
+        $addonXmlFileGenerator
+            ->write()
+            ->throwIfNotExists($addonXmlGenerator->getPath() . ' cannot be created.');
+
+        /**
+         * results
+         */
+        $this->terminal->success($addonXmlGenerator->getPath() . ' was created');
+        $this->terminal->diff(
+            \Diff::toString(\Diff::compare('', $addonXmlGenerator->toString()))
         );
     }
 
