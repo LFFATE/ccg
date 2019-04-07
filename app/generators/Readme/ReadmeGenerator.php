@@ -6,14 +6,15 @@ use Config;
 use mediators\AbstractMediator;
 
 /**
-  * @property string $path_template
+  * @property string $pathTemplate
   * @property string $content
   * @property Config $config
   */
 final class ReadmeGenerator extends \generators\AbstractGenerator
 {
     // readonly
-    private $path_template = '/app/addons/${addon}/README.md';
+    private $pathTemplate = '/app/addons/${addon}/README.md';
+    private $templatePath = ROOT_DIR . '/resources/README.md';
     private $content = '';
     private $config;
     private $mediator;
@@ -21,6 +22,14 @@ final class ReadmeGenerator extends \generators\AbstractGenerator
     function __construct(Config $config)
     {
         $this->config = $config;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTemplateFilename(): string
+    {
+        return get_absolute_path($this->templatePath);
     }
 
     public function setMediator(AbstractMediator $mediator): void
@@ -41,7 +50,7 @@ final class ReadmeGenerator extends \generators\AbstractGenerator
 
         $path = $this->config->get('path')
             . $this->config->get('filesystem.output_path_relative')
-            . str_replace('${addon}', $addon_id, $this->path_template);
+            . str_replace('${addon}', $addon_id, $this->pathTemplate);
 
         return get_absolute_path($path);
     }
@@ -83,7 +92,7 @@ final class ReadmeGenerator extends \generators\AbstractGenerator
     public function toString(): string
     {
         return self::substituteData($this->content, [
-            $this->config->get('addon.id'),
+            parse_to_readable($this->config->get('addon.id')),
             $this->config->get('developer.company'),
             $this->config->get('developer.name')
         ]);

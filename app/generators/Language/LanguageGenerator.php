@@ -8,7 +8,7 @@ use generators\Language\exceptions\DuplicateException;
 use mediators\AbstractMediator;
 
 /**
-  * @property string $path_template
+  * @property string $pathTemplate
   * @property string $path
   * @property string $content
   * @property Config $config
@@ -18,7 +18,8 @@ use mediators\AbstractMediator;
 final class LanguageGenerator extends \generators\AbstractGenerator
 {
     // readonly
-    private $path_template = 'var/langs/${lang}/addons/${addon}.po';
+    private $pathTemplate = 'var/langs/${lang}/addons/${addon}.po';
+    private $templatePath = '';
     private $path;
     private $content = '';
     private $config;
@@ -31,6 +32,14 @@ final class LanguageGenerator extends \generators\AbstractGenerator
     function __construct(Config $config)
     {
         $this->config = $config;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getTemplateFilename(): string
+    {
+        return $this->templatePath;
     }
 
     public function setMediator(AbstractMediator $mediator): void
@@ -57,7 +66,7 @@ final class LanguageGenerator extends \generators\AbstractGenerator
                     $this->config->getOr('lang', 'addon.default_language'),
                     $addon_id
                 ],
-                $this->path_template
+                $this->pathTemplate
             );
 
         return get_absolute_path($path);

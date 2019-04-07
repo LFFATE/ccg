@@ -6,6 +6,7 @@ abstract class AbstractFileGenerator {
     private $generator;
 
     abstract public function read();
+    abstract public function readFromTemplate();
     abstract public function write();
     abstract public function exists(): bool;
     abstract public function throwIfExists(string $message = '');

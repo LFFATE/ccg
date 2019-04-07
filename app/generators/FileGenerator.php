@@ -8,6 +8,7 @@ use filesystem\Filesystem;
 class FileGenerator extends \generators\AbstractFileGenerator
 {
     private $generator;
+    private $templateFilename;
     private $filename;
     private $filesystem;
 
@@ -16,9 +17,23 @@ class FileGenerator extends \generators\AbstractFileGenerator
         Filesystem $filesystem
     )
     {
-        $this->generator    = $generator;
-        $this->filename     = $this->generator->getPath();
-        $this->filesystem   = $filesystem;
+        $this->generator        = $generator;
+        $this->filename         = $this->generator->getPath();
+        $this->templateFilename = $this->generator->getTemplateFilename();
+        $this->filesystem       = $filesystem;
+    }
+
+    public function readFromTemplate(): FileGenerator
+    {
+        if (!$this->filesystem->exists($this->templateFilename)) {
+            throw new \InvalidArgumentException('File not found: ' . $this->templateFilename);
+        }
+        
+        $this->generator->setContent(
+            $this->filesystem->read($this->templateFilename)
+        );
+
+        return $this;
     }
 
     public function read(): FileGenerator

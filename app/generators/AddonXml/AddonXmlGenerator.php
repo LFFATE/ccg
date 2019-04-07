@@ -16,7 +16,8 @@ use Config;
 final class AddonXmlGenerator extends \generators\AbstractGenerator implements ICanNotify
 {
     // readonly
-    private $path_template = '/app/addons/${addon}/addon.xml';
+    private $pathTemplate = '/app/addons/${addon}/addon.xml';
+    private $templatePath = '';
     private $content;
     private $config;
     private $mediator;
@@ -39,6 +40,14 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
     }
 
     /**
+     * @inheritdoc
+     */
+    public function getTemplateFilename(): string
+    {
+        return $this->templatePath;
+    }
+
+    /**
      * returns full path for addon.xml file
      * @return string
      */
@@ -52,7 +61,7 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
 
         $path = $this->config->get('path')
             . $this->config->get('filesystem.output_path_relative')
-            . str_replace('${addon}', $addon_id, $this->path_template);
+            . str_replace('${addon}', $addon_id, $this->pathTemplate);
 
         return get_absolute_path($path);
     }

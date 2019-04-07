@@ -24,4 +24,9 @@ abstract class AbstractGenerator {
      * Get full filename
      */
     abstract public function getPath(): string;
+
+    /**
+     * Get template path
+     */
+    abstract public function getTemplateFilename(): string;
 }
