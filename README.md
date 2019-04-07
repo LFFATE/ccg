@@ -61,6 +61,7 @@ with debug
 
 
 ## TODO
+- Handle addonXml remove settings
 - Change namespaces to PSR-0
 - Improve tests filesystem (split to directories)
 - Copy files from resources to new addon destination on create addon command (ResourcesGenerator)
