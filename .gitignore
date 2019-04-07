@@ -1,2 +1,3 @@
 .phpunit.result.cache
 /cscart
+/config/custom.php

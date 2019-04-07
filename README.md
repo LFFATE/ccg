@@ -3,8 +3,10 @@
   - [Purposes](#purposes)
   - [Features](#features)
   - [Getting started](#getting-started)
-    - [Generate](#generate)
+    - [Installing](#installing)
     - [Configure](#configure)
+    - [Generate](#generate)
+    - [Configure](#configure-1)
     - [Test](#test)
   - [Contributing](#contributing)
   - [TODO](#todo)
@@ -15,6 +17,26 @@
 ## Features
 
 ## Getting started
+### Installing
+```
+~: git clone https://github.com/LFFATE/ccg.git
+~: cd ccg
+```
+### Configure
+Open `config/custom.php` and override config values:
+```
+<?php
+
+$defaults['addon']['id'] = 'my_default_addon_name';
+
+```
+All other configs you can find at `config/defaults.php`, `config/filesystem.php` and others.
+
+All this options you also can set by command line:
+```
+~: php generator.php addon create addon.id=custom_addon_id
+```
+
 ### Generate
 Get help
 ```
