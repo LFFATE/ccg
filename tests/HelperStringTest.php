@@ -65,4 +65,20 @@ EOD;
             parse_to_readable('side__effects__is_4bad')
         );
     }
+
+    public function testToCamelCase(): void
+    {
+        $this->assertSame(
+            'removeItem',
+            to_camel_case('remove-item')
+        );
+        $this->assertSame(
+            'removeSettingsItem',
+            to_camel_case('remove-settings-item')
+        );
+        $this->assertSame(
+            'remove',
+            to_camel_case('remove')
+        );
+    }
 }

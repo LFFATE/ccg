@@ -21,18 +21,18 @@ $config             = new Config($argv, $defaults_normalized);
 $terminal           = new Terminal();
 $filesystem         = new Filesystem();
 
-$controller = new Controller(
+$ccg = new Ccg(
     $config,
     $terminal,
     $filesystem
 );
 
 if ($config->get('debug')) {
-    $controller
+    $ccg
         ->generate();
 } else {
     try {
-        $controller
+        $ccg
             ->generate();
     } catch (\Exception $error) {
         $terminal->error($error->getMessage());

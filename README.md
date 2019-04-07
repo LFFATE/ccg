@@ -34,18 +34,18 @@ All other configs you can find at `config/defaults.php`, `config/filesystem.php`
 
 All this options you also can set by command line:
 ```
-~: php generator.php addon create addon.id=custom_addon_id
+~: php ccg.php addon create addon.id=custom_addon_id
 ```
 
 ### Generate
 Get help
 ```
 ~: cd /path/to/ccg
-~: php generator.php help
+~: php ccg.php help
 ```
 with debug
 ```
-~: php generator.php addon create debug=1
+~: php ccg.php addon create debug=1
 ```
 ### Configure
 

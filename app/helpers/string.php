@@ -24,3 +24,16 @@ function parse_to_readable(string $source): string
         )
     );
 }
+
+/**
+ * Parses strings like addon-xml to addonXml
+ * @param string $string 
+ * 
+ * @return string
+ */
+function to_camel_case(string $string): string
+{
+    return preg_replace_callback('/(-(\w+))/', function($matches) {
+        return ucfirst($matches[2]);
+    }, $string);
+}
