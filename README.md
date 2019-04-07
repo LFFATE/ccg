@@ -1,4 +1,15 @@
 # Cs-cart code generator
+- [Cs-cart code generator](#cs-cart-code-generator)
+  - [Purposes](#purposes)
+  - [Features](#features)
+  - [Getting started](#getting-started)
+    - [Generate](#generate)
+    - [Configure](#configure)
+    - [Test](#test)
+  - [Contributing](#contributing)
+  - [TODO](#todo)
+
+
 ## Purposes
 
 ## Features
@@ -9,6 +20,10 @@ Get help
 ```
 ~: cd /path/to/ccg
 ~: php generator.php help
+```
+with debug
+```
+~: php generator.php addon create debug=1
 ```
 ### Configure
 

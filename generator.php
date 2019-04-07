@@ -21,12 +21,20 @@ $config             = new Config($argv, $defaults_normalized);
 $terminal           = new Terminal();
 $filesystem         = new Filesystem();
 
-$mediator = new Controller(
+$controller = new Controller(
     $config,
     $terminal,
     $filesystem
 );
 
-$mediator
-    ->generate();
-    //->getOutput();
+if ($config->get('debug')) {
+    $controller
+        ->generate();
+} else {
+    try {
+        $controller
+            ->generate();
+    } catch (\Exception $error) {
+        $terminal->error($error->getMessage());
+    }
+}
