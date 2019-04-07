@@ -17,8 +17,8 @@ class Addon extends AbstractController
     private $terminal;
     private $filesystem;
 
-    use Help;
-    
+    use HelpTrait;
+
     function __construct(
         Config              $config,
         Terminal            $terminal,

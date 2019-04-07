@@ -6,7 +6,7 @@ class Config
 
     function __construct(array $argv, array $defaults = [])
     {
-        $this->set('generator', @$argv[1] ?: null);
+        $this->set('generator', to_camel_case(@$argv[1] ?: null));
         $this->set('command', @$argv[2] ?: null);
         $this->set('path', ROOT_DIR);
 
