@@ -9,6 +9,7 @@ use filesystem\Filesystem;
 final class FilesystemTest extends TestCase
 {
     private $testFilename = __DIR__ . '/tmp/' . 'test';
+    private $testPath = __DIR__ . '/tmp/dir';
     private $fileContent = <<<EOD
     Test string
     towrite to file
@@ -17,47 +18,61 @@ EOD;
 
     public function testCanBeCreated(): void
     {
-        $Filesystem = new Filesystem();
+        $filesystem = new Filesystem();
 
         $this->assertInstanceOf(
             Filesystem::class,
-            $Filesystem
+            $filesystem
         );
     }
 
     public function testCanWriteFile(): void
     {
-        $Filesystem = new Filesystem();
+        $filesystem = new Filesystem();
 
-        $Filesystem->write($this->testFilename, $this->fileContent);
+        $filesystem->write($this->testFilename, $this->fileContent);
         $this->assertFileExists(
             $this->testFilename
         );
         $this->assertStringEqualsFile(
             $this->testFilename,
-            $Filesystem->read($this->testFilename)
+            $filesystem->read($this->testFilename)
         );
     }
 
     public function testExists(): void
     {
-        $Filesystem = new Filesystem();
+        $filesystem = new Filesystem();
 
         $this->assertTrue(
-            $Filesystem->exists($this->testFilename)
+            $filesystem->exists($this->testFilename)
         );
     }
 
-    public function testCanRemoveFile(): void
+    public function testCanRemove(): void
     {
-        $Filesystem = new Filesystem();
+        $filesystem = new Filesystem();
 
-        $is_deleted = $Filesystem->delete($this->testFilename);
+        $is_deleted = $filesystem->delete($this->testFilename);
 
         $this->assertFileNotExists(
             $this->testFilename
         );
 
         $this->assertTrue($is_deleted);
+    }
+
+    public function testCanRemoveDir(): void
+    {
+        $filesystem = new Filesystem();
+        $filesystem->write($this->testPath . '/subdir/susubdir/tst.txt', '');
+        $filesystem->write($this->testPath . '/subdir/txt.txt', '');
+        $filesystem->write($this->testPath . '/file.php', '');
+        
+        $filesystem->delete($this->testPath);
+
+        $this->assertFileNotExists(
+            $this->testPath
+        );
     }
 }
