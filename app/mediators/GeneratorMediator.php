@@ -5,6 +5,7 @@ namespace mediators;
 use generators\AbstractGenerator;
 use generators\AddonXml\AddonXmlGenerator;
 use generators\Language\LanguageGenerator;
+use generators\Readme\ReadmeGenerator;
 use generators\Language\enums\LangvarTypes;
 use mediators\AbstractMediator;
 
@@ -12,6 +13,7 @@ class GeneratorMediator extends AbstractMediator
 {
     private $addonXmlGenerator;
     private $languageGenerator;
+    private $readmeGenerator;
 
     public function addGenerator(AbstractGenerator $generator)
     {
@@ -22,6 +24,9 @@ class GeneratorMediator extends AbstractMediator
                 break;
             case 'generators\Language\LanguageGenerator':
                 $this->languageGenerator = $generator;
+                break;
+            case 'generators\Readme\ReadmeGenerator':
+                $this->readmeGenerator = $generator;
                 break;
             default:
                 throw new \LogicException('Wrong generator type passed: ' . get_class($generator));
@@ -38,6 +43,11 @@ class GeneratorMediator extends AbstractMediator
     public function getLanguageGenerator(): LanguageGenerator
     {
         return $this->languageGenerator;
+    }
+
+    public function getReadmeGenerator(): ReadmeGenerator
+    {
+        return $this->readmeGenerator;
     }
 
     /**

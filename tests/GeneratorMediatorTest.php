@@ -56,4 +56,9 @@ class TestGenerator extends AbstractGenerator
     {
         return '';
     }
+
+    public function getTemplateFilename(): string
+    {
+        return '';
+    }
 }
