@@ -14,7 +14,7 @@ Get help
 
 ### Test
 ```
-~: cd /path/to/ccg/tests
+~: cd /path/to/ccg
 ~: phpunit --testdox
 ```
 ## Contributing
