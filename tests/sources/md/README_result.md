@@ -1,4 +1,4 @@
-# sd_addon #
+# Sd addon #
 
 Short addon description
 
