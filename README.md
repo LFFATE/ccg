@@ -6,7 +6,6 @@
     - [Installing](#installing)
     - [Configure](#configure)
     - [Generate](#generate)
-    - [Configure](#configure-1)
     - [Test](#test)
   - [Contributing](#contributing)
   - [TODO](#todo)
@@ -49,7 +48,6 @@ with debug
 ```
 ~: php ccg.php addon create debug=1
 ```
-### Configure
 
 ### Test
 ```
@@ -60,7 +58,6 @@ with debug
 - Fork
 - Code
 - Pull request
-
 
 ## TODO
 - Handle addonXml remove settings
