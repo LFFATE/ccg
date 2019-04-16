@@ -6,8 +6,8 @@ class Config
 
     function __construct(array $argv, array $defaults = [])
     {
-        $this->set('generator', to_camel_case(@$argv[1] ?: null));
-        $this->set('command', @$argv[2] ?: null);
+        $this->set('generator', to_camel_case(@$argv[1] ?: ''));
+        $this->set('command', @$argv[2] ?: '');
         $this->set('path', ROOT_DIR);
 
         $self = $this;
@@ -18,11 +18,13 @@ class Config
             );
         });
 
-        foreach($argv as $arg) {
+        foreach($argv as $number => $arg) {
             $e = explode('=', $arg);
-            if (count($e) == 2) {
+            if (count($e) === 2) {
                 $this->set($e[0], $e[1]);
-            } // else
+            } else {
+                $this->set($e[0], true);
+            }
         }
     }
 
@@ -36,7 +38,7 @@ class Config
         $result = @$this->params[$key] ?: null;
         $config = $this;
 
-        return preg_replace_callback('/(\$\{([\w\.-_]+)\})/', function($matches) use ($config) {
+        return !is_string($result) ? $result : preg_replace_callback('/(\$\{([\w\.-_]+)\})/', function($matches) use ($config) {
             return $config->get($matches[2]);
         }, $result);
     }

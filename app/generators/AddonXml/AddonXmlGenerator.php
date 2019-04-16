@@ -454,6 +454,24 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
     }
 
     /**
+     * @todo test
+     * Remove settings item
+     * 
+     * @param string $id
+     * 
+     * @return AddonXmlGenerator
+     */
+    public function removeSetting(string $id)
+    {
+        $itemElement = $this->content->getSingleElement('item', $id);
+        if (null !== $itemElement) {
+            $itemElement->remove();
+        }
+
+        return $this;
+    }
+
+    /**
      * @deprecated - Use toString instead
      */
     public function toXml(): string

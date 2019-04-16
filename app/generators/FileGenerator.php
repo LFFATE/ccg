@@ -84,4 +84,9 @@ class FileGenerator extends \generators\AbstractFileGenerator
 
         return $this;
     }
+
+    public function extract(): AbstractGenerator
+    {
+        return $this->generator;
+    }
 }

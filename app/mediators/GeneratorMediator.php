@@ -33,6 +33,8 @@ class GeneratorMediator extends AbstractMediator
         }
 
         $generator->setMediator($this);
+
+        return $this;
     }
 
     public function getAddonXmlGenerator(): AddonXmlGenerator

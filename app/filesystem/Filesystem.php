@@ -44,4 +44,30 @@ final class Filesystem
 
         return false !== file_put_contents($filename, $data);
     }
+
+    /**
+     * @param string $filename - full filename to be renamed
+     * @param string $new_name - new name of the file, relative to $filename path
+     * 
+     * @return bool
+     */
+    public function rename(string $filename, string $new_name)
+    {
+        if (!$this->exists($filename)) {
+            throw new \InvalidArgumentException("File $filename doesn't exists");
+        }
+        
+        $pathinfo = pathinfo($filename);
+        $new_filename = get_absolute_path($pathinfo['dirname'] . '/' . $new_name);
+
+        if ($this->exists($new_filename)) {
+            throw new \InvalidArgumentException("File $new_filename already exists");
+        }
+    
+        if (rename($filename, $new_filename)) {
+            return $new_filename;
+        } else {
+            return false;
+        }
+    }
 }

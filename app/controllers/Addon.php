@@ -5,6 +5,7 @@ namespace controllers;
 use generators\AddonXml\AddonXmlGenerator;
 use generators\Language\LanguageGenerator;
 use generators\Readme\ReadmeGenerator;
+use generators\MultipleFileGenerator;
 use generators\FileGenerator;
 use terminal\Terminal;
 use filesystem\Filesystem;
@@ -16,6 +17,7 @@ class Addon extends AbstractController
     private $config;
     private $terminal;
     private $filesystem;
+    private $mfGenerator;
 
     use HelpTrait;
 
@@ -28,8 +30,25 @@ class Addon extends AbstractController
         $this->config               = $config;
         $this->terminal             = $terminal;
         $this->filesystem           = $filesystem;
-    }
 
+        $addonXmlGenerator  = new AddonXmlGenerator($this->config);
+        $languageGenerator  = new LanguageGenerator($this->config);
+        $readmeGenerator    = new ReadmeGenerator($this->config);
+
+        $generatorMediator  = new GeneratorMediator();
+
+        $generatorMediator
+            ->addGenerator($addonXmlGenerator)
+            ->addGenerator($languageGenerator)
+            ->addGenerator($readmeGenerator);
+
+        $this->mfGenerator = new MultipleFileGenerator($this->filesystem);
+        $this->mfGenerator
+            ->addGenerator($addonXmlGenerator)
+            ->addGenerator($languageGenerator)
+            ->addGenerator($readmeGenerator);
+    }
+    
     /**
      * help:
      * addon create
@@ -38,50 +57,29 @@ class Addon extends AbstractController
      */
     public function create()
     {
-        $addonXmlGenerator  = new AddonXmlGenerator($this->config);
-        $languageGenerator  = new LanguageGenerator($this->config);
-        $readmeGenerator    = new ReadmeGenerator($this->config);
-        $generatorMediator  = new GeneratorMediator();
-        $generatorMediator->addGenerator($addonXmlGenerator);
-        $generatorMediator->addGenerator($languageGenerator);
-        $generatorMediator->addGenerator($readmeGenerator);
+        $this->mfGenerator
+            ->throwIfExists('File already exists. Remove it first if you want to replace it.')
+            ->find(AddonXmlGenerator::class)
+                ->extract()
+                    ->create();
 
-        $addonXmlFileGenerator  = new FileGenerator($addonXmlGenerator, $this->filesystem);
-        $languageFileGenerator  = new FileGenerator($languageGenerator, $this->filesystem);
-        $readmeFileGenerator    = new FileGenerator($readmeGenerator, $this->filesystem);
+        $this->mfGenerator
+            ->excluding(ReadmeGenerator::class)
+                ->write()
+                ->throwIfNotExists('File cannot be created.');
 
-        $addonXmlFileGenerator->throwIfExists($addonXmlGenerator->getPath() . ' already exists. Remove it first if you want to replace it.');
-        $languageFileGenerator->throwIfExists($languageGenerator->getPath() . ' already exists. Remove it first if you want to replace it.');
+        $this->mfGenerator
+            ->find(ReadmeGenerator::class)
+                ->readFromTemplate()
+                ->write();
 
-        $addonXmlGenerator->create();
-
-        $addonXmlFileGenerator
-            ->write()
-            ->throwIfNotExists($addonXmlGenerator->getPath() . ' cannot be created.');
-        $languageFileGenerator
-            ->write()
-            ->throwIfNotExists($languageGenerator->getPath() . ' cannot be created.');
-        $readmeFileGenerator
-            ->readFromTemplate()
-            ->write();
-
-        /**
-         * results
-         */
-        $this->terminal->success($addonXmlGenerator->getPath() . ' was created');
-        $this->terminal->diff(
-            \Diff::toString(\Diff::compare('', $addonXmlGenerator->toString()))
-        );
-
-        $this->terminal->success($languageGenerator->getPath() . ' was created');
-        $this->terminal->diff(
-            \Diff::toString(\Diff::compare('', $languageGenerator->toString()))
-        );
-
-        $this->terminal->success($readmeGenerator->getPath() . ' was created');
-        $this->terminal->diff(
-            \Diff::toString(\Diff::compare('', $readmeGenerator->toString()))
-        );
+        $self = $this;
+        $this->mfGenerator->each(function($generator) use ($self) {
+            $self->terminal->success($generator->extract()->getPath() . ' was created');
+            $self->terminal->diff(
+                \Diff::toString(\Diff::compare('', $generator->extract()->toString()))
+            );
+        });
     }
 
     /**

@@ -9,6 +9,7 @@ use filesystem\Filesystem;
 final class FilesystemTest extends TestCase
 {
     private $testFilename = __DIR__ . '/tmp/' . 'test';
+    private $testFilenameRenamed = __DIR__ . '/tmp/' . 'test_renamed';
     private $testPath = __DIR__ . '/tmp/dir';
     private $fileContent = <<<EOD
     Test string
@@ -74,5 +75,34 @@ EOD;
         $this->assertFileNotExists(
             $this->testPath
         );
+    }
+
+    public function testRename(): void
+    {
+        $filesystem = new Filesystem();
+        $test_file = $this->testPath . '/to_rename.js';
+        $test_file_not_exists = $this->testPath . '/not_exists.js';
+        $test_file_renamed = $this->testPath . '/renamed.js';
+        $filesystem->write($test_file, 'rename file');
+
+        $this->assertFileExists(
+            $test_file
+        );
+
+        $filesystem->rename($test_file, 'renamed.js');
+        
+        $this->assertFileNotExists(
+            $test_file
+        );
+        
+        $this->assertFileExists(
+            $test_file_renamed
+        );
+        
+        $this->expectException(\InvalidArgumentException::class);
+        $filesystem->rename($test_file, 'renamed.js');
+        $this->expectException(\InvalidArgumentException::class);
+        $filesystem->rename($test_file_not_exists, 'renamed.js');
+        $filesystem->delete($test_file_renamed);
     }
 }
