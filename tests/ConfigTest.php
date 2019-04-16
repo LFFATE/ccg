@@ -113,6 +113,7 @@ final class ConfigTest extends TestCase
                 return $key !== 'path'; // Don't test path item
             }, ARRAY_FILTER_USE_KEY),
             [
+                '' => true,
                 'generator' => 'generator',
                 'command' => 'command',
                 'addon' => 'sd_addon',

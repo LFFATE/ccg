@@ -307,6 +307,62 @@ EOD;
         );
     }
 
+    public function testRemoveById(): void
+    {
+        $test_content = file_get_contents($this->testFilename);
+
+        $generator = new LanguageGenerator($this->config);
+        $generator->setContent($test_content);
+
+        $generator->removeById('name');
+
+        $this->assertSame(
+            false,
+            $generator->findByKey(
+                LanguageGenerator::getTranslationKey(
+                    LangvarTypes::$SETTINGS_VARIANTS,
+                    'sd_addon',
+                    'name',
+                    'Jane'
+                )
+            )
+        );
+
+        $this->assertSame(
+            false,
+            $generator->findByKey(
+                LanguageGenerator::getTranslationKey(
+                    LangvarTypes::$SETTINGS_VARIANTS,
+                    'sd_addon',
+                    'name',
+                    'Isaac'
+                )
+            )
+        );
+
+        $this->assertSame(
+            false,
+            $generator->findByKey(
+                LanguageGenerator::getTranslationKey(
+                    LangvarTypes::$SETTINGS_TOOLTIPS,
+                    'sd_addon',
+                    'name',
+                )
+            )
+        );
+
+        $this->assertSame(
+            false,
+            $generator->findByKey(
+                LanguageGenerator::getTranslationKey(
+                    LangvarTypes::$SETTINGS_OPTIONS,
+                    'sd_addon',
+                    'name',
+                )
+            )
+        );
+    }
+
     /**
      * @covers LanguageGenerator::create
      * @covers LanguageGenerator::toString

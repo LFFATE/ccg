@@ -6,8 +6,6 @@ class Config
 
     function __construct(array $argv, array $defaults = [])
     {
-        $this->set('generator', to_camel_case(@$argv[1] ?: ''));
-        $this->set('command', @$argv[2] ?: '');
         $this->set('path', ROOT_DIR);
 
         $self = $this;
@@ -26,6 +24,9 @@ class Config
                 $this->set($e[0], true);
             }
         }
+
+        $this->set('generator', to_camel_case(@$argv[1] ?: ''));
+        $this->set('command', @$argv[2] ?: '');
     }
 
     public function set(string $key, $param): void

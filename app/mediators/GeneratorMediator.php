@@ -86,7 +86,9 @@ class GeneratorMediator extends AbstractMediator
             break;
             case 'addonxml.setting.updated':
             case 'addonxml.setting.added':
+                
                 $this->languageGenerator
+                    ->removeById($data['id'])
                     ->replaceLangvar(
                         LanguageGenerator::getTranslationKey(
                             LangvarTypes::$SETTINGS_OPTIONS,
@@ -119,6 +121,10 @@ class GeneratorMediator extends AbstractMediator
                     }
                 }
 
+            break;
+            case 'addonxml.setting.removed':
+                $this->languageGenerator
+                    ->removeById($data['id']);
             break;
             case 'addonxml.settingSection.added':
             case 'addonxml.settingSection.updated':

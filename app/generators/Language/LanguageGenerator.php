@@ -226,7 +226,33 @@ EOD;
             $this->content
         );
 
-        return $this->setContent($new_content);
+        $this->setContent($new_content);
+
+        return $this;
+    }
+
+    /**
+     * Fully removes all langvars with a specified id
+     * 
+     * @param
+     * 
+     * 
+     */
+    public function removeById(string $id)
+    {
+        if (!$id) {
+            throw new \InvalidArgumentException('id cannot be empty');
+        }
+
+        $new_content = preg_replace(
+            '/(msgctxt\s+"[\w:._]+' . $this->config->get('addon.id') . '::' . $id . '[\w:._]*"[\r\n|\n|\r]+msgid\s+".*"[\r\n|\n|\r]+msgstr\s+".*")([\r\n|\n|\r]*)/umi',
+            '',
+            $this->content
+        );
+
+        $this->setContent($new_content);
+
+        return $this;
     }
 
     /**

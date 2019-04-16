@@ -1064,3 +1064,27 @@ msgstr "Secure profile, checkout and order pages"
 msgctxt "SettingsVariants::secure_storefront::full"
 msgid "Secure full site"
 msgstr "Secure full site"
+
+msgctxt "SettingsOptions::sd_addon::name"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "SettingsTooltips::sd_addon::name"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "SettingsVariants::sd_addon::name::Jack"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "SettingsVariants::sd_addon::name::Mikle"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "SettingsVariants::sd_addon::name::Jane"
+msgid "Name"
+msgstr "Name"
+
+msgctxt "SettingsVariants::sd_addon::name::Isaac"
+msgid "Name"
+msgstr "Name"

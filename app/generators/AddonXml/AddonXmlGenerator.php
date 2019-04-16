@@ -468,6 +468,14 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
             $itemElement->remove();
         }
 
+        $this->trigger(
+            'addonxml.setting.removed',
+            [
+                'addon.id'      => $this->config->getOr('addon', 'addon.id'),
+                'id'            => $id
+            ]
+        );
+
         return $this;
     }
 
