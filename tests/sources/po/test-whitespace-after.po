@@ -1,0 +1,16 @@
+msgctxt "Languages::tts_generate_submenu"
+msgid "The submenu will include child elements of the selected object"
+msgstr "The submenu will include child elements of the selected object"
+
+msgctxt "ProfileFields::phone"
+msgid "Phone"
+msgstr "Phone"
+
+msgctxt "SettingsVariants::secure_storefront::full"
+msgid "Secure full site"
+msgstr "Secure full site"
+
+msgctxt "ProfileFields::email"
+msgid "E-mail"
+msgstr "E-mail"
+

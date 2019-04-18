@@ -12,6 +12,8 @@ final class LanguageGeneratorTest extends TestCase
     private $generator;
     private $config;
     private $testFilename = ROOT_DIR . '/tests/sources/po/test.po';
+    private $testWhitespacesFilename = ROOT_DIR . '/tests/sources/po/test-whitespace-before.po';
+    private $testWhitespacesFilenameResult = ROOT_DIR . '/tests/sources/po/test-whitespace-after.po';
 
     protected function setUp(): void
     {
@@ -221,20 +223,38 @@ EOD;
 msgctxt "Languages::tts_generate_submenu"
 msgid "The submenu will include child elements of the selected object."
 msgstr "The submenu will include child elements of the selected object."
+
+msgctxt "SettingsVariants::sign_in_default_action::checkout_as_guest"
+msgid "Checkout as guest"
+msgstr "Checkout as guest"
 EOD;
         $generator = new LanguageGenerator($this->config);
 
-        $generator->setContent($test_content)->removeByKey(
-            LanguageGenerator::getTranslationKey(
-                LangvarTypes::$LANGUAGES,
-                '',
-                'tts_generate_submenu'
+        $generator->setContent($test_content)
+            ->removeByKey(
+                LanguageGenerator::getTranslationKey(
+                    LangvarTypes::$LANGUAGES,
+                    '',
+                    'tts_generate_submenu'
+                )
             )
-        );
+            ->removeByKey(
+                LanguageGenerator::getTranslationKey(
+                    LangvarTypes::$SETTINGS_VARIANTS,
+                    '',
+                    'sign_in_default_action',
+                    'checkout_as_guest'
+                )
+            );
 
         $this->assertSame(
             '',
             $generator->toString()
+        );
+
+        $this->assertSame(
+            $generator::purify($test_content),
+            $generator->getRecycleBin()
         );
 
         unset($generator);
@@ -401,13 +421,13 @@ msgid "The submenu will include child elements of the selected object"
 msgstr "The submenu will include child elements of the selected object"
 
 EOD;
-
+        
         $generator->replaceLangvar(
             LanguageGenerator::getTranslationKey(LangvarTypes::$LANGUAGES, '', 'tts_generate_submenu'),
             'The submenu will include child elements of the selected object',
             'The submenu will include child elements of the selected object'
         );
-
+        
         $generator->replaceLangvar(
             LanguageGenerator::getTranslationKey(LangvarTypes::$LANGUAGES, '', 'tts_generate_submenu'),
             'The submenu will include child elements of the selected object',
@@ -473,6 +493,64 @@ EOD;
         $this->assertSame(
             get_absolute_path(ROOT_DIR . $this->config->get('filesystem.output_path_relative') . 'var/langs/en/addons/sd_addon.po'),
             $this->generator->getPath()
+        );
+    }
+
+    /**
+     * @covers LanguageGenerator::checkForEdited
+     */
+    public function testCheckForEdited(): void
+    {
+        $this->assertSame(
+            false,
+            $this->generator::checkForEdited('SettingsOptions::sd_addon::name', 'Name')
+        );
+
+        $this->assertSame(
+            true,
+            $this->generator::checkForEdited('SettingsOptions::sd_addon::name', 'NAME')
+        );
+
+        $this->assertSame(
+            true,
+            $this->generator::checkForEdited('SettingsOptions::sd_addon::name', 'Vendor name')
+        );
+
+        $this->assertSame(
+            false,
+            $this->generator::checkForEdited('SettingsVariants::sd_addon::name::Mikle', 'Mikle')
+        );
+
+        $this->assertSame(
+            true,
+            $this->generator::checkForEdited('SettingsVariants::sd_addon::name::Jane', 'Jane Green')
+        );
+
+        $this->assertSame(
+            false,
+            $this->generator::checkForEdited('SettingsSections::test_addon::new_section', 'New section')
+        );
+
+        $this->assertSame(
+            true,
+            $this->generator::checkForEdited('SettingsSections::test_addon::new_section', 'General')
+        );
+    }
+
+    /**
+     * @covers LanguageGenerator::clearWhitespaces
+     */
+    public function testClearWhitespaces(): void
+    {
+        $generator              = new LanguageGenerator($this->config);
+        $test_content           = file_get_contents($this->testWhitespacesFilename);
+        $test_content_result    = file_get_contents($this->testWhitespacesFilenameResult);
+
+        $this->assertSame(
+            $generator::replaceEol($test_content_result),
+            $generator::clearWhitespaces(
+                $generator::replaceEol($test_content)
+            )
         );
     }
 }

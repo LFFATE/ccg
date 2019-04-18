@@ -116,7 +116,7 @@ class GeneratorMediator extends AbstractMediator
                                         $data['id'],
                                         $variation,
                                     ),
-                                parse_to_readable($data['id'])
+                                parse_to_readable($variation)
                             );
                     }
                 }

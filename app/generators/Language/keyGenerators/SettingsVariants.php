@@ -9,6 +9,6 @@ final class SettingsVariants extends \generators\Language\keyGenerators\Abstract
     {
         list($subpath, $key, $value) = $paths;
 
-        return LangvarTypes::$SETTINGS_VARIANTS . '::' . ($subpath . '::' . $key . '::' . $value);
+        return LangvarTypes::$SETTINGS_VARIANTS . '::' . (($subpath ? $subpath . '::' : '') . $key . '::' . $value);
     }
 }

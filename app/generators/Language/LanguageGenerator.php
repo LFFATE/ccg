@@ -9,10 +9,13 @@ use mediators\AbstractMediator;
 
 /**
   * @property string $pathTemplate
-  * @property string $path
+  * @property string $templatePath
+  * @property string $recycleBin - buffer to which be removed all langvars from actual content
   * @property string $content
   * @property Config $config
+  * @property AbstractMediator $mediator
   * @property array $codes
+  * @property string $eol - end of line char
   * @todo add all $codes supported by cs-cart
   */
 final class LanguageGenerator extends \generators\AbstractGenerator
@@ -20,7 +23,7 @@ final class LanguageGenerator extends \generators\AbstractGenerator
     // readonly
     private $pathTemplate = 'var/langs/${lang}/addons/${addon}.po';
     private $templatePath = '';
-    private $path;
+    private $recycleBin = '';
     private $content = '';
     private $config;
     private $mediator;
@@ -28,6 +31,7 @@ final class LanguageGenerator extends \generators\AbstractGenerator
         'en' => ['pack-name' => 'English', 'country-code' => 'US'],
         'ru' => ['pack-name' => 'Russian', 'country-code' => 'RU']
     ];
+    private static $eol = "\n";
 
     function __construct(Config $config)
     {
@@ -84,13 +88,47 @@ final class LanguageGenerator extends \generators\AbstractGenerator
     }
 
     /**
+     * Replaces different style eol by one
+     * 
+     * @param string $content - content wich will be changed
+     * 
+     * @return string - content with one-style eol
+     */
+    public static function replaceEol(string $content): string
+    {
+        return preg_replace('~\r\n?~', self::$eol, $content);
+    }
+
+    /**
      * @inheritdoc
      *
      * @return LanguageGenerator
      */
     public function setContent(string $content)
     {
-        $this->content = $content;
+        $this->content = self::replaceEol($content);
+
+        return $this;
+    }
+
+    /**
+     * get recycleBin
+     * 
+     * @return string
+     */
+    public function getRecycleBin(): string
+    {
+        return self::purify($this->recycleBin);
+    }
+
+    /**
+     * Set content to recycleBin
+     *
+     * @return LanguageGenerator
+     */
+    public function setRecycleBin(string $content)
+    {
+        $this->recycleBin = self::replaceEol($content);
 
         return $this;
     }
@@ -105,6 +143,21 @@ final class LanguageGenerator extends \generators\AbstractGenerator
     {
         $this->setContent(
             (empty($this->content) ? '' : self::setEndingNewLine($this->content) . PHP_EOL)
+            . $content
+        );
+
+        return $this;
+    }
+
+    /**
+     * Append content to recycleBin
+     *
+     * @return LanguageGenerator
+     */
+    public function appendRecycleBin(string $content)
+    {
+        $this->setRecycleBin(
+            (empty($this->recycleBin) ? '' : self::setEndingNewLine($this->recycleBin) . PHP_EOL)
             . $content
         );
 
@@ -186,13 +239,45 @@ EOD;
      */
     public function findByKey(string $full_key)
     {
+        return self::findByKeyIn($full_key, $this->content);
+    }
+
+    /**
+     * Get langvar array from recycleBin
+     * @param string $full_key - key for search like Languages::email_marketing.subscription_confirmed
+     * @throws \InvalidArgumentException if $full_key is empty
+     *
+     * @return bool|array - [
+     *  'msgctxt' => "Languages::payments.epdq.tbl_bgcolor",
+     *  'msgid' =>  "Table background color",
+     *  'msgstr' => "Table background color"
+     * ]
+     */
+    public function findByKeyInRecycleBin(string $full_key)
+    {
+        return self::findByKeyIn($full_key, $this->recycleBin);
+    }
+
+    /**
+     * Get langvar array from specified content
+     * @param string $full_key - key for search like Languages::email_marketing.subscription_confirmed
+     * @throws \InvalidArgumentException if $full_key is empty
+     *
+     * @return bool|array - [
+     *  'msgctxt' => "Languages::payments.epdq.tbl_bgcolor",
+     *  'msgid' =>  "Table background color",
+     *  'msgstr' => "Table background color"
+     * ]
+     */
+    public static function findByKeyIn(string $full_key, string $content)
+    {
         if (!$full_key) {
             throw new \InvalidArgumentException('full_key cannot be empty');
         }
 
         $found_count = preg_match_all(
-            '/(msgctxt\s+"(' . $full_key . ')")[\r\n|\n|\r]+(msgid\s+"(.*)")[\r\n|\n|\r]+(msgstr\s+"(.*)")/umi',
-            $this->content,
+            '/(msgctxt\s+"(' . $full_key . ')")' . self::$eol . '+(msgid\s+"(.*)")' . self::$eol . '+(msgstr\s+"(.*)")/umi',
+            $content,
             $matches
         );
 
@@ -208,25 +293,30 @@ EOD;
     }
 
     /**
-     * Fully remove langvar, that matches msgctxt (full_key)
-     * @param string $full_key - msgctxt
-     * @throws \InvalidArgumentException if $full_key is empty
+     * Fully remove langvar, that matches msgctxt (msgctxt)
+     * @param string $msgctxt - msgctxt
+     * @throws \InvalidArgumentException if $msgctxt is empty
      *
      * @return LanguageGenerator
      */
-    public function removeByKey(string $full_key)
+    public function removeByKey(string $msgctxt)
     {
-        if (!$full_key) {
-            throw new \InvalidArgumentException('full_key cannot be empty');
+        if (!$msgctxt) {
+            throw new \InvalidArgumentException('msgctxt cannot be empty');
         }
 
-        $new_content = preg_replace(
-            '/(msgctxt\s+"' . $full_key . '"[\r\n|\n|\r]+msgid\s+".*"[\r\n|\n|\r]+msgstr\s+".*")([\r\n|\n|\r]*)/umi',
-            '',
+        $recycle_bin = '';
+        $new_content = preg_replace_callback(
+            '/(msgctxt\s+"' . $msgctxt . '"' . self::$eol . '+msgid\s+".*"' . self::$eol . '+msgstr\s+".*")(' . self::$eol . '*)/umi',
+            function($matches) use (&$recycle_bin) {
+                $recycle_bin .= $matches[1] . $matches[2];
+                return '';
+            },
             $this->content
         );
 
         $this->setContent($new_content);
+        $this->appendRecycleBin($recycle_bin);
 
         return $this;
     }
@@ -234,9 +324,9 @@ EOD;
     /**
      * Fully removes all langvars with a specified id
      * 
-     * @param
+     * @param string $id
      * 
-     * 
+     * @return LanguageGenerator
      */
     public function removeById(string $id)
     {
@@ -244,13 +334,18 @@ EOD;
             throw new \InvalidArgumentException('id cannot be empty');
         }
 
-        $new_content = preg_replace(
-            '/(msgctxt\s+"[\w:._]+' . $this->config->get('addon.id') . '::' . $id . '[\w:._]*"[\r\n|\n|\r]+msgid\s+".*"[\r\n|\n|\r]+msgstr\s+".*")([\r\n|\n|\r]*)/umi',
-            '',
+        $recycle_bin = '';
+        $new_content = preg_replace_callback(
+            '/(msgctxt\s+"[\w:._]+' . $this->config->get('addon.id') . '::' . $id . '[\w:._]*"' . self::$eol . '+msgid\s+".*"' . self::$eol . '+msgstr\s+".*")(' . self::$eol . '*)/umi',
+            function($matches) use (&$recycle_bin) {
+                $recycle_bin .= $matches[1] . $matches[2];
+                return '';
+            },
             $this->content
         );
 
         $this->setContent($new_content);
+        $this->appendRecycleBin($recycle_bin);
 
         return $this;
     }
@@ -263,13 +358,15 @@ EOD;
      */
     public static function setEndingNewLine(string $content): string
     {
-        $output_arr = explode_by_new_line($content);
+        $output_arr = explode(self::$eol, $content);
 
         if (!empty(end($output_arr))) {
             $output_arr[] = '';
+        } elseif (end($output_arr) === '' && prev($output_arr) === '') {
+            array_pop($output_arr);
         }
 
-        return implode(PHP_EOL, $output_arr);
+        return implode(self::$eol, $output_arr);
     }
 
     /**
@@ -278,7 +375,7 @@ EOD;
      */
     public function toString(): string
     {
-        return self::setEndingNewLine($this->content);
+        return self::purify($this->content);
     }
 
     /**
@@ -297,21 +394,50 @@ EOD;
             throw new \InvalidArgumentException('msgctxt cannot be empty');
         }
 
-        $msgstr_actual = $msgstr ?: $msgid;
+        $saved_langvar = $this->findByKeyInRecycleBin($msgctxt);
 
-        $langvar_lines = [
-            "msgctxt \"$msgctxt\"",
-            "msgid \"$msgid\"",
-            "msgstr \"$msgstr_actual\""
-        ];
+        if ($saved_langvar) {
+            list('msgctxt' => $msgctxt, 'msgid' => $msgid, 'msgstr' => $msgstr) = $saved_langvar;
+            $langvar_lines = [
+                "msgctxt \"$msgctxt\"",
+                "msgid \"$msgid\"",
+                "msgstr \"$msgstr\""
+            ];
+        } else {
+            $msgstr_actual = $msgstr ?: $msgid;
 
-        $this->removeByKey($msgctxt);
+            $langvar_lines = [
+                "msgctxt \"$msgctxt\"",
+                "msgid \"$msgid\"",
+                "msgstr \"$msgstr_actual\""
+            ];
 
-        return $this->appendContent(implode(PHP_EOL, $langvar_lines));
+            $this->removeByKey($msgctxt);
+        }
+        
+        $this->appendContent(implode(PHP_EOL, $langvar_lines));
+       
+        return $this;
     }
 
     /**
-     * @todo realize function and write tests
+     * Checks langvars for edited manualy
+     * If msgctxt "SettingsOptions::sd_addon::name" has msgid "Name"
+     * So it didn't modified manually
+     * because Name created from name id
+     * but if it was msgid "Vendor name" - it was modified
+     * 
+     * @return bool
+     */
+    public static function checkForEdited(string $msgctxt, string $msgid): bool
+    {
+        $msg_parts = explode('::', $msgctxt);
+        $last_item = end($msg_parts);
+
+        return strcmp(parse_to_readable($last_item), $msgid) !== 0;
+    }
+
+    /**
      * add langvar
      * @param string $msgctxt
      * @param string $msgid
@@ -329,6 +455,32 @@ EOD;
         $this->replaceLangvar($msgctxt, $msgid, $msgstr);
 
         return $this;
+    }
+
+    /**
+     * Clears multiple empty lines
+     * 
+     * @param string $content - content to be purified
+     * 
+     * @return string - purified content
+     */
+    public static function purify(string $content): string
+    {
+        return self::setEndingNewLine(
+            self::clearWhitespaces($content)
+        );
+    }
+
+    /**
+     * Reduces multiple empty lines to one
+     * 
+     * @param string $content - content to be purified
+     * 
+     * @return string content without multiple whitespaces
+     */
+    public static function clearWhitespaces(string $content): string
+    {
+        return preg_replace('/(' . self::$eol . '{3,})/sm', str_repeat(self::$eol, 2), $content);
     }
 
     /**
