@@ -33,8 +33,8 @@ final class XmlTest extends TestCase
     }
 
     /**
-     * @covers Xml::getSingleElement
-     * @covers Xml::getSelf
+     * @covers generators\XML::getSingleElement
+     * @covers generators\XML::getSelf
      */
     public function testGetSingleElement(): void
     {
@@ -65,8 +65,8 @@ final class XmlTest extends TestCase
     }
 
     /**
-     * @covers XML::setAttribute
-     * @covers XML::getAttributeValue
+     * @covers generators\XML::setAttribute
+     * @covers generators\XML::getAttributeValue
      */
     public function testSetAndGetAttribute(): void
     {
@@ -80,10 +80,10 @@ final class XmlTest extends TestCase
     }
 
     /**
-     * @covers XML::setUniqueChild
-     * @covers XML::getSelf
-     * @covers XML::getSingleElement
-     * @covers XML::getSelf
+     * @covers generators\XML::setUniqueChild
+     * @covers generators\XML::getSelf
+     * @covers generators\XML::getSingleElement
+     * @covers generators\XML::getSelf
      */
     public function testSetUniqueChild(): void
     {

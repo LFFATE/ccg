@@ -44,8 +44,8 @@ final class AddonXmlGeneratorTest extends TestCase
     }
 
     /**
-     * @covers AddonXmlGenerator::toXml
-     * @covers AddonXmlGenerator::create
+     * @covers generators\AddonXml\AddonXmlGenerator::toXml
+     * @covers generators\AddonXml\AddonXmlGenerator::create
      */
     public function testCreate(): void
     {
@@ -85,7 +85,7 @@ final class AddonXmlGeneratorTest extends TestCase
     }
 
     /**
-     * @covers AddonXmlGenerator::setContent
+     * @covers generators\AddonXml\AddonXmlGenerator::setContent
      */
     public function testSetContent(): void
     {
@@ -105,7 +105,7 @@ final class AddonXmlGeneratorTest extends TestCase
     }
 
     /**
-     * @covers AddonXmlGenerator::createAddon
+     * @covers generators\AddonXml\AddonXmlGenerator::createAddon
      */
     public function testCreateAddon(): void
     {
@@ -125,7 +125,7 @@ final class AddonXmlGeneratorTest extends TestCase
     }
 
     /**
-     * @covers AddonXmlGenerator::setScheme
+     * @covers generators\AddonXml\AddonXmlGenerator::setScheme
      */
     public function testSetScheme(): void
     {
@@ -135,7 +135,7 @@ final class AddonXmlGeneratorTest extends TestCase
     }
 
     /**
-     * @covers AddonXmlGenerator::setEditionType
+     * @covers generators\AddonXml\AddonXmlGenerator::setEditionType
      */
     public function testSetEditionType(): void
     {
@@ -145,7 +145,7 @@ final class AddonXmlGeneratorTest extends TestCase
     }
 
     /**
-     * @covers AddonXmlGenerator::setId
+     * @covers generators\AddonXml\AddonXmlGenerator::setId
      */
     public function testSetId(): void
     {
@@ -156,7 +156,7 @@ final class AddonXmlGeneratorTest extends TestCase
 
 
     /**
-     * @covers AddonXmlGenerator::setVersion
+     * @covers generators\AddonXml\AddonXmlGenerator::setVersion
      */
     public function testSetVersion(): void
     {
@@ -166,7 +166,7 @@ final class AddonXmlGeneratorTest extends TestCase
     }
 
     /**
-     * @covers AddonXmlGenerator::setPriority
+     * @covers generators\AddonXml\AddonXmlGenerator::setPriority
      */
     public function testSetPriority(): void
     {
@@ -176,7 +176,7 @@ final class AddonXmlGeneratorTest extends TestCase
     }
 
     /**
-     * @covers AddonXmlGenerator::setStatus
+     * @covers generators\AddonXml\AddonXmlGenerator::setStatus
      */
     public function testSetStatus(): void
     {
@@ -186,7 +186,7 @@ final class AddonXmlGeneratorTest extends TestCase
     }
 
     /**
-     * @covers AddonXmlGenerator::setAutoInstall
+     * @covers generators\AddonXml\AddonXmlGenerator::setAutoInstall
      */
     public function testSetAutoInstall(): void
     {
@@ -196,8 +196,8 @@ final class AddonXmlGeneratorTest extends TestCase
     }
 
     /**
-     * @covers AddonXmlGenerator::setSettings
-     * @covers AddonXmlGenerator::getSettings
+     * @covers generators\AddonXml\AddonXmlGenerator::setSettings
+     * @covers generators\AddonXml\AddonXmlGenerator::getSettings
      */
     public function testSetAndGetSettings(): void
     {
@@ -212,7 +212,7 @@ final class AddonXmlGeneratorTest extends TestCase
     }
 
     /**
-     * @covers AddonXmlGenerator::setSettingsLayout
+     * @covers generators\AddonXml\AddonXmlGenerator::setSettingsLayout
      */
     public function testSetSettingsLayout(): void
     {
@@ -238,7 +238,7 @@ final class AddonXmlGeneratorTest extends TestCase
     }
 
     /**
-     * @covers AddonXmlGenerator::addSection
+     * @covers generators\AddonXml\AddonXmlGenerator::addSection
      */
     public function testAddSectionThrowsException(): void
     {
@@ -255,8 +255,8 @@ final class AddonXmlGeneratorTest extends TestCase
     }
 
     /**
-     * @covers AddonXmlGenerator::addSection
-     * @covers AddonXmlGenerator::setSetting
+     * @covers generators\AddonXml\AddonXmlGenerator::addSection
+     * @covers generators\AddonXml\AddonXmlGenerator::setSetting
      */
     public function testSetSetting(): void
     {
@@ -348,7 +348,7 @@ EOD;
     }
 
     /**
-     * @covers AddonXmlGenerator::addSetting
+     * @covers generators\AddonXml\AddonXmlGenerator::addSetting
      */
     public function testAddSetting(): void
     {

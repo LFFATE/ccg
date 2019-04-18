@@ -6,9 +6,6 @@ use PHPUnit\Framework\TestCase;
 
 final class HelperStringTest extends TestCase
 {
-    /**
-     * @covers explode_by_new_line
-     */
     public function testExplodeByLines(): void
     {
         $string = <<<EOD

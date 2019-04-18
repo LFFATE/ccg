@@ -29,7 +29,7 @@ final class LanguageGeneratorTest extends TestCase
     }
 
     /**
-     * @covers LanguageGenerator::setEndingNewLine
+     * @covers generators\Language\LanguageGenerator::setEndingNewLine
      */
     public function testNewLine(): void
     {
@@ -47,8 +47,8 @@ EOD;
     }
 
     /**
-     * @covers LanguageGenerator::setContent
-     * @covers LanguageGenerator::toString
+     * @covers generators\Language\LanguageGenerator::setContent
+     * @covers generators\Language\LanguageGenerator::toString
      */
     public function testSetContent(): void
     {
@@ -66,9 +66,9 @@ EOD;
     }
 
     /**
-     * @covers LanguageGenerator::setContent
-     * @covers LanguageGenerator::appendContent
-     * @covers LanguageGenerator::toString
+     * @covers generators\Language\LanguageGenerator::setContent
+     * @covers generators\Language\LanguageGenerator::appendContent
+     * @covers generators\Language\LanguageGenerator::toString
      */
     public function testAppendContent(): void
     {
@@ -106,7 +106,7 @@ EOD;
     }
 
     /**
-     * @covers LanguageGenerator::getTranslationKey
+     * @covers generators\Language\LanguageGenerator::getTranslationKey
      */
     public function testGetTranslationKey(): void
     {
@@ -185,7 +185,7 @@ EOD;
     }
 
     /**
-     * @covers LanguageGenerator::findByKey
+     * @covers generators\Language\LanguageGenerator::findByKey
      */
     public function testFindByKey(): void
     {
@@ -213,9 +213,9 @@ EOD;
     }
 
     /**
-     * @covers LanguageGenerator::removeByKey
-     * @covers LanguageGenerator::setContent
-     * @covers LanguageGenerator::getTranslationKey
+     * @covers generators\Language\LanguageGenerator::removeByKey
+     * @covers generators\Language\LanguageGenerator::setContent
+     * @covers generators\Language\LanguageGenerator::getTranslationKey
      */
     public function testRemove(): void
     {
@@ -384,8 +384,8 @@ EOD;
     }
 
     /**
-     * @covers LanguageGenerator::create
-     * @covers LanguageGenerator::toString
+     * @covers generators\Language\LanguageGenerator::create
+     * @covers generators\Language\LanguageGenerator::toString
      */
     public function testCreate(): void
     {
@@ -408,9 +408,9 @@ EOD;
     }
 
     /**
-     * @covers LanguageGenerator::replaceLangvar
-     * @covers LanguageGenerator::toString
-     * @covers LanguageGenerator::getTranslationKey
+     * @covers generators\Language\LanguageGenerator::replaceLangvar
+     * @covers generators\Language\LanguageGenerator::toString
+     * @covers generators\Language\LanguageGenerator::getTranslationKey
      */
     public function testReplaceLangvar()
     {
@@ -465,7 +465,7 @@ EOD;
     }
 
     /**
-     * @covers LanguageGenerator::checkLanguageSupport
+     * @covers generators\Language\LanguageGenerator::checkLanguageSupport
      */
     public function testCheckLanguageSupport(): void
     {
@@ -486,7 +486,7 @@ EOD;
     }
 
     /**
-     * @covers LanguageGenerator::getPath
+     * @covers generators\Language\LanguageGenerator::getPath
      */
     public function testGetPath(): void
     {
@@ -497,7 +497,7 @@ EOD;
     }
 
     /**
-     * @covers LanguageGenerator::checkForEdited
+     * @covers generators\Language\LanguageGenerator::checkForEdited
      */
     public function testCheckForEdited(): void
     {
@@ -538,7 +538,7 @@ EOD;
     }
 
     /**
-     * @covers LanguageGenerator::clearWhitespaces
+     * @covers generators\Language\LanguageGenerator::clearWhitespaces
      */
     public function testClearWhitespaces(): void
     {

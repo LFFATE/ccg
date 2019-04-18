@@ -16,7 +16,7 @@ final class TerminalTest extends TestCase
     }
 
     /**
-     * @covers Terminal->echo
+     * @covers terminal\Terminal::echo
      */
     public function testCanOutputToTerminal(): void
     {

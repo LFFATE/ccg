@@ -35,7 +35,7 @@ final class ReadmeGeneratorTest extends TestCase
     }
 
     /**
-     * @covers ReadmeGenerator::getPath
+     * @covers generators\Readme\ReadmeGenerator::getPath
      */
     public function testGetPath(): void
     {
@@ -48,8 +48,8 @@ final class ReadmeGeneratorTest extends TestCase
     }
 
     /**
-     * @covers ReadmeGenerator::setContent
-     * @covers ReadmeGenerator::toString
+     * @covers generators\Readme\ReadmeGenerator::setContent
+     * @covers generators\Readme\ReadmeGenerator::toString
      * 
      */
     public function testGenerate(): void

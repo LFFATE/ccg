@@ -39,8 +39,8 @@ final class MultipleFileGeneratorTest extends TestCase
     }
 
     /**
-     * @covers MultipleFileGenerator::addGenerator
-     * @covers MultipleFileGenerator::find
+     * @covers generators\MultipleFileGenerator::addGenerator
+     * @covers generators\MultipleFileGenerator::find
      */
     public function testAddAndFindGenerator(): void
     {
@@ -59,7 +59,7 @@ final class MultipleFileGeneratorTest extends TestCase
     }
 
     /**
-     * @covers MultipleFileGenerator::read
+     * @covers generators\MultipleFileGenerator::read
      */
     public function testRead(): void
     {
@@ -81,7 +81,7 @@ final class MultipleFileGeneratorTest extends TestCase
     }
 
     /**
-     * @covers MultipleFileGenerator::exists
+     * @covers generators\MultipleFileGenerator::exists
      */
     public function testExists(): void
     {
@@ -110,11 +110,11 @@ final class MultipleFileGeneratorTest extends TestCase
     }
 
     /**
-     * @covers MultipleFileGenerator::readFromTemplate
-     * @covers MultipleFileGenerator::write
-     * @covers MultipleFileGenerator::remove
-     * @covers MultipleFileGenerator::throwIfExists
-     * @covers MultipleFileGenerator::throwIfNotExists
+     * @covers generators\MultipleFileGenerator::readFromTemplate
+     * @covers generators\MultipleFileGenerator::write
+     * @covers generators\MultipleFileGenerator::remove
+     * @covers generators\MultipleFileGenerator::throwIfExists
+     * @covers generators\MultipleFileGenerator::throwIfNotExists
      */
     public function testRemove(): void
     {
@@ -142,7 +142,7 @@ final class MultipleFileGeneratorTest extends TestCase
     }
 
     /**
-     * @covers MultipleFileGenerator::removeGenerator
+     * @covers generators\MultipleFileGenerator::removeGenerator
      */
     public function testRemoveGenerator(): void
     {
@@ -172,7 +172,7 @@ final class MultipleFileGeneratorTest extends TestCase
     }
 
     /**
-     * @covers MultipleFileGenerator::including
+     * @covers generators\MultipleFileGenerator::including
      */
     public function testIncluding(): void
     {
@@ -191,7 +191,7 @@ final class MultipleFileGeneratorTest extends TestCase
     }
 
     /**
-     * @covers MultipleFileGenerator::excluding
+     * @covers generators\MultipleFileGenerator::excluding
      */
     public function testExcluding(): void
     { 
