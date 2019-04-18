@@ -3,8 +3,8 @@
 use terminal\Terminal;
 use filesystem\Filesystem;
 
-require_once(__DIR__ . '/app/helpers/helpers.php');
-require_once(__DIR__ . '/config/config.php');
+require __DIR__ . '/app/helpers/helpers.php';
+require __DIR__ . '/config/config.php';
 
 /**
  * autoload

@@ -2,7 +2,7 @@
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed-raw/lffate/ccg.svg)
 ![GitHub issues](https://img.shields.io/github/issues-raw/lffate/ccg.svg)
 ![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/lffate/ccg.svg)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b38904e8705f4126a00851bfb420d912)](https://www.codacy.com/app/LFFATE/ccg?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LFFATE/ccg&amp;utm_campaign=Badge_Grade)
+[![codecov](https://codecov.io/gh/LFFATE/ccg/branch/4.9/graph/badge.svg)](https://codecov.io/gh/LFFATE/ccg)
 
 # Cs-cart code generator
 - [Cs-cart code generator](#cs-cart-code-generator)
