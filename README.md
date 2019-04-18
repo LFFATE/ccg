@@ -7,7 +7,7 @@
     - [Configure](#configure)
     - [Generate](#generate)
     - [Test](#test)
-  - [Contributing](#contributing)
+  - [Contributing :fire:](#contributing-fire)
   - [TODO](#todo)
 
 
@@ -54,7 +54,7 @@ with debug
 ~: cd /path/to/ccg
 ~: phpunit --testdox
 ```
-## Contributing
+## Contributing :fire:
 - Fork
 - Code
 - Pull request
