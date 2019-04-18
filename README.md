@@ -64,6 +64,6 @@ with debug
 - Change namespaces to PSR-0
 - Improve tests filesystem (split to directories)
 - Copy files from resources to new addon destination on create addon command (ResourcesGenerator)
-- Add method to LanguageGenerator to remove langvars by setting id (all variants for the setting and etc.)
+- ~~Add method to LanguageGenerator to remove langvars by setting id (all variants for the setting and etc.)~~ :heavy_check_mark:
 - Improve tests coverage
 - Add filesystem decorator for save history of files to be edited/removed
