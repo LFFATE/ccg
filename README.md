@@ -60,7 +60,7 @@ with debug
 - Pull request
 
 ## TODO
-- Handle addonXml remove settings
+- ~~Handle addonXml remove settings~~ :heavy_check_mark:
 - Change namespaces to PSR-0
 - Improve tests filesystem (split to directories)
 - Copy files from resources to new addon destination on create addon command (ResourcesGenerator)
