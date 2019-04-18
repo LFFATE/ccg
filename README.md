@@ -1,4 +1,4 @@
-![license]([http://url/to/img.png](https://img.shields.io/github/license/LFFATE/ccg.svg))
+![GitHub](https://img.shields.io/github/license/LFFATE/ccg.svg)
 
 # Cs-cart code generator
 - [Cs-cart code generator](#cs-cart-code-generator)
