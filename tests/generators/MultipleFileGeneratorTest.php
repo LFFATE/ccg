@@ -224,7 +224,7 @@ final class MultipleFileGeneratorTest extends TestCase
         
         $i = 0;
 
-        $this->mfGenerator->each(function($generator) use (&$i) {
+        $this->mfGenerator->each(function() use (&$i) {
             $i++;
         });
 

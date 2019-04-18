@@ -3,7 +3,6 @@
 namespace generators\Language;
 
 use Config;
-use generators\Language\enums\LangvarTypes;
 use generators\Language\exceptions\DuplicateException;
 use mediators\AbstractMediator;
 

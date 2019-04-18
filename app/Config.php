@@ -16,7 +16,7 @@ class Config
             );
         });
 
-        foreach($argv as $number => $arg) {
+        foreach($argv as $arg) {
             $e = explode('=', $arg);
             if (count($e) === 2) {
                 $this->set($e[0], $e[1]);

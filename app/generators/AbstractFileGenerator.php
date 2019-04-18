@@ -3,8 +3,6 @@
 namespace generators;
 
 abstract class AbstractFileGenerator {
-    private $generator;
-
     abstract public function read();
     abstract public function readFromTemplate();
     abstract public function write();

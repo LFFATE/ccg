@@ -243,15 +243,15 @@ final class AddonXmlGeneratorTest extends TestCase
     public function testAddSectionThrowsException(): void
     {
         $this->expectException(DuplicateIdException::class);
-        $xml_duplicate_sections =
-            $this
-                ->generator
-                ->createAddon()
-                ->setSettings()
-                ->addSection('defaults')
-                ->addSection('secondary')
-                ->addSection('defaults')
-                ->toString();
+        
+        $this
+            ->generator
+            ->createAddon()
+            ->setSettings()
+            ->addSection('defaults')
+            ->addSection('secondary')
+            ->addSection('defaults')
+            ->toString();
     }
 
     /**

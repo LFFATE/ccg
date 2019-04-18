@@ -52,22 +52,4 @@ class Ccg
 
         return $this;
     }
-
-    /**
-     * addonXml create - $generator and $command
-     * if addonXmlCreate not found
-     * Then trying to call create(addonXml) $command($generator)
-     */
-    private function handleCommand($generator, $command)
-    {
-        $method = $generator . ucfirst($command);
-
-        if (method_exists($this, $method)) {
-            return $this->{$method}();
-        } elseif(method_exists($this, $command)) {
-            return $this->{$command}($generator);
-        }
-
-        throw new \BadMethodCallException('There is no such command or generator: ' . $method);
-    }
 }

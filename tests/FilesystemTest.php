@@ -9,7 +9,6 @@ use filesystem\Filesystem;
 final class FilesystemTest extends TestCase
 {
     private $testFilename = __DIR__ . '/tmp/' . 'test';
-    private $testFilenameRenamed = __DIR__ . '/tmp/' . 'test_renamed';
     private $testPath = __DIR__ . '/tmp/dir';
     private $fileContent = <<<EOD
     Test string
