@@ -353,26 +353,26 @@ EOD;
     public function testAddSetting(): void
     {
         $this->expectException(DuplicateIdException::class);
-        $xml_duplicate_sections =
-            $this
-                ->generator
-                ->createAddon()
-                ->setSettings()
-                ->addSection('defaults')
-                ->addSection('secondary')
-                ->addSection('defaults')
-                ->addSetting(
-                    'defaults',
-                    'input',
-                    'vendor_name',
-                    'shemenyov'
-                )
-                ->addSetting(
-                    'defaults',
-                    'input',
-                    'vendor_name',
-                    'shemenyov'
-                );
+
+        $this
+            ->generator
+            ->createAddon()
+            ->setSettings()
+            ->addSection('defaults')
+            ->addSection('secondary')
+            ->addSection('defaults')
+            ->addSetting(
+                'defaults',
+                'input',
+                'vendor_name',
+                'shemenyov'
+            )
+            ->addSetting(
+                'defaults',
+                'input',
+                'vendor_name',
+                'shemenyov'
+            );
     }
 
     private function _testAddonNode(string $xml, string $name, string $value): void
