@@ -1,0 +1,7 @@
+language: php
+
+env:
+  - CODACY_PROJECT_TOKEN=3de3502cbaca4ee0aa09426b21e172c0
+
+php:
+  - 7.3
