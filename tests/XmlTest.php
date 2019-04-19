@@ -5,7 +5,7 @@ include 'autoloader.php';
 
 use PHPUnit\Framework\TestCase;
 
-use generators\XML;
+use generators\Xml;
 use filesystem\Filesystem;
 
 final class XmlTest extends TestCase
@@ -33,8 +33,8 @@ final class XmlTest extends TestCase
     }
 
     /**
-     * @covers generators\XML::getSingleElement
-     * @covers generators\XML::getSelf
+     * @covers generators\Xml::getSingleElement
+     * @covers generators\Xml::getSelf
      */
     public function testGetSingleElement(): void
     {
@@ -65,8 +65,8 @@ final class XmlTest extends TestCase
     }
 
     /**
-     * @covers generators\XML::setAttribute
-     * @covers generators\XML::getAttributeValue
+     * @covers generators\Xml::setAttribute
+     * @covers generators\Xml::getAttributeValue
      */
     public function testSetAndGetAttribute(): void
     {
@@ -80,10 +80,10 @@ final class XmlTest extends TestCase
     }
 
     /**
-     * @covers generators\XML::setUniqueChild
-     * @covers generators\XML::getSelf
-     * @covers generators\XML::getSingleElement
-     * @covers generators\XML::getSelf
+     * @covers generators\Xml::setUniqueChild
+     * @covers generators\Xml::getSelf
+     * @covers generators\Xml::getSingleElement
+     * @covers generators\Xml::getSelf
      */
     public function testSetUniqueChild(): void
     {

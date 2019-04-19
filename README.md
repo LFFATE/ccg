@@ -3,6 +3,7 @@
 ![GitHub issues](https://img.shields.io/github/issues-raw/lffate/ccg.svg)
 ![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/lffate/ccg.svg)
 [![codecov](https://codecov.io/gh/LFFATE/ccg/branch/4.9/graph/badge.svg)](https://codecov.io/gh/LFFATE/ccg)
+[![Build Status](https://travis-ci.org/LFFATE/ccg.svg?branch=4.9)](https://travis-ci.org/LFFATE/ccg)
 
 # Cs-cart code generator
 - [Cs-cart code generator](#cs-cart-code-generator)
