@@ -4,13 +4,17 @@ namespace filesystem;
 
 final class Filesystem
 {
-    public function exists(string $filename)
+    public function exists(string $raw_filename)
     {
+        $filename = get_absolute_path($raw_filename);
+
         return file_exists($filename);
     }
 
-    public function read(string $filename)
+    public function read(string $raw_filename)
     {
+        $filename = get_absolute_path($raw_filename);
+
         return @file_get_contents($filename);
     }
 
