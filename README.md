@@ -2,6 +2,7 @@
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed-raw/lffate/ccg.svg)
 ![GitHub issues](https://img.shields.io/github/issues-raw/lffate/ccg.svg)
 ![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/lffate/ccg.svg)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/LFFATE/ccg.svg)](https://scrutinizer-ci.com/g/LFFATE/ccg/?branch=4.9)
 [![codecov](https://codecov.io/gh/LFFATE/ccg/branch/4.9/graph/badge.svg)](https://codecov.io/gh/LFFATE/ccg)
 [![Build Status](https://travis-ci.org/LFFATE/ccg.svg?branch=4.9)](https://travis-ci.org/LFFATE/ccg)
 
