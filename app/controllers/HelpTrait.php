@@ -29,7 +29,7 @@ trait HelpTrait
 
         $docs = $this->getHelp();
 
-        array_walk($docs, function($doc) use ($search) {
+        array_walk($docs, function(array $doc) use ($search) {
 
             if ($search && strpos($doc['name'], $search) === false) {
                 return;
@@ -52,11 +52,11 @@ trait HelpTrait
         $ref = new \ReflectionClass($this);
         $methods = $ref->getMethods();
 
-        $docs = array_map(function(\ReflectionMethod $method) use ($ref) {
+        $docs = array_map(function(\ReflectionMethod $method) {
             $helpCommentPurified = '';
-            $helpComment = self::_extractCommentForHelp($method->getDocComment());
+            $helpComment = self::_extractCommentForHelp($method->getDocComment() ?: '');
 
-            if ($helpComment) {
+            if (!empty($helpComment)) {
                 $helpCommentPurified = self::_purifyCommentForHelp($helpComment[1]);
             }
 

@@ -383,7 +383,7 @@ EOD;
      * @todo add langvar right after removed
      * @param string $msgctxt
      * @param string $msgid
-     * @param string msgstr - optional, gets value of $msgid if empty
+     * @param string $msgstr - optional, gets value of $msgid if empty
      *
      * @return LanguageGenerator
      */
@@ -440,7 +440,7 @@ EOD;
      * add langvar
      * @param string $msgctxt
      * @param string $msgid
-     * @param string msgstr - optional, gets value of $msgid if empty
+     * @param string $msgstr - optional, gets value of $msgid if empty
      * @throws DuplicateException if langvar with such msgctxt already exists
      *
      * @return LanguageGenerator

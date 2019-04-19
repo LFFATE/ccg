@@ -9,9 +9,9 @@ abstract class AbstractController
     private $filesystem;
 
     function __construct(
-        Config              $config,
-        Terminal            $terminal,
-        Filesystem          $filesystem
+        \Config              $config,
+        \Terminal            $terminal,
+        \Filesystem          $filesystem
     )
     {
         $this->config               = $config;

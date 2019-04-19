@@ -46,8 +46,6 @@ class Config
 
     public function getOr(string ...$keys)
     {
-        $value = null;
-
         foreach($keys as $key) {
             $value = $this->get($key);
 

@@ -2,7 +2,7 @@
 
 namespace generators\AddonXml;
 
-use exceptions\InvalidAddonXmlException;
+use generators\AddonXml\exceptions\InvalidAddonXmlException;
 use generators\AddonXml\exceptions\InvalidContentException;
 use generators\AddonXml\exceptions\DuplicateIdException;
 use generators\Xml;
@@ -94,7 +94,7 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
         $this->createAddon();
         $this->setScheme();
         $this->setEditionType($this->config->get('addon.edition_type'));
-        $this->setId($this->config->getOr('addon', 'addon.id'));
+        $this->setId($this->config->get('addon.id'));
         $this->setVersion($this->config->get('addon.version'));
         $this->setPriority($this->config->get('addon.priority'));
         $this->setStatus($this->config->get('addon.status'));
@@ -156,7 +156,7 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
      * @param string $type - edition_type
      * @return AddonXmlGenerator
      */
-    public function setEditionType($type = 'ROOT,ULT:VENDOR')
+    public function setEditionType(string $type = 'ROOT,ULT:VENDOR')
     {
         $this->getAddon()->setAttribute('edition_type', $type);
 

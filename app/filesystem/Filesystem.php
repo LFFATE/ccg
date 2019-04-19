@@ -54,7 +54,7 @@ final class Filesystem
      * @param string $raw_filename - full filename to be renamed
      * @param string $new_name - new name of the file, relative to $filename path
      * 
-     * @return bool
+     * @return bool|string
      */
     public function rename(string $raw_filename, string $new_name)
     {
