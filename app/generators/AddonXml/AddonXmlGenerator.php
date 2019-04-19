@@ -5,7 +5,7 @@ namespace generators\AddonXml;
 use exceptions\InvalidAddonXmlException;
 use generators\AddonXml\exceptions\InvalidContentException;
 use generators\AddonXml\exceptions\DuplicateIdException;
-use generators\XML;
+use generators\Xml;
 use mediators\AbstractMediator;
 use mediators\ICanNotify;
 use Config;

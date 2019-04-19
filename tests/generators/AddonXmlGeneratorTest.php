@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use generators\AddonXml\AddonXmlGenerator;
 use generators\AddonXml\exceptions\InvalidContentException;
 use generators\AddonXml\exceptions\DuplicateIdException;
-use generators\XML;
+use generators\Xml;
 use filesystem\Filesystem;
 
 /**
