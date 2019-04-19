@@ -8,7 +8,7 @@ use filesystem\Filesystem;
 
 final class FilesystemTest extends TestCase
 {
-    private $testFilename = __DIR__ . '/tmp/' . 'test';
+    private $testFilename = __DIR__ . '/tmp/test';
     private $testPath = __DIR__ . '/tmp/dir';
     private $fileContent = <<<EOD
     Test string

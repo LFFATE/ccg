@@ -35,8 +35,9 @@ final class Filesystem
         }
     }
 
-    public function write(string $filename, string $data)
+    public function write(string $raw_filename, string $data)
     {
+        $filename = get_absolute_path($raw_filename);
         $pathinfo = pathinfo($filename);
         if (!file_exists($pathinfo['dirname'])) {
             mkdir($pathinfo['dirname'], 0777, true);
@@ -46,13 +47,14 @@ final class Filesystem
     }
 
     /**
-     * @param string $filename - full filename to be renamed
+     * @param string $raw_filename - full filename to be renamed
      * @param string $new_name - new name of the file, relative to $filename path
      * 
      * @return bool
      */
-    public function rename(string $filename, string $new_name)
+    public function rename(string $raw_filename, string $new_name)
     {
+        $filename = get_absolute_path($raw_filename);
         if (!$this->exists($filename)) {
             throw new \InvalidArgumentException("File $filename doesn't exists");
         }
