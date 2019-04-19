@@ -300,7 +300,7 @@ EOD;
                 LanguageGenerator::getTranslationKey(
                     LangvarTypes::$PROFILE_FIELDS,
                     '',
-                    'email',
+                    'email'
                 )
             )
         );
@@ -366,7 +366,7 @@ EOD;
                 LanguageGenerator::getTranslationKey(
                     LangvarTypes::$SETTINGS_TOOLTIPS,
                     'sd_addon',
-                    'name',
+                    'name'
                 )
             )
         );
@@ -377,7 +377,7 @@ EOD;
                 LanguageGenerator::getTranslationKey(
                     LangvarTypes::$SETTINGS_OPTIONS,
                     'sd_addon',
-                    'name',
+                    'name'
                 )
             )
         );

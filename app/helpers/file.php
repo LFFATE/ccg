@@ -1,9 +1,9 @@
 <?php
 
 function get_absolute_path($path) {
-    $path = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
+    $path = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     $parts = array_filter(explode(DIRECTORY_SEPARATOR, $path), 'strlen');
-    $absolutes = array();
+    $absolutes = [];
     foreach ($parts as $part) {
         if ('.' == $part) continue;
         if ('..' == $part) {
@@ -12,5 +12,5 @@ function get_absolute_path($path) {
             $absolutes[] = $part;
         }
     }
-    return implode(DIRECTORY_SEPARATOR, $absolutes);
+    return DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $absolutes);
 }

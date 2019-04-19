@@ -71,7 +71,7 @@ class GeneratorMediator extends AbstractMediator
                         LanguageGenerator::getTranslationKey(
                             LangvarTypes::$ADDONS,
                                 'name',
-                                $data['addon.id'],
+                                $data['addon.id']
                             ),
                         parse_to_readable($data['addon.id'])
                     )
@@ -79,7 +79,7 @@ class GeneratorMediator extends AbstractMediator
                         LanguageGenerator::getTranslationKey(
                             LangvarTypes::$ADDONS,
                                 'description',
-                                $data['addon.id'],
+                                $data['addon.id']
                             ),
                         parse_to_readable($data['addon.id'])
                     );
@@ -93,7 +93,7 @@ class GeneratorMediator extends AbstractMediator
                         LanguageGenerator::getTranslationKey(
                             LangvarTypes::$SETTINGS_OPTIONS,
                                 $data['addon.id'],
-                                $data['id'],
+                                $data['id']
                             ),
                         parse_to_readable($data['id'])
                     )
@@ -101,7 +101,7 @@ class GeneratorMediator extends AbstractMediator
                         LanguageGenerator::getTranslationKey(
                             LangvarTypes::$SETTINGS_TOOLTIPS,
                                 $data['addon.id'],
-                                $data['id'],
+                                $data['id']
                             ),
                         parse_to_readable($data['id'])
                     );
@@ -114,7 +114,7 @@ class GeneratorMediator extends AbstractMediator
                                     LangvarTypes::$SETTINGS_VARIANTS,
                                         $data['addon.id'],
                                         $data['id'],
-                                        $variation,
+                                        $variation
                                     ),
                                 parse_to_readable($variation)
                             );
@@ -133,7 +133,7 @@ class GeneratorMediator extends AbstractMediator
                         LanguageGenerator::getTranslationKey(
                             LangvarTypes::$SETTINGS_SECTIONS,
                                 $data['addon.id'],
-                                $data['id'],
+                                $data['id']
                             ),
                         parse_to_readable($data['id'])
                     );
