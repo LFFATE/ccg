@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 use terminal\Terminal;
@@ -10,16 +11,20 @@ require __DIR__ . '/config/config.php';
  * autoload
  */
 spl_autoload_register(function ($class) {
-    include 'app/' . $class . '.php';
+    $file = realpath(__DIR__ . DIRECTORY_SEPARATOR . 'app') . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
+    if(file_exists($file)) {
+        require_once($file);
+    }
 });
 
 define('ROOT_DIR', realpath(__DIR__));
 
-$defaults_normalized   = flat_array_with_prefix($defaults);
+$defaults_normalized = flat_array_with_prefix($defaults);
 
 $config             = new Config($argv, $defaults_normalized);
 $terminal           = new Terminal();
 $filesystem         = new Filesystem();
+
 
 $ccg = new Ccg(
     $config,
