@@ -30,7 +30,7 @@ final class AddonXmlGeneratorTest extends TestCase
             'addon.priority' => '665',
             'addon.status' => 'active',
             'addon.auto_install' => 'ULTIMATE',
-            'filesystem.output_path_relative' => './'
+            'filesystem.output_path_relative' => ''
         ]);
         $this->generator = new AddonXmlGenerator($this->config);
     }
@@ -38,7 +38,7 @@ final class AddonXmlGeneratorTest extends TestCase
     public function testGetPath(): void
     {
         $this->assertSame(
-            get_absolute_path(ROOT_DIR . $this->config->get('filesystem.output_path_relative') . 'app/addons/sd_addon/addon.xml'),
+            sanitize_filename(ROOT_DIR . $this->config->get('filesystem.output_path_relative') . 'app/addons/sd_addon/addon.xml'),
             $this->generator->getPath()
         );
     }

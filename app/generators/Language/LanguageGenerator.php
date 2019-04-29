@@ -72,7 +72,7 @@ final class LanguageGenerator extends \generators\AbstractGenerator
                 $this->pathTemplate
             );
 
-        return get_absolute_path($path);
+        return sanitize_filename($path);
     }
 
     /**

@@ -42,7 +42,7 @@ final class ReadmeGeneratorTest extends TestCase
         $generator = new ReadmeGenerator($this->config);
 
         $this->assertSame(
-            get_absolute_path($this->config->get('path') . $this->config->get('filesystem.output_path_relative') . '/app/addons/sd_addon/README.md'),
+            sanitize_filename($this->config->get('path') . $this->config->get('filesystem.output_path_relative') . '/app/addons/sd_addon/README.md'),
             $generator->getPath()
         );
     }

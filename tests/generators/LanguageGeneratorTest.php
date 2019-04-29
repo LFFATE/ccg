@@ -491,7 +491,7 @@ EOD;
     public function testGetPath(): void
     {
         $this->assertSame(
-            get_absolute_path(ROOT_DIR . $this->config->get('filesystem.output_path_relative') . 'var/langs/en/addons/sd_addon.po'),
+            sanitize_filename(ROOT_DIR . $this->config->get('filesystem.output_path_relative') . 'var/langs/en/addons/sd_addon.po'),
             $this->generator->getPath()
         );
     }

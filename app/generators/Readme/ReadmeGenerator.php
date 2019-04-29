@@ -29,7 +29,7 @@ final class ReadmeGenerator extends \generators\AbstractGenerator
      */
     public function getTemplateFilename(): string
     {
-        return get_absolute_path($this->templatePath);
+        return sanitize_filename($this->templatePath);
     }
 
     public function setMediator(AbstractMediator $mediator): void
@@ -52,7 +52,7 @@ final class ReadmeGenerator extends \generators\AbstractGenerator
             . $this->config->get('filesystem.output_path_relative')
             . str_replace('${addon}', $addon_id, $this->pathTemplate);
 
-        return get_absolute_path($path);
+        return sanitize_filename($path);
     }
 
     /**

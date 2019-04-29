@@ -1,16 +1,44 @@
 <?php
 
-function get_absolute_path($path) {
-    $path = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
-    $parts = array_filter(explode(DIRECTORY_SEPARATOR, $path), 'strlen');
-    $absolutes = [];
-    foreach ($parts as $part) {
-        if ('.' == $part) continue;
-        if ('..' == $part) {
-            array_pop($absolutes);
+function sanitize_filename($input)
+{
+    $input = sanitize_slashes($input);
+    $output = '';
+
+    while ($input !== '') {
+        if (
+            ($prefix = substr($input, 0, 3)) == '../' ||
+            ($prefix = substr($input, 0, 2)) == './'
+           ) {
+            $input = substr($input, strlen($prefix));
+        } else if (
+            ($prefix = substr($input, 0, 3)) == '/./' ||
+            ($prefix = $input) == '/.'
+           ) {
+            $input = '/' . substr($input, strlen($prefix));
+        } else
+
+        if (
+            ($prefix = substr($input, 0, 4)) == '/../' ||
+            ($prefix = $input) == '/..'
+           ) {
+            $input = '/' . substr($input, strlen($prefix));
+            $output = substr($output, 0, strrpos($output, '/'));
+        } else if ($input == '.' || $input == '..') {
+            $input = '';
         } else {
-            $absolutes[] = $part;
+            $pos = strpos($input, '/');
+            if ($pos === 0) $pos = strpos($input, '/', $pos+1);
+            if ($pos === false) $pos = strlen($input);
+            $output .= substr($input, 0, $pos);
+            $input = (string) substr($input, $pos);
         }
     }
-    return DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $absolutes);
+
+    return $output;
+}
+
+function sanitize_slashes($filename)
+{
+    return str_replace('\\', '/', $filename);
 }

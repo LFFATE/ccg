@@ -11,13 +11,13 @@ require __DIR__ . '/config/config.php';
  * autoload
  */
 spl_autoload_register(function ($class) {
-    $file = realpath(__DIR__ . DIRECTORY_SEPARATOR . 'app') . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
+    $file = realpath(__DIR__ . '/' . 'app') . '/' . str_replace('\\', '/', $class) . '.php';
     if(file_exists($file)) {
         require_once($file);
     }
 });
 
-define('ROOT_DIR', realpath(__DIR__));
+define('ROOT_DIR', sanitize_filename(__DIR__));
 
 $defaults_normalized = flat_array_with_prefix($defaults);
 
@@ -31,6 +31,10 @@ $ccg = new Ccg(
     $terminal,
     $filesystem
 );
+
+if ($config->get('autocomplete')) {
+    $ccg->autocomplete();
+}
 
 if ($config->get('debug')) {
     $ccg
