@@ -22,7 +22,7 @@ final class AddonXmlGeneratorTest extends TestCase
     protected function setUp(): void
     {
         $this->config = new Config([
-            'addon.id=sd_addon'
+            'addon.id' => 'sd_addon'
         ],
         [
             'addon.edition_type' => 'ROOT,ULT:VENDOR',

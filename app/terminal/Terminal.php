@@ -54,7 +54,7 @@ final class Terminal {
         while ($line !== false) {
             if (strpos($line, '-') === 0) {
                 $result_string .= $this->error($line, false, true);
-            } else if(strpos($line, '+') === 0) {
+            } else if (strpos($line, '+') === 0) {
                 $result_string .= $this->success($line, false, true);
             } else {
                 $result_string .= $line;
@@ -142,7 +142,7 @@ final class Terminal {
         $handle = fopen('php://stdin', 'r');
         $line   = fgets($handle);
 
-        if(trim($line) != $confirmation_word){
+        if(trim($line) != $confirmation_word) {
             $this->warning('ABORTING');
             call_user_func($cancel_action);
             exit;

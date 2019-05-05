@@ -19,7 +19,7 @@ final class MultipleFileGeneratorTest extends TestCase
     protected function setUp(): void
     {
         $this->config = new Config([
-            'addon.id=sd_new_addon'
+            'addon.id' => 'sd_new_addon'
         ],
         [
             'lang' => 'en',

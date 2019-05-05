@@ -18,7 +18,7 @@ final class LanguageGeneratorTest extends TestCase
     protected function setUp(): void
     {
         $this->config = new Config([
-            'addon.id=sd_addon'
+            'addon.id' => 'sd_addon'
         ],
         [
             'addon.default_language' => 'en',
