@@ -37,3 +37,38 @@ function to_camel_case(string $string): string
         return ucfirst($matches[2]);
     }, $string);
 }
+
+/**
+ * Parse command line like arguments into array
+ * 
+ * @param string $command
+ * 
+ * @return array
+ */
+function arguments(string $command) {
+    $arguments = [];
+
+    preg_replace_callback(
+        '/--([\w\.\-_]+)\s*("([^"\\\]*(\\\.[^"\\\]*)*)"|[\w\d\.]+)?/ius',
+        function($matches) use (&$arguments) {
+            $key = $matches[1];
+            $value = true;
+
+            switch(count($matches)) {
+                case 4:
+                case 5:
+                    $value = $matches[3];
+                break;
+                case 3:
+                    $value = $matches[2];
+                break;
+            }
+            
+            $arguments[$key] = $value;
+        },
+        // 'ccg.php addon/create --addon.id "new_addon" --langvar "say my name \"Daniel\"" --cur "" --developer mikhail ddfgd --test');
+        $command
+    );
+
+    return $arguments;
+}

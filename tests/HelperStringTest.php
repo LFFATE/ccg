@@ -78,4 +78,36 @@ EOD;
             to_camel_case('remove')
         );
     }
+
+    public function testArguments()
+    {
+        $argv_test = 'ccg.php addon/create --addon.id "new_addon" --langvar "say my name \"Daniel\"" --cur "" --developer mikhail ddfgd --test';
+
+        $arguments = arguments($argv_test);
+        $this->assertSame('new_addon', $arguments['addon.id']);
+        $this->assertSame(true, $arguments['test']);
+        $this->assertSame('say my name \"Daniel\"', $arguments['langvar']);
+        $this->assertSame('mikhail', $arguments['developer']);
+
+        $argv_test = 'ccg.php addon/create --addon.id new_addon';
+        $arguments = arguments($argv_test);
+        $this->assertSame('new_addon', $arguments['addon.id']);
+
+        $argv_test = 'ccg.php addon/create --addon.id new addon';
+        $arguments = arguments($argv_test);
+        $this->assertSame('new', $arguments['addon.id']);
+
+        $argv_test = 'ccg.php addon/create --test --addon.id new addon';
+        $arguments = arguments($argv_test);
+        $this->assertSame(true, $arguments['test']);
+        $this->assertSame('new', $arguments['addon.id']);
+
+        $argv_test = 'ccg.php addon/create --test-option true';
+        $arguments = arguments($argv_test);
+        $this->assertSame('true', $arguments['test-option']);
+
+        $argv_test = 'ccg.php addon/create --test_option true';
+        $arguments = arguments($argv_test);
+        $this->assertSame('true', $arguments['test_option']);
+    }
 }

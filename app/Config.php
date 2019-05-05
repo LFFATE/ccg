@@ -3,8 +3,9 @@
 class Config
 {
     private $params = [];
+    private $systemKeys = [];
 
-    function __construct(array $argv, array $defaults = [])
+    function __construct(array $arguments, array $defaults = [])
     {
         $this->set('path', ROOT_DIR);
 
@@ -14,19 +15,12 @@ class Config
                 $key,
                 $setting
             );
+            $self->systemKeys[] = $key;
         });
-
-        foreach($argv as $arg) {
-            $e = explode('=', $arg);
-            if (count($e) === 2) {
-                $this->set($e[0], $e[1]);
-            } else {
-                $this->set($e[0], true);
-            }
+        
+        foreach($arguments as $key => $value) {
+            $this->set($key, $value);
         }
-
-        $this->set('generator', to_camel_case(@$argv[1] ?: ''));
-        $this->set('command', @$argv[2] ?: '');
     }
 
     public function set(string $key, $param): void
@@ -60,5 +54,10 @@ class Config
     public function getAll(): array
     {
         return $this->params;
+    }
+
+    public function getSystemKeys(): array
+    {
+        return $this->systemKeys;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace filesystem;
 
+use SebastianBergmann\ObjectReflector\InvalidArgumentException;
+
 final class Filesystem
 {
     public function exists(string $raw_filename)
@@ -75,5 +77,19 @@ final class Filesystem
         } else {
             return false;
         }
+    }
+
+    /**
+     * @param string $path - full path name to scan
+     * 
+     * @return array of full path names of found dirs
+     */
+    public function listDirs(string $path): array
+    {
+        if (!$this->exists($path)) {
+            throw new \InvalidArgumentException();
+        }
+
+        return array_filter(glob($path . '*'), 'is_dir');
     }
 }

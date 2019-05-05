@@ -18,6 +18,12 @@ class AddonXml extends AbstractController
     private $terminal;
     private $filesystem;
     private $mfGenerator;
+    private static $allowedMethods = [
+        'help',
+        'create',
+        'remove',
+        'update'
+    ];
 
     use HelpTrait;
 
@@ -43,6 +49,14 @@ class AddonXml extends AbstractController
         $this->mfGenerator
             ->addGenerator($addonXmlGenerator)
             ->addGenerator($languageGenerator);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function getAllowedMethods(): array
+    {
+        return self::$allowedMethods;
     }
 
     /**

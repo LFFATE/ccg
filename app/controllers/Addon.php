@@ -6,7 +6,6 @@ use generators\AddonXml\AddonXmlGenerator;
 use generators\Language\LanguageGenerator;
 use generators\Readme\ReadmeGenerator;
 use generators\MultipleFileGenerator;
-use generators\FileGenerator;
 use terminal\Terminal;
 use filesystem\Filesystem;
 use mediators\GeneratorMediator;
@@ -18,6 +17,11 @@ class Addon extends AbstractController
     private $terminal;
     private $filesystem;
     private $mfGenerator;
+    private static $allowedMethods = [
+        'help',
+        'create',
+        'remove'
+    ];
 
     use HelpTrait;
 
@@ -50,6 +54,14 @@ class Addon extends AbstractController
     }
     
     /**
+     * @inheritdoc
+     */
+    public static function getAllowedMethods(): array
+    {
+        return self::$allowedMethods;
+    }
+
+    /**
      * help:
      * addon create
      * creates addon.xml, language file, readme and other
@@ -81,7 +93,7 @@ class Addon extends AbstractController
             );
         });
     }
-
+    
     /**
      * help:
      * addon remove
@@ -89,13 +101,64 @@ class Addon extends AbstractController
      */
     public function remove()
     {
-        $addonPath = $this->config->get('path')
-            . $this->config->get('filesystem.output_path_relative');
+        $self = $this;
+        $this->terminal->confirm(
+            function() use ($self) {
+                $addonPath = $self->config->get('path')
+                    . $self->config->get('filesystem.output_path_relative');
 
-        $this->filesystem->delete($addonPath);
+                $self->filesystem->delete($addonPath);
 
-        if ($this->filesystem->exists($addonPath)) {
-            throw new \Exception($addonPath . ' cannot be removed');
+                if ($self->filesystem->exists($addonPath)) {
+                    throw new \Exception($addonPath . ' cannot be removed');
+                }
+
+                $this->terminal->warning('Addon was removed');
+            }
+        );        
+    }
+
+    /**
+     * Autocomplete addon param
+     */
+    public function createAutocomplete($prev = null, $cur = null, $arguments = [])
+    {
+        if (empty($arguments['addon.id'])) {
+            return ['--addon.id'];
+        }
+
+        return [];
+    }
+    /**
+     * Autocomplete addon name to be removed
+     */
+    public function removeAutocomplete($prev = null, $cur = null, $arguments = [])
+    {
+        switch ($prev)
+        {
+            case '--addon.id':
+           
+                $addonsPath = sanitize_filename(
+                    $this->config->get('path')
+                    . $this->config->get('filesystem.output_path_relative') . '../'
+                );
+
+                $dirs = $this->filesystem->listDirs($addonsPath);
+        
+                return array_map(function($dir) {
+                    $paths = explode('/', $dir);
+                    return end($paths);
+                }, $dirs);
+            break;
+            default:
+            /**
+             * @todo do it better
+             */
+                if (empty($arguments['addon.id'])) {
+                    return ['--addon.id'];
+                }
+
+                return [];
         }
     }
 }

@@ -8,5 +8,3 @@ php:
 
 os:
   - linux
-  - osx
-  - windows

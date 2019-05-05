@@ -13,7 +13,7 @@ use mediators\AbstractMediator;
 final class ReadmeGenerator extends \generators\AbstractGenerator
 {
     // readonly
-    private $pathTemplate = '/app/addons/${addon}/README.md';
+    private $pathTemplate = 'app/addons/${addon}/README.md';
     private $templatePath = ROOT_DIR . '/resources/README.md';
     private $content = '';
     private $config;

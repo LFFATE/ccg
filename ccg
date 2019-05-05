@@ -1,0 +1,16 @@
+_ccg()
+{
+    local cur prev opts
+    COMPREPLY=()
+    generator="${COMP_WORDS[1]}"
+    command="${COMP_WORDS[3]}"
+
+	opts="${COMP_LINE} --autocomplete y"
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    opts="${opts} --cur \"${cur:=}\""
+    opts="${opts} --prev \"${COMP_WORDS[COMP_CWORD - 1]:=}\""
+    opts="$(${opts})"
+	COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+
+}
+complete -F _ccg ccg.php

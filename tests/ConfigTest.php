@@ -8,14 +8,11 @@ final class ConfigTest extends TestCase
 {
     public function testCanBeCreatedFromValidArgs(): void
     {
-        $argsArray = [
-            '_tools/ccg/generator.php',
-            'addonXml',
-            'remove',
-            'addon=sd_new'
+        $arguments = [
+            'generator' => 'test'
         ];
 
-        $config = new Config($argsArray);
+        $config = new Config($arguments);
 
         $this->assertInstanceOf(
             Config::class,
@@ -25,52 +22,30 @@ final class ConfigTest extends TestCase
 
     public function testCanParseArgv(): void
     {
-        $argsArray = [
-            '_tools/ccg/generator.php',
-            'addonXml',
-            'remove',
-            'addon.id=sd_new',
-            'subpath=cscart',
-            'path=/var/path/${subpath}/${addon.id}'
+        $arguments = [
+            'generator' => 'addonXml',
+            'command'   => 'remove',
+            'addon.id'  => 'sd_new',
+            'subpath'   => 'cscart',
+            'path'      => '/var/path/${subpath}/${addon.id}',
         ];
 
-        $config = new Config($argsArray);
+        $config = new Config($arguments);
 
-        $this->assertEquals(
-            'addonXml',
-            $config->get('generator')
-        );
-
-        $this->assertEquals(
-            'remove',
-            $config->get('command')
-        );
-
-        $this->assertEquals(
-            'sd_new',
-            $config->get('addon.id')
-        );
-
-        $this->assertEquals(
-            '/var/path/cscart/sd_new',
-            $config->get('path')
-        );
+        $this->assertEquals('addonXml', $config->get('generator'));
+        $this->assertEquals('remove', $config->get('command'));
+        $this->assertEquals('sd_new', $config->get('addon.id'));
+        $this->assertEquals('/var/path/cscart/sd_new', $config->get('path'));
     }
+
     public function testCanSetValue(): void
     {
         $config = new Config([]);
         $config->set('string', 'value');
         $config->set('array', ['key' => 'val']);
 
-        $this->assertEquals(
-            $config->get('string'),
-            'value'
-        );
-
-        $this->assertEquals(
-            $config->get('array'),
-            ['key' => 'val']
-        );
+        $this->assertEquals($config->get('string'), 'value');
+        $this->assertEquals($config->get('array'), ['key' => 'val']);
     }
 
     public function testCanGetOr(): void
@@ -97,13 +72,12 @@ final class ConfigTest extends TestCase
     public function testCanGetAll(): void
     {
         $config = new Config([
-            '',
-            'generator',
-            'command',
-            'addon=sd_addon',
-            'item=itemname',
-            'remove=true',
-            'check=exists'
+            'generator' => 'generator',
+            'command'   => 'command',
+            'addon'     => 'sd_addon',
+            'item'      => 'itemname',
+            'remove'    => 'true',
+            'check'     => 'exists'
         ]);
 
         $config->set('string', 'value');
@@ -113,7 +87,6 @@ final class ConfigTest extends TestCase
                 return $key !== 'path'; // Don't test path item
             }, ARRAY_FILTER_USE_KEY),
             [
-                '' => true,
                 'generator' => 'generator',
                 'command' => 'command',
                 'addon' => 'sd_addon',

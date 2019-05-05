@@ -3,7 +3,7 @@
 $defaults['addon'] = [
     'edition_type'      => 'ROOT,ULT:VENDOR',
     'id'                => 'sd_new_addon',
-    'version'           => '4.8.0.1',
+    'version'           => '4.8.1',
     'priority'          => 1000,
     'position'          => 1,
     'status'            => 'active',

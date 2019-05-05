@@ -8,11 +8,11 @@ use terminal\Terminal;
 
 final class TerminalTest extends TestCase
 {
-    private $Terminal;
+    private $terminal;
 
     protected function setUp(): void
     {
-        $this->Terminal = new Terminal();
+        $this->terminal = new Terminal();
     }
 
     /**
@@ -21,7 +21,7 @@ final class TerminalTest extends TestCase
     public function testCanOutputToTerminal(): void
     {
         ob_start();
-        $this->Terminal->echo('string');
+        $this->terminal->echo('string');
 
         $this->assertEquals(
             ob_get_contents(),
@@ -34,22 +34,22 @@ final class TerminalTest extends TestCase
     public function testCanForceOutput(): void
     {
 
-        $this->Terminal->echo('string', true);
-        $this->Terminal->success('string', true);
-        $this->Terminal->warning('string', true);
-        $this->Terminal->info('string', true);
-        $this->Terminal->error('string', true);
+        $this->terminal->echo('string', true);
+        $this->terminal->success('string', true);
+        $this->terminal->warning('string', true);
+        $this->terminal->info('string', true);
+        $this->terminal->error('string', true);
 
         ob_start();
-        $this->Terminal->forceOutput();
+        $this->terminal->forceOutput();
 
         $this->assertEquals(
             ob_get_contents(),
-            $this->Terminal->echo('string', false, true) . PHP_EOL .
-            $this->Terminal->success('string', false, true) . PHP_EOL .
-            $this->Terminal->warning('string', false, true) . PHP_EOL .
-            $this->Terminal->info('string', false, true) . PHP_EOL .
-            $this->Terminal->error('string', false, true) . PHP_EOL
+            $this->terminal->echo('string', false, true) . PHP_EOL .
+            $this->terminal->success('string', false, true) . PHP_EOL .
+            $this->terminal->warning('string', false, true) . PHP_EOL .
+            $this->terminal->info('string', false, true) . PHP_EOL .
+            $this->terminal->error('string', false, true) . PHP_EOL
         );
         ob_end_clean();
     }
@@ -57,11 +57,11 @@ final class TerminalTest extends TestCase
     public function testCanWriteToBuffer(): void
     {
 
-        $this->Terminal->echo('string', true);
-        $this->Terminal->addBuffer('lorem ipsum');
+        $this->terminal->echo('string', true);
+        $this->terminal->addBuffer('lorem ipsum');
 
         $this->assertEquals(
-            $this->Terminal->getBuffer(),
+            $this->terminal->getBuffer(),
             'string' . PHP_EOL . 'lorem ipsum'
         );
     }
@@ -70,12 +70,12 @@ final class TerminalTest extends TestCase
     {
 
         $this->assertEquals(
-            $this->Terminal->success('string', false, true),
+            $this->terminal->success('string', false, true),
             "\e[32m" . 'string' . "\e[0m"
         );
 
         ob_start();
-        $this->Terminal->success('string');
+        $this->terminal->success('string');
 
         $this->assertEquals(
             ob_get_contents(),
@@ -88,12 +88,12 @@ final class TerminalTest extends TestCase
     public function testWarning(): void
     {
         $this->assertEquals(
-            $this->Terminal->warning('string', false, true),
+            $this->terminal->warning('string', false, true),
             "\e[43m" . 'string' . "\e[0m"
         );
 
         ob_start();
-        $this->Terminal->warning('string');
+        $this->terminal->warning('string');
 
         $this->assertEquals(
             ob_get_contents(),
@@ -106,12 +106,12 @@ final class TerminalTest extends TestCase
     public function testError(): void
     {
         $this->assertEquals(
-            $this->Terminal->error('string', false, true),
+            $this->terminal->error('string', false, true),
             "\e[1;31m" . 'string' . "\e[0m"
         );
 
         ob_start();
-        $this->Terminal->error('string');
+        $this->terminal->error('string');
 
         $this->assertEquals(
             ob_get_contents(),
@@ -124,12 +124,12 @@ final class TerminalTest extends TestCase
     public function testInfo(): void
     {
         $this->assertEquals(
-            $this->Terminal->info('string', false, true),
+            $this->terminal->info('string', false, true),
             "\e[46m" . 'string' . "\e[0m"
         );
 
         ob_start();
-        $this->Terminal->info('string');
+        $this->terminal->info('string');
 
         $this->assertEquals(
             ob_get_contents(),
@@ -137,5 +137,81 @@ final class TerminalTest extends TestCase
         );
 
         ob_end_clean();
+    }
+
+    /**
+     * @covers terminal\Terminal::getArguments
+     */
+    public function testGetGenerator(): void
+    {
+        global $argv;
+        $argv_backup = $argv;
+        $argv = [
+            'ccg.php',
+        ];
+
+        $terminal = new Terminal();
+        $arguments = $terminal->getArguments();
+        $this->assertArrayHasKey('generator', $arguments);
+        $this->assertSame('', $arguments['generator']);
+        
+        $argv = [
+            'ccg.php',
+            '--autocomplete',
+            'y'
+        ];
+        $terminal = new Terminal();
+        $arguments = $terminal->getArguments();
+        $this->assertArrayHasKey('generator', $arguments);
+        $this->assertSame('', $arguments['generator']);
+
+        $argv = $argv_backup;
+    }
+
+    /**
+     * @covers terminal\Terminal::getArguments
+     */
+    public function testGetArguments(): void
+    {
+        global $argv;
+        $argv_backup = $argv;
+        $argv = [
+            'ccg.php',
+            'generator/command',
+            '--test-option',
+            'value'
+        ];
+
+        $terminal = new Terminal();
+        $arguments = $terminal->getArguments();
+        $this->assertArrayHasKey('generator', $arguments);
+        $this->assertSame('generator', $arguments['generator']);
+        $this->assertArrayHasKey('command', $arguments);
+        $this->assertSame('command', $arguments['command']);
+        $this->assertArrayHasKey('test-option', $arguments);
+        $this->assertSame('value', $arguments['test-option']);
+
+        $argv = $argv_backup;
+    }
+
+    /**
+     * @covers terminal\Terminal::isAutocomplete
+     */
+    public function testIsAutocomplete(): void
+    {
+        global $argv;
+        $argv_backup = $argv;
+        $argv = [
+            'ccg.php',
+            'generator/command',
+            '--test-option',
+            'value',
+            '--autocomplete',
+            'y'
+        ];
+
+        $terminal = new Terminal();
+        $this->assertSame(true, $terminal->isAutocomplete());
+        $argv = $argv_backup;
     }
 }

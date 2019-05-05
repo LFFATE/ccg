@@ -18,5 +18,9 @@ abstract class AbstractController
         $this->terminal             = $terminal;
         $this->filesystem           = $filesystem;
     }
-    // CRUD??
+    
+    /**
+     * Returns array of methods that can be requested
+     */
+    abstract public static function getAllowedMethods(): array;
 }

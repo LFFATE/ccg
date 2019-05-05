@@ -12,8 +12,6 @@ use mediators\GeneratorMediator;
 
 /**
  * Enter point for all commands
- * @todo Find out a code splitting way for this class
- * It may be a several traits
  */
 class Ccg
 {
@@ -34,22 +32,93 @@ class Ccg
 
     public function generate()
     {
-        $generator  = $this->config->get(EnumConfig::$GENERATOR);
-        $command    = $this->config->get(EnumConfig::$COMMAND) ?: 'index';
+        $generator          = $this->config->get(EnumConfig::$GENERATOR);
+        $command            = $this->config->get(EnumConfig::$COMMAND) ?: 'index';
+        $controllerClass    = 'controllers\\' . $generator;
+        
+        if (!$generator) {
+            throw new \InvalidArgumentException('Provide a command. See php ccg.php help');
+        }
 
-        try {
-            $controllerClass = 'controllers\\' . $generator;
+        if (!class_exists($controllerClass)) {
+            throw new \InvalidArgumentException('Command not recognized. See php ccg.php help');
+        }
+
+        $refl = new ReflectionClass($controllerClass);
+        $controller = $refl->newInstanceArgs([
+            $this->config,
+            $this->terminal,
+            $this->filesystem
+        ]);
+        
+        $allowedMethods = $controller::getAllowedMethods();
+        if (in_array($command, $allowedMethods)) {
+            $controller->{$command}();
+        } else {
+            throw new \InvalidArgumentException('Command not recognized. See php ccg.php help');
+        }
+
+        return $this;
+    }
+
+    public function autocomplete($arguments)
+    {
+        $generator          = $arguments['generator'];
+        $command            = $arguments['command'];
+        $prev               = $arguments['prev'];
+        $cur                = $arguments['cur'];
+        $controllerClass    = 'controllers\\' . $generator;
+        
+        /**
+         * @todo add autogeneration this list
+         */
+        $generators = [
+            'addon',
+            'addon-xml',
+            'help'
+        ];
+
+        $autocompletes = [];
+        // $this->filesystem->write(ROOT_DIR . '/logs/terminal.txt', "gen: $generator; com: $command; prev: $prev; cur: $cur; " . implode(',', $autocompletes));
+        
+        // if (empty($generator)) {
+        //     $autocompletes = $generators;
+        // }
+
+        if (class_exists($controllerClass)) {
             $refl = new ReflectionClass($controllerClass);
             $controller = $refl->newInstanceArgs([
                 $this->config,
                 $this->terminal,
                 $this->filesystem
             ]);
-        } catch (\Exception $error) {
+            
+            $method = $command;
+            $is_method_exists = method_exists($controllerClass, $method);
+            
+            if ($method) {
+                $method_autocomplete = $command . 'Autocomplete';
+                $autocompletes = method_exists($controllerClass, $method_autocomplete) ? $controller->{$method_autocomplete}($prev, $cur, $arguments) : [];
+                // $autocompletes = method_exists($controllerClass, $method) ? $controller->{$method}($prev, $cur) : $this->config->getSystemKeys();
+                // $autocompletes = array_merge($autocompletes, $this->config->getSystemKeys());
+                $this->filesystem->write(ROOT_DIR . '/logs/terminal.txt', "gen: $generator; method: $method_autocomplete; " . implode(',', $autocompletes) . ':::' . method_exists($controllerClass, $method_autocomplete));
+            }
+            
+            if (empty($autocompletes) && !$is_method_exists) {
+                $allowedMethods = $controller::getAllowedMethods();
+                $autocompletes = array_map(function($method) use ($generator) {
+                    return $generator . '/' . $method;
+                }, $allowedMethods);
+                // $autocompletes[] = 'aaaaaaaaaaaaaddddd';
+            }
+        } else {
+            $autocompletes = $generators;
         }
-        
-        $controller->{$command}();
 
-        return $this;
+        /**
+         * @todo return array
+         */
+        $this->terminal->echo(implode(' ', $autocompletes));
+        exit(0);
     }
 }

@@ -16,6 +16,9 @@ class Help extends AbstractController
     private $config;
     private $terminal;
     private $filesystem;
+    private static $allowedMethods = [
+        'index',
+    ];
 
     use HelpTrait;
 
@@ -28,6 +31,14 @@ class Help extends AbstractController
         $this->config               = $config;
         $this->terminal             = $terminal;
         $this->filesystem           = $filesystem;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function getAllowedMethods(): array
+    {
+        return self::$allowedMethods;
     }
 
     /**
