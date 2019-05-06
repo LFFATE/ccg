@@ -26,7 +26,7 @@ function parse_to_readable(string $source): string
 }
 
 /**
- * Parses strings like addon-xml to addonXml
+ * Converts strings like addon-xml to addonXml
  * @param string $string 
  * 
  * @return string
@@ -35,6 +35,19 @@ function to_camel_case(string $string): string
 {
     return preg_replace_callback('/(-(\w+))/', function($matches) {
         return ucfirst($matches[2]);
+    }, $string);
+}
+
+/**
+ * Converts strings like addonXml to addon-xml
+ * @param string $string
+ * 
+ * @return string
+ */
+function to_lower_case(string $string): string
+{
+    return preg_replace_callback('/([A-Z]+)/', function($matches) {
+        return '-' . strtolower($matches[1]);
     }, $string);
 }
 
@@ -49,7 +62,7 @@ function arguments(string $command) {
     $arguments = [];
 
     preg_replace_callback(
-        '/--([\w\.\-_]+)\s*("([^"\\\]*(\\\.[^"\\\]*)*)"|[\w\d\.]+)?/ius',
+        '/--([\w\.\-_]+)\s*("([^"\\\]*(\\\.[^"\\\]*)*)"|[\w\d][\w\d\.\-_]+)?/ius',
         function($matches) use (&$arguments) {
             $key = $matches[1];
             $value = true;

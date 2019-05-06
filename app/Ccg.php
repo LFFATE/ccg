@@ -79,11 +79,6 @@ class Ccg
         ];
 
         $autocompletes = [];
-        // $this->filesystem->write(ROOT_DIR . '/logs/terminal.txt', "gen: $generator; com: $command; prev: $prev; cur: $cur; " . implode(',', $autocompletes));
-        
-        // if (empty($generator)) {
-        //     $autocompletes = $generators;
-        // }
 
         if (class_exists($controllerClass)) {
             $refl = new ReflectionClass($controllerClass);
@@ -99,9 +94,6 @@ class Ccg
             if ($method) {
                 $method_autocomplete = $command . 'Autocomplete';
                 $autocompletes = method_exists($controllerClass, $method_autocomplete) ? $controller->{$method_autocomplete}($prev, $cur, $arguments) : [];
-                // $autocompletes = method_exists($controllerClass, $method) ? $controller->{$method}($prev, $cur) : $this->config->getSystemKeys();
-                // $autocompletes = array_merge($autocompletes, $this->config->getSystemKeys());
-                $this->filesystem->write(ROOT_DIR . '/logs/terminal.txt', "gen: $generator; method: $method_autocomplete; " . implode(',', $autocompletes) . ':::' . method_exists($controllerClass, $method_autocomplete));
             }
             
             if (empty($autocompletes) && !$is_method_exists) {
@@ -109,16 +101,11 @@ class Ccg
                 $autocompletes = array_map(function($method) use ($generator) {
                     return $generator . '/' . $method;
                 }, $allowedMethods);
-                // $autocompletes[] = 'aaaaaaaaaaaaaddddd';
             }
         } else {
             $autocompletes = $generators;
         }
 
-        /**
-         * @todo return array
-         */
-        $this->terminal->echo(implode(' ', $autocompletes));
-        exit(0);
+        return $autocompletes;
     }
 }

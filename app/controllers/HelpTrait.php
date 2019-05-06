@@ -8,10 +8,6 @@ use \Config;
 
 trait HelpTrait
 {
-    private $config;
-    private $terminal;
-    private $filesystem;
-
     function __construct(
         Config              $config,
         Terminal            $terminal,

@@ -14,9 +14,6 @@ use \Config;
 
 class AddonXml extends AbstractController
 {
-    private $config;
-    private $terminal;
-    private $filesystem;
     private $mfGenerator;
     private static $allowedMethods = [
         'help',
@@ -113,11 +110,11 @@ class AddonXml extends AbstractController
 
     /**
      * help:
-     * addon-xml update addon.id=<addon_id> <item> [remove] [...args]
+     * addon-xml/update --addon.id <addon_id> <item> [remove] [...args]
      * Sets additional field to addon xml file
      * addon.id - id of the addon
      * ---
-     *      settings-item (si) - <item id="date">...</item>
+     *      --settings-item - <item id="date">...</item>
      *           args: section=<section_id> type=<type> id=<id> [dv=<default_value>] [v=<variants>]
      *              section         - id for the settings section
      *              type            - type of the item id: input, textarea, password, checkbox, selectbox, multiple select, multiple checkboxes, countries list, states list, file, info, header, template
@@ -144,30 +141,12 @@ class AddonXml extends AbstractController
             ->find(AddonXmlGenerator::class)
                 ->extract();
 
-        switch (true)
-        {
-            case $this->config->get('settings-item'):
-            case $this->config->get('si'):
-                if (true === $this->config->get('remove')) {
-                    $addonXmlGenerator->removeSetting(
-                        $this->config->get('id')
-                    );
-                } else {
-                    $addonXmlGenerator->setSetting(
-                        $this->config->get('section'),
-                        $this->config->get('type'),
-                        $this->config->get('id'),
-                        $this->config->getOr('default_value', 'dv') ?: '',
-                        (function($config) {
-                            $variants = $config->getOr('variants', 'v');
-
-                            return $variants ? explode(',', $variants) : [];
-                        })($this->config)
-                    );
-                }
-            break;
-            default:
-                throw new \BadMethodCallException('There is no such command');
+        $method     = $this->getMethodName();
+        $class_name = get_class($this);
+        if (method_exists($class_name, $method)) {
+            $this->{$method}($addonXmlGenerator);
+        } else {
+            throw new \BadMethodCallException('There is no such command');
         }
 
         $this->mfGenerator
@@ -179,5 +158,40 @@ class AddonXml extends AbstractController
                 \Diff::toString(\Diff::compare($old_content[get_class($generator->extract())], $generator->extract()->toString()))
             );
         });
+    }
+
+    /**
+     * 
+     */
+    public function setSettingsItem($addonXmlGenerator)
+    {
+        $addonXmlGenerator->setSetting(
+            $this->config->get('section'),
+            $this->config->get('type'),
+            $this->config->get('id'),
+            $this->config->getOr('default_value', 'dv') ?: '',
+            (function($config) {
+                $variants = $config->getOr('variants', 'v');
+
+                return $variants ? explode(',', $variants) : [];
+            })($this->config)
+        );
+    }
+
+    public function removeSettingsItem($addonXmlGenerator)
+    {
+        $addonXmlGenerator->removeSetting(
+            $this->config->get('id')
+        );
+    }
+
+    public function updateAutocomplete()
+    {
+
+    }
+
+    public function updateSettingsItemAutocomplete()
+    {
+
     }
 }

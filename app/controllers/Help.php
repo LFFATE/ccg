@@ -13,9 +13,6 @@ use \Config;
 
 class Help extends AbstractController
 {
-    private $config;
-    private $terminal;
-    private $filesystem;
     private static $allowedMethods = [
         'index',
     ];

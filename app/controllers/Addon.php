@@ -13,9 +13,6 @@ use \Config;
 
 class Addon extends AbstractController
 {
-    private $config;
-    private $terminal;
-    private $filesystem;
     private $mfGenerator;
     private static $allowedMethods = [
         'help',

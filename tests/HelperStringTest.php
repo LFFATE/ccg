@@ -79,6 +79,11 @@ EOD;
         );
     }
 
+    public function testToLowerCase(): void
+    {
+        $this->assertSame('remove-item', to_lower_case('removeItem'));
+    }
+
     public function testArguments()
     {
         $argv_test = 'ccg.php addon/create --addon.id "new_addon" --langvar "say my name \"Daniel\"" --cur "" --developer mikhail ddfgd --test';
@@ -105,6 +110,10 @@ EOD;
         $argv_test = 'ccg.php addon/create --test-option true';
         $arguments = arguments($argv_test);
         $this->assertSame('true', $arguments['test-option']);
+
+        $argv_test = 'ccg.php addon/create --test-option settings-item';
+        $arguments = arguments($argv_test);
+        $this->assertSame('settings-item', $arguments['test-option']);
 
         $argv_test = 'ccg.php addon/create --test_option true';
         $arguments = arguments($argv_test);

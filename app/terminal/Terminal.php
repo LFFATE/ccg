@@ -219,11 +219,9 @@ final class Terminal {
         $controller = @$this->argv[1] ?: '';
         list($generator, $command) = array_pad(explode('/', $controller), 2, '');
         $generator = (1 === preg_match('/^[\w]+/ui', $generator)) ? $generator : '';
-        // echo '->' . $generator; var_dump(preg_match('/[\w?!\-]+/ui', $generator));die();
 
         $arguments['generator'] = to_camel_case($generator);
         $arguments['command'] = $command;
-// print_r($arguments);
         $this->setArguments($arguments);
     }
 
@@ -238,5 +236,27 @@ final class Terminal {
             isset($this->arguments['autocomplete'])
             && $this->arguments['autocomplete'] === 'y'
         );
+    }
+
+    /**
+     * Echo autocompletes to terminal
+     * 
+     * @param array
+     * 
+     * @return Terminal
+     */
+    public function autocomplete(array $variants)
+    {
+        $this->echo(implode(' ', $variants)) . ' ';
+
+        return $this;
+    }
+
+    /**
+     * Closes program execution
+     */
+    public function exit()
+    {
+        exit;
     }
 }

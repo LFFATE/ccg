@@ -30,9 +30,12 @@ $ccg = new Ccg(
     $terminal,
     $filesystem
 );
-
+print_r($terminal->getArguments());
 if ($terminal->isAutocomplete()) {
-    $ccg->autocomplete($terminal->getArguments());
+    $autocompletes = $ccg->autocomplete($terminal->getArguments());
+    $terminal
+        ->autocomplete($autocompletes)
+        ->exit();
 }
 
 if ($config->get('debug')) {
