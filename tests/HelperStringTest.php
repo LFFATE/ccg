@@ -115,8 +115,9 @@ EOD;
         $arguments = arguments($argv_test);
         $this->assertSame('settings-item', $arguments['test-option']);
 
-        $argv_test = 'ccg.php addon/create --test_option true';
+        $argv_test = 'ccg.php addon/create --test_option true --one-char-value y';
         $arguments = arguments($argv_test);
         $this->assertSame('true', $arguments['test_option']);
+        $this->assertSame('y', $arguments['one-char-value']);
     }
 }

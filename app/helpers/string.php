@@ -62,7 +62,7 @@ function arguments(string $command) {
     $arguments = [];
 
     preg_replace_callback(
-        '/--([\w\.\-_]+)\s*("([^"\\\]*(\\\.[^"\\\]*)*)"|[\w\d][\w\d\.\-_]+)?/ius',
+        '/--([\w\.\-_]+)\s*("([^"\\\]*(\\\.[^"\\\]*)*)"|[\w\d][\w\d\.\-_]*)?/ius',
         function($matches) use (&$arguments) {
             $key = $matches[1];
             $value = true;
