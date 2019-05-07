@@ -3,7 +3,6 @@
 class Config
 {
     private $params = [];
-    private $systemKeys = [];
 
     function __construct(array $arguments, array $defaults = [])
     {
@@ -11,11 +10,7 @@ class Config
 
         $self = $this;
         array_walk($defaults, function($setting, $key) use ($self) {
-            $self->set(
-                $key,
-                $setting
-            );
-            $self->systemKeys[] = $key;
+            $self->set($key, $setting);
         });
         
         foreach($arguments as $key => $value) {
@@ -54,10 +49,5 @@ class Config
     public function getAll(): array
     {
         return $this->params;
-    }
-
-    public function getSystemKeys(): array
-    {
-        return $this->systemKeys;
     }
 }

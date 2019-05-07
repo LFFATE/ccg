@@ -54,18 +54,23 @@ final class ConfigTest extends TestCase
         $config->set('string', 'value');
 
         $this->assertEquals(
-            $config->getOr('string', 's'),
-            'value'
+            'value',
+            $config->getOr('string', 's')
         );
 
         $this->assertEquals(
-            $config->getOr('s', 'string'),
-            'value'
+            'value',
+            $config->getOr('s', 'string')
         );
 
         $this->assertEquals(
-            $config->getOr('findSome', 's', 'string'),
-            'value'
+            'value',
+            $config->getOr('findSome', 's', 'string')
+        );
+
+        $this->assertEquals(
+            null,
+            $config->getOr('not-found', 'checko-for-null')
         );
     }
 
