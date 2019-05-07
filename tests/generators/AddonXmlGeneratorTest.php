@@ -26,6 +26,7 @@ final class AddonXmlGeneratorTest extends TestCase
         ],
         [
             'addon.edition_type' => 'ROOT,ULT:VENDOR',
+            'addon.scheme' => '3.0',
             'addon.version' => '4.9',
             'addon.priority' => '665',
             'addon.status' => 'active',

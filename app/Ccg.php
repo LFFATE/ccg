@@ -1,14 +1,9 @@
 <?php
 
-use exceptions\FileAlreadyExistsException;
-use generators\AddonXml\AddonXmlGenerator;
-use generators\Language\LanguageGenerator;
-use generators\Readme\ReadmeGenerator;
-use generators\FileGenerator;
 use enums\Config as EnumConfig;
 use terminal\Terminal;
 use filesystem\Filesystem;
-use mediators\GeneratorMediator;
+use autocomplete\Autocomplete;
 
 /**
  * Enter point for all commands
@@ -18,16 +13,19 @@ class Ccg
     private $config;
     private $terminal;
     private $filesystem;
+    private $autocomplete;
 
     function __construct(
         Config              $config,
         Terminal            $terminal,
-        Filesystem          $filesystem
+        Filesystem          $filesystem,
+        Autocomplete        $autocomplete
     )
     {
         $this->config               = $config;
         $this->terminal             = $terminal;
         $this->filesystem           = $filesystem;
+        $this->autocomplete         = $autocomplete;
     }
 
     public function generate()
@@ -48,7 +46,8 @@ class Ccg
         $controller = $refl->newInstanceArgs([
             $this->config,
             $this->terminal,
-            $this->filesystem
+            $this->filesystem,
+            $this->autocomplete
         ]);
         
         $allowedMethods = $controller::getAllowedMethods();
@@ -85,7 +84,8 @@ class Ccg
             $controller = $refl->newInstanceArgs([
                 $this->config,
                 $this->terminal,
-                $this->filesystem
+                $this->filesystem,
+                $this->autocomplete
             ]);
             
             $method = $command;
@@ -99,7 +99,7 @@ class Ccg
             if (empty($autocompletes) && !$is_method_exists) {
                 $allowedMethods = $controller::getAllowedMethods();
                 $autocompletes = array_map(function($method) use ($generator) {
-                    return $generator . '/' . $method;
+                    return to_lower_case($generator . '/' . $method);
                 }, $allowedMethods);
             }
         } else {

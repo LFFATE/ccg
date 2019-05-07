@@ -4,11 +4,10 @@ namespace controllers;
 
 use generators\AddonXml\AddonXmlGenerator;
 use generators\Language\LanguageGenerator;
-use generators\Readme\ReadmeGenerator;
 use generators\MultipleFileGenerator;
-use generators\FileGenerator;
 use terminal\Terminal;
 use filesystem\Filesystem;
+use autocomplete\Autocomplete;
 use mediators\GeneratorMediator;
 use \Config;
 
@@ -27,12 +26,14 @@ class AddonXml extends AbstractController
     function __construct(
         Config              $config,
         Terminal            $terminal,
-        Filesystem          $filesystem
+        Filesystem          $filesystem,
+        Autocomplete        $autocomplete
     )
     {
         $this->config               = $config;
         $this->terminal             = $terminal;
         $this->filesystem           = $filesystem;
+        $this->autocomplete         = $autocomplete;
 
         $addonXmlGenerator      = new AddonXmlGenerator($this->config);
         $languageGenerator      = new LanguageGenerator($this->config);
@@ -185,13 +186,59 @@ class AddonXml extends AbstractController
         );
     }
 
-    public function updateAutocomplete()
+    /**
+     * Autocomplete addon param
+     */
+    public function createAutocomplete($prev = null, $cur = null, $arguments = [])
     {
+        $generator = $this->mfGenerator
+            ->find(AddonXmlGenerator::class)
+                ->extract();
 
+        return $this->autocomplete->combineQueueParam(
+            $this->autocomplete->queueArgument('addon.id'),
+            $this->autocomplete->queueArgument('addon.scheme', function() use ($generator) {
+                return $generator->getVariants('scheme');
+            }),
+            $this->autocomplete->queueArgument('addon.status', function() use ($generator) {
+                return $generator->getVariants('status');
+            }),
+            $this->autocomplete->queueArgument('addon.edition_type'),
+            $this->autocomplete->queueArgument('addon.priority'),
+            $this->autocomplete->queueArgument('addon.position')
+        );
     }
 
-    public function updateSettingsItemAutocomplete()
+    public function updateAutocomplete()
     {
+        $autocomplete   = $this->autocomplete;
+        $arguments      = $this->terminal->getArguments();
+        
+        if (!empty($arguments['set']) && $arguments['set'] === 'settings-item') {
+            return $this->setSettingsItemAutocomplete();
+        }
 
+        return $this->autocomplete->combineQueueParam(
+            $this->autocomplete->queueArgument('addon.id', function() use ($autocomplete) {
+                return $autocomplete->getAddonsList();
+            }),
+            $this->autocomplete->queueArgument('set', ['settings-item'])
+        );
+    }
+
+    public function setSettingsItemAutocomplete()
+    {
+        $autocomplete   = $this->autocomplete;
+        $generator      = $this->mfGenerator
+            ->find(AddonXmlGenerator::class)
+                ->extract();
+
+        return $this->autocomplete->combineQueueParam(
+            $this->autocomplete->queueArgument('type', function() use ($generator) {
+                return $generator->getVariants('item');
+            }),
+            $this->autocomplete->queueArgument('section'),
+            $this->autocomplete->queueArgument('id')
+        );
     }
 }

@@ -5,6 +5,8 @@ namespace generators;
 use mediators\AbstractMediator;
 
 abstract class AbstractGenerator {
+    protected $variants;
+
     /**
      * Set generator content from string
      * @param string $content
@@ -29,4 +31,18 @@ abstract class AbstractGenerator {
      * Get template path
      */
     abstract public function getTemplateFilename(): string;
+
+    /**
+     * Get variants for setting/option
+     * 
+     * @return array
+     */
+    public function getVariants(string $option)
+    {
+        if (!empty($this->variants[$option])) {
+            return $this->variants[$option];
+        }
+
+        return [];
+    }
 }

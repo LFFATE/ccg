@@ -3,6 +3,7 @@
 
 use terminal\Terminal;
 use filesystem\Filesystem;
+use autocomplete\Autocomplete;
 
 require __DIR__ . '/app/helpers/helpers.php';
 require __DIR__ . '/config/config.php';
@@ -25,12 +26,9 @@ $terminal           = new Terminal();
 $config             = new Config($terminal->getArguments(), $defaults_normalized);
 $filesystem         = new Filesystem();
 
-$ccg = new Ccg(
-    $config,
-    $terminal,
-    $filesystem
-);
-print_r($terminal->getArguments());
+$autocomplete   = new Autocomplete($config, $terminal, $filesystem);
+$ccg            = new Ccg($config, $terminal, $filesystem, $autocomplete);
+
 if ($terminal->isAutocomplete()) {
     $autocompletes = $ccg->autocomplete($terminal->getArguments());
     $terminal

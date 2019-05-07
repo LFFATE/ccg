@@ -107,6 +107,7 @@ Use autocomplete:
 | --- | --- | --- | --- |
 |**Addon**|
 |Name|Addon name (id)|addon.id|sd_new_addon|
+|Scheme||addon.scheme|3.0|
 |Edition type||addon.edition_type|ROOT,ULT:VENDOR|
 |Version||addon.version|4.8.1|
 |Priority||addon.priority|1000|

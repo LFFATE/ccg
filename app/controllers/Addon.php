@@ -8,6 +8,7 @@ use generators\Readme\ReadmeGenerator;
 use generators\MultipleFileGenerator;
 use terminal\Terminal;
 use filesystem\Filesystem;
+use autocomplete\Autocomplete;
 use mediators\GeneratorMediator;
 use \Config;
 
@@ -25,12 +26,14 @@ class Addon extends AbstractController
     function __construct(
         Config              $config,
         Terminal            $terminal,
-        Filesystem          $filesystem
+        Filesystem          $filesystem,
+        Autocomplete        $autocomplete
     )
     {
         $this->config               = $config;
         $this->terminal             = $terminal;
         $this->filesystem           = $filesystem;
+        $this->autocomplete         = $autocomplete;
 
         $addonXmlGenerator  = new AddonXmlGenerator($this->config);
         $languageGenerator  = new LanguageGenerator($this->config);
@@ -120,42 +123,35 @@ class Addon extends AbstractController
      */
     public function createAutocomplete($prev = null, $cur = null, $arguments = [])
     {
-        if (empty($arguments['addon.id'])) {
-            return ['--addon.id'];
-        }
+        $generator = $this->mfGenerator
+            ->find(AddonXmlGenerator::class)
+                ->extract();
 
-        return [];
+        return $this->autocomplete->combineQueueParam(
+            $this->autocomplete->queueArgument('addon.id'),
+            $this->autocomplete->queueArgument('addon.scheme', function() use ($generator) {
+                return $generator->getVariants('scheme');
+            }),
+            $this->autocomplete->queueArgument('addon.status', function() use ($generator) {
+                return $generator->getVariants('status');
+            }),
+            $this->autocomplete->queueArgument('addon.edition_type'),
+            $this->autocomplete->queueArgument('addon.priority'),
+            $this->autocomplete->queueArgument('addon.position')
+        );
     }
+
     /**
      * Autocomplete addon name to be removed
      */
     public function removeAutocomplete($prev = null, $cur = null, $arguments = [])
     {
-        switch ($prev)
-        {
-            case '--addon.id':
-           
-                $addonsPath = sanitize_filename(
-                    $this->config->get('path')
-                    . $this->config->get('filesystem.output_path_relative') . '../'
-                );
-
-                $dirs = $this->filesystem->listDirs($addonsPath);
+        $self = $this;
         
-                return array_map(function($dir) {
-                    $paths = explode('/', $dir);
-                    return end($paths);
-                }, $dirs);
-            break;
-            default:
-            /**
-             * @todo do it better
-             */
-                if (empty($arguments['addon.id'])) {
-                    return ['--addon.id'];
-                }
-
-                return [];
-        }
+        return $this->autocomplete->combineQueueParam(
+            $this->autocomplete->queueArgument('addon.id', function() use ($self) {
+                return $self->autocomplete->getAddonsList();
+            })
+        );
     }
 }

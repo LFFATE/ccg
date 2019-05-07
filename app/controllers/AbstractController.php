@@ -7,17 +7,7 @@ abstract class AbstractController
     protected $config;
     protected $terminal;
     protected $filesystem;
-
-    function __construct(
-        \Config                 $config,
-        \terminal\Terminal       $terminal,
-        \filesystem\Filesystem   $filesystem
-    )
-    {
-        $this->config               = $config;
-        $this->terminal             = $terminal;
-        $this->filesystem           = $filesystem;
-    }
+    protected $autocomplete;
     
     /**
      * Returns array of methods that can be requested

@@ -22,6 +22,25 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
     private $config;
     private $mediator;
 
+    protected $variants = [
+        'scheme' => [
+            '3.0',
+            '4.0'
+        ],
+        'status' => [
+            'active',
+            'disabled'
+        ],
+        'item' => [
+            'input',
+            'password',
+            'checkbox',
+            'textarea',
+            'radiogroup',
+            'file'
+        ]
+    ];
+
     function __construct(
         Config $config
     )
@@ -92,7 +111,7 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
     public function create()
     {
         $this->createAddon();
-        $this->setScheme();
+        $this->setScheme($this->config->get('addon.scheme'));
         $this->setEditionType($this->config->get('addon.edition_type'));
         $this->setId($this->config->get('addon.id'));
         $this->setVersion($this->config->get('addon.version'));
@@ -116,7 +135,7 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
         $this->trigger(
             'addonxml.created',
             [
-                'addon.id' => $this->config->getOr('addon', 'addon.id')
+                'addon.id' => $this->config->get('addon.id')
             ]
         );
 
@@ -394,7 +413,7 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
         $this->trigger(
             'addonxml.setting.updated',
             [
-                'addon.id'      => $this->config->getOr('addon', 'addon.id'),
+                'addon.id'      => $this->config->get('addon.id'),
                 'section_id'    => $section_id,
                 'type'          => $type,
                 'id'            => $id,
