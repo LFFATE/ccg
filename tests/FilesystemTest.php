@@ -9,7 +9,7 @@ use filesystem\Filesystem;
 final class FilesystemTest extends TestCase
 {
     private $testFilename = __DIR__ . '/tmp/test';
-    private $testPath = __DIR__ . '/tmp/dir';
+    protected static $testPath = __DIR__ . '/tmp/dir';
     private $fileContent = <<<EOD
     Test string
     towrite to file
@@ -65,23 +65,23 @@ EOD;
     public function testCanRemoveDir(): void
     {
         $filesystem = new Filesystem();
-        $filesystem->write($this->testPath . '/subdir/susubdir/tst.txt', '');
-        $filesystem->write($this->testPath . '/subdir/txt.txt', '');
-        $filesystem->write($this->testPath . '/file.php', '');
+        $filesystem->write(self::$testPath . '/subdir/susubdir/tst.txt', '');
+        $filesystem->write(self::$testPath . '/subdir/txt.txt', '');
+        $filesystem->write(self::$testPath . '/file.php', '');
         
-        $filesystem->delete($this->testPath);
+        $filesystem->delete(self::$testPath);
 
         $this->assertFileNotExists(
-            $this->testPath
+            self::$testPath
         );
     }
 
     public function testRename(): void
     {
         $filesystem = new Filesystem();
-        $test_file = $this->testPath . '/to_rename.js';
-        $test_file_not_exists = $this->testPath . '/not_exists.js';
-        $test_file_renamed = $this->testPath . '/renamed.js';
+        $test_file = self::$testPath . '/to_rename.js';
+        $test_file_not_exists = self::$testPath . '/not_exists.js';
+        $test_file_renamed = self::$testPath . '/renamed.js';
         $filesystem->write($test_file, 'rename file');
         
         $this->assertFileExists($test_file);
@@ -98,16 +98,25 @@ EOD;
 
     public function testListDirs(): void
     {
+        mkdir(sanitize_filename(self::$testPath . '/list-dir'));
+        mkdir(self::$testPath . '/list-dir/addon');
+        mkdir(self::$testPath . '/list-dir/dir1');
+        mkdir(self::$testPath . '/list-dir/path');
+
         $filesystem = new Filesystem();
-        $test_path = sanitize_filename($this->testPath . '/../list-dir/');
+        $test_path = sanitize_filename(self::$testPath . '/list-dir/');
 
         $this->assertSame(
             [
-                sanitize_filename($this->testPath . '/../list-dir/addon'),
-                sanitize_filename($this->testPath . '/../list-dir/dir1'),
-                sanitize_filename($this->testPath . '/../list-dir/path')
+                sanitize_filename(self::$testPath . '/list-dir/addon'),
+                sanitize_filename(self::$testPath . '/list-dir/dir1'),
+                sanitize_filename(self::$testPath . '/list-dir/path')
             ],
             $filesystem->listDirs($test_path)
         );
+
+        rmdir(self::$testPath . '/list-dir/addon');
+        rmdir(self::$testPath . '/list-dir/dir1');
+        rmdir(self::$testPath . '/list-dir/path');
     }
 }

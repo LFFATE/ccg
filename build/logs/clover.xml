@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1557220640">
-  <project timestamp="1557220640">
+<coverage generated="1557252133">
+  <project timestamp="1557252133">
     <file name="C:\work\ccg\app\Ccg.php">
       <class name="Ccg" namespace="global">
         <metrics complexity="12" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="72" coveredstatements="0" elements="75" coveredelements="0"/>
@@ -1754,8 +1754,8 @@
       <line num="18" type="stmt" count="0"/>
       <line num="22" type="stmt" count="6"/>
       <line num="23" type="stmt" count="6"/>
-      <line num="25" type="stmt" count="1"/>
-      <line num="26" type="stmt" count="1"/>
+      <line num="25" type="stmt" count="0"/>
+      <line num="26" type="stmt" count="0"/>
       <line num="27" type="stmt" count="6"/>
       <line num="28" type="stmt" count="0"/>
       <line num="30" type="stmt" count="6"/>
@@ -1765,7 +1765,7 @@
       <line num="34" type="stmt" count="6"/>
       <line num="38" type="stmt" count="6"/>
       <line num="43" type="stmt" count="6"/>
-      <metrics loc="44" ncloc="44" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="19" elements="22" coveredelements="19"/>
+      <metrics loc="44" ncloc="44" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="17" elements="22" coveredelements="17"/>
     </file>
     <file name="C:\work\ccg\app\helpers\helpers.php">
       <line num="3" type="stmt" count="0"/>
@@ -2098,6 +2098,6 @@
         <metrics loc="262" ncloc="198" classes="1" methods="19" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="143" coveredstatements="0" elements="162" coveredelements="0"/>
       </file>
     </package>
-    <metrics files="43" loc="3617" ncloc="2800" classes="27" methods="181" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="1646" coveredstatements="49" elements="1827" coveredelements="53"/>
+    <metrics files="43" loc="3617" ncloc="2800" classes="27" methods="181" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="1646" coveredstatements="47" elements="1827" coveredelements="51"/>
   </project>
 </coverage>
