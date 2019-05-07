@@ -87,7 +87,7 @@ final class Filesystem
     public function listDirs(string $path): array
     {
         if (!$this->exists($path)) {
-            throw new \InvalidArgumentException();
+            throw new \InvalidArgumentException("$path not exists");
         }
 
         return array_filter(glob($path . '*'), 'is_dir');

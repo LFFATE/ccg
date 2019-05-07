@@ -83,25 +83,31 @@ EOD;
         $test_file_not_exists = $this->testPath . '/not_exists.js';
         $test_file_renamed = $this->testPath . '/renamed.js';
         $filesystem->write($test_file, 'rename file');
-
-        $this->assertFileExists(
-            $test_file
-        );
-
+        
+        $this->assertFileExists($test_file);
+        
         $filesystem->rename($test_file, 'renamed.js');
-        
-        $this->assertFileNotExists(
-            $test_file
-        );
-        
-        $this->assertFileExists(
-            $test_file_renamed
-        );
+        $this->assertFileNotExists($test_file);
+        $this->assertFileExists($test_file_renamed);
         
         $this->expectException(\InvalidArgumentException::class);
         $filesystem->rename($test_file, 'renamed.js');
-        $this->expectException(\InvalidArgumentException::class);
         $filesystem->rename($test_file_not_exists, 'renamed.js');
         $filesystem->delete($test_file_renamed);
+    }
+
+    public function testListDirs(): void
+    {
+        $filesystem = new Filesystem();
+        $test_path = sanitize_filename($this->testPath . '/../list-dir/');
+
+        $this->assertSame(
+            [
+                sanitize_filename($this->testPath . '/../list-dir/addon'),
+                sanitize_filename($this->testPath . '/../list-dir/dir1'),
+                sanitize_filename($this->testPath . '/../list-dir/path')
+            ],
+            $filesystem->listDirs($test_path)
+        );
     }
 }
