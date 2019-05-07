@@ -10,6 +10,9 @@ final class Autocomplete
 {
     protected $prev;
     protected $cur;
+    protected $config;
+    protected $terminal;
+    protected $filesystem;
 
     function __construct(
         Config              $config,
@@ -67,9 +70,9 @@ final class Autocomplete
         if ($this->prev === $option) {
             if (is_callable($values)) {
                 return call_user_func($values);
+            } else {
+                return $values;
             }
-            
-            return $values;
         }
     }
 

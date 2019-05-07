@@ -228,7 +228,6 @@ class AddonXml extends AbstractController
 
     public function setSettingsItemAutocomplete()
     {
-        $autocomplete   = $this->autocomplete;
         $generator      = $this->mfGenerator
             ->find(AddonXmlGenerator::class)
                 ->extract();
