@@ -9,14 +9,19 @@ final class Terminal {
     private $argv;
     private $argc;
     private $arguments = [];
+    protected $input_stream;
+    protected $output_stream;
 
-    public function __construct()
+    public function __construct($input_stream = STDIN, $output_stream = STDOUT)
     {
         global $argv;
         global $argc;
 
         $this->argv = $argv;
         $this->argc = $argc;
+
+        $this->input_stream  = $input_stream;
+        $this->output_stream = $output_stream;
 
         $this->parseArguments();
     }
@@ -28,25 +33,20 @@ final class Terminal {
 
     public function diff(string $string)
     {
-        $result_string = '';
         $separator = "\r\n";
         $line = strtok($string, $separator);
 
         while ($line !== false) {
             if (strpos($line, '-') === 0) {
-                $result_string .= $this->error($line, false, true);
+                $this->error($line);
             } else if (strpos($line, '+') === 0) {
-                $result_string .= $this->success($line, false, true);
+                $this->success($line);
             } else {
-                $result_string .= $line;
+                $this->echo($line);
             }
-
-            $result_string .= PHP_EOL;
 
             $line = strtok($separator);
         }
-
-        $this->echo($result_string);
     }
 
     public function info(string $string)
@@ -85,17 +85,15 @@ final class Terminal {
     ): void
     {
         $this->warning($question);
-        $handle = fopen('php://stdin', 'r');
-        $line   = fgets($handle);
+        fseek($this->input_stream, 0); 
+        $line = fgets($this->input_stream);
 
-        if(trim($line) != $confirmation_word) {
+        if (trim($line) !== $confirmation_word) {
             $this->warning('ABORTING');
-            call_user_func($cancel_action);
-            exit;
+            $cancel_action and call_user_func($cancel_action);
+        } else {
+            call_user_func($success_action);
         }
-
-        fclose($handle);
-        call_user_func($success_action);
     }
 
     /**
@@ -108,12 +106,11 @@ final class Terminal {
     ): void
     {
         $this->echo("Please, set up $name");
-        $handle = fopen('php://stdin', 'r');
-        $line   = fgets($handle);
+        fseek($this->input_stream, 0);
+        $line   = fgets($this->input_stream);
         $result = trim($line);
 
         call_user_func($result_action, $result ?: $default);
-        fclose($handle);
     }
 
     /**

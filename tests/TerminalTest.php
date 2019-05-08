@@ -83,6 +83,95 @@ final class TerminalTest extends TestCase
         ob_end_clean();
     }
 
+    public function testDiff(): void
+    {
+        ob_start();
+        $this->terminal->diff(<<<EOD
+regular line
+-removed line
++added line
+the end
+EOD
+        );
+
+        $this->assertEquals(
+            'regular line' . PHP_EOL .
+            "\e[1;31m" . '-removed line' . "\e[0m" . PHP_EOL .
+            "\e[32m" . '+added line' . "\e[0m" . PHP_EOL .
+            'the end' . PHP_EOL,
+            ob_get_contents()
+        );
+
+        ob_end_clean();
+    }
+
+    /**
+     * @covers terminal\Terminal::confirm
+     */
+    public function testConfirm(): void
+    {
+        ob_start();
+        $is_executed = false;
+        $stream  = fopen('php://memory', 'rw');
+        $memory_terminal = new Terminal($stream, $stream);
+        fwrite($stream, "Y\n");
+        $memory_terminal->confirm(function() use (&$is_executed) {
+            $is_executed = true;
+        });
+        fclose($stream);
+
+        $this->assertSame(true, $is_executed);
+
+        $is_cancelled = false;
+        $is_success = false;
+        $stream  = fopen('php://memory', 'rw');
+        $memory_terminal = new Terminal($stream, $stream);
+        fwrite($stream, "N\n");
+        $memory_terminal->confirm(
+            function() use (&$is_success) {
+                $is_success = true;
+            },
+            function() use (&$is_cancelled) {
+                $is_cancelled = true;
+            }
+        );
+        fclose($stream);
+
+        $this->assertSame(false, $is_success);
+        $this->assertSame(true, $is_cancelled);
+        ob_end_clean();
+    }
+
+    /**
+     * @covers terminal\Terminal::requestSetting
+     */
+    public function testRequestSetting(): void
+    {
+        ob_start();
+        $expected_result = false;
+        $stream  = fopen('php://memory', 'rw');
+        $memory_terminal = new Terminal($stream, $stream);
+        fwrite($stream, "result\n");
+        $memory_terminal->requestSetting('addon.id', function($result) use (&$expected_result) {
+            $expected_result = $result;
+        }, 'default');
+        fclose($stream);
+
+        $this->assertSame('result', $expected_result);
+
+        $stream  = fopen('php://memory', 'rw');
+        $memory_terminal = new Terminal($stream, $stream);
+        fwrite($stream, '');
+        $memory_terminal->requestSetting('addon.id', function($result) use (&$expected_result) {
+            $expected_result = $result;
+        }, 'default');
+        fclose($stream);
+
+        $this->assertSame('default', $expected_result);
+
+        ob_end_clean();
+    }
+
     public function testAutocomplete(): void
     {
         ob_start();

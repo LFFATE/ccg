@@ -151,7 +151,7 @@ final class XmlTest extends TestCase
         $this->assertEquals('section', $sectionElement->getName());
         $sectionElement->remove();
         $sectionElement = $this->xml->getSingleElement('section', 'section1');
-        var_dump($sectionElement);
+
         $this->assertEquals(
             null,
             $sectionElement
