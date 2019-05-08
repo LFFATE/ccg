@@ -78,7 +78,14 @@ final class XML extends SimpleXMLElementDecorator
         $elements = $this->getElements($name, $id);
         return $elements ? $elements[0] : null;
     }
-
+    /**
+     * Get elements by name or by name and id
+     * 
+     * @param string $name - name of elements to find, 'item' for <item>
+     * @param string $id   - id of elements to find, 'main' for <item id="main">
+     * 
+     * @return array of XML elements
+     */
     public function getElements(string $name, string $id = '')
     {
         $elements = $this->xpath('descendant::' . $name . ($id ? '[@id="' . $id . '"]' : ''));

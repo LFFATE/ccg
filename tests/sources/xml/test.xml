@@ -18,7 +18,20 @@
   <settings layout="separate" edition_type="ROOT,ULT:VENDOR">
     <sections>
       <section id="section1">
-        <items></items>
+        <items>
+          <item id="txtarea">
+            <type>textarea</type>
+            <default_value/>
+          </item>
+          <item id="input">
+            <type>input</type>
+            <default_value/>
+          </item>
+          <item id="local_name">
+            <type>input</type>
+            <default_value/>
+          </item>
+        </items>
       </section>
     </sections>
   </settings>

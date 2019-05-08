@@ -34,6 +34,7 @@ final class XmlTest extends TestCase
 
     /**
      * @covers generators\Xml::getSingleElement
+     * @covers generators\Xml::getElements
      * @covers generators\Xml::getSelf
      */
     public function testGetSingleElement(): void
@@ -55,6 +56,18 @@ final class XmlTest extends TestCase
         $this->assertEquals(
             $sectionElement->getName(),
             'section'
+        );
+
+        $sectionElements = $this->xml->getElements('section', 'section1');
+        $this->assertSame(
+            1,
+            count($sectionElements)
+        );
+
+        $itemElements = $this->xml->getElements('item');
+        $this->assertSame(
+            3,
+            count($itemElements)
         );
 
         $nonExistingElement = $this->xml->getSingleElement('non-existing-element');
