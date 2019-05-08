@@ -386,6 +386,13 @@ EOD;
             ['3.0', '4.0'],
             $variants
         );
+        unset($variants);
+
+        $variants = $this->generator->getVariants('non-existing');
+        $this->assertSame(
+            [],
+            $variants
+        );
     }
 
     private function _testAddonNode(string $xml, string $name, string $value): void
