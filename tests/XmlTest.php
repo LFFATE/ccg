@@ -85,10 +85,16 @@ final class XmlTest extends TestCase
     {
         $sectionElement = $this->xml->getSingleElement('section', 'section1');
         $sectionElement->setAttribute('name', 'test');
-
+        
         $this->assertEquals(
-            $sectionElement->getAttributeValue('name'),
-            'test'
+            'test',
+            $sectionElement->getAttributeValue('name')
+        );
+
+        $sectionElement->setAttribute('name', 'new value');
+        $this->assertEquals(
+            'new value',
+            $sectionElement->getAttributeValue('name')
         );
     }
 
@@ -96,7 +102,6 @@ final class XmlTest extends TestCase
      * @covers generators\Xml::setUniqueChild
      * @covers generators\Xml::getSelf
      * @covers generators\Xml::getSingleElement
-     * @covers generators\Xml::getSelf
      */
     public function testSetUniqueChild(): void
     {
@@ -134,6 +139,22 @@ final class XmlTest extends TestCase
         $this->assertEquals(
             $compatibilityElement->getSingleElement('core_edition')->getSelf(),
             'ULTIMATE'
+        );
+    }
+
+    /**
+     * @covers generators\Xml::remove
+     */
+    public function testRemove(): void
+    {
+        $sectionElement = $this->xml->getSingleElement('section', 'section1');
+        $this->assertEquals('section', $sectionElement->getName());
+        $sectionElement->remove();
+        $sectionElement = $this->xml->getSingleElement('section', 'section1');
+        var_dump($sectionElement);
+        $this->assertEquals(
+            null,
+            $sectionElement
         );
     }
 }

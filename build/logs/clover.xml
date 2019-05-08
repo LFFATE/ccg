@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1557294647">
-  <project timestamp="1557294647">
+<coverage generated="1557298988">
+  <project timestamp="1557298988">
     <file name="C:\work\ccg\app\Ccg.php">
       <class name="Ccg" namespace="global">
         <metrics complexity="12" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="72" coveredstatements="0" elements="75" coveredelements="0"/>
@@ -900,15 +900,15 @@
       </file>
       <file name="C:\work\ccg\app\generators\Xml.php">
         <class name="generators\XML" namespace="generators">
-          <metrics complexity="11" methods="7" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="16" elements="27" coveredelements="20"/>
+          <metrics complexity="11" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="19" elements="27" coveredelements="25"/>
         </class>
-        <line num="16" type="method" name="remove" complexity="1" crap="2.00" count="0"/>
-        <line num="18" type="stmt" count="0"/>
-        <line num="19" type="stmt" count="0"/>
-        <line num="28" type="method" name="setAttribute" visibility="public" complexity="2" crap="2.03" count="1"/>
+        <line num="16" type="method" name="remove" complexity="1" crap="1" count="1"/>
+        <line num="18" type="stmt" count="1"/>
+        <line num="19" type="stmt" count="1"/>
+        <line num="28" type="method" name="setAttribute" visibility="public" complexity="2" crap="2" count="1"/>
         <line num="30" type="stmt" count="1"/>
         <line num="32" type="stmt" count="1"/>
-        <line num="33" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="1"/>
         <line num="35" type="stmt" count="1"/>
         <line num="38" type="stmt" count="1"/>
         <line num="46" type="method" name="getAttributeValue" visibility="public" complexity="1" crap="1" count="1"/>
@@ -929,7 +929,7 @@
         <line num="95" type="stmt" count="1"/>
         <line num="98" type="method" name="getSelf" visibility="public" complexity="1" crap="1" count="2"/>
         <line num="100" type="stmt" count="2"/>
-        <metrics loc="102" ncloc="66" classes="1" methods="7" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="16" elements="27" coveredelements="20"/>
+        <metrics loc="102" ncloc="66" classes="1" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="20" coveredstatements="19" elements="27" coveredelements="25"/>
       </file>
     </package>
     <package name="generators\AddonXml">
@@ -1680,6 +1680,6 @@
         <metrics loc="262" ncloc="198" classes="1" methods="19" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="87" coveredstatements="51" elements="106" coveredelements="64"/>
       </file>
     </package>
-    <metrics files="43" loc="3614" ncloc="2789" classes="27" methods="180" coveredmethods="82" conditionals="0" coveredconditionals="0" statements="1229" coveredstatements="412" elements="1409" coveredelements="494"/>
+    <metrics files="43" loc="3614" ncloc="2789" classes="27" methods="180" coveredmethods="84" conditionals="0" coveredconditionals="0" statements="1229" coveredstatements="415" elements="1409" coveredelements="499"/>
   </project>
 </coverage>
