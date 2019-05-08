@@ -31,49 +31,8 @@ final class TerminalTest extends TestCase
         ob_end_clean();
     }
 
-    public function testCanForceOutput(): void
-    {
-
-        $this->terminal->echo('string', true);
-        $this->terminal->success('string', true);
-        $this->terminal->warning('string', true);
-        $this->terminal->info('string', true);
-        $this->terminal->error('string', true);
-
-        ob_start();
-        $this->terminal->forceOutput();
-
-        $this->assertEquals(
-            ob_get_contents(),
-            $this->terminal->echo('string', false, true) . PHP_EOL .
-            $this->terminal->success('string', false, true) . PHP_EOL .
-            $this->terminal->warning('string', false, true) . PHP_EOL .
-            $this->terminal->info('string', false, true) . PHP_EOL .
-            $this->terminal->error('string', false, true) . PHP_EOL
-        );
-        ob_end_clean();
-    }
-
-    public function testCanWriteToBuffer(): void
-    {
-
-        $this->terminal->echo('string', true);
-        $this->terminal->addBuffer('lorem ipsum');
-
-        $this->assertEquals(
-            $this->terminal->getBuffer(),
-            'string' . PHP_EOL . 'lorem ipsum'
-        );
-    }
-
     public function testSuccess(): void
     {
-
-        $this->assertEquals(
-            $this->terminal->success('string', false, true),
-            "\e[32m" . 'string' . "\e[0m"
-        );
-
         ob_start();
         $this->terminal->success('string');
 
@@ -87,11 +46,6 @@ final class TerminalTest extends TestCase
 
     public function testWarning(): void
     {
-        $this->assertEquals(
-            $this->terminal->warning('string', false, true),
-            "\e[43m" . 'string' . "\e[0m"
-        );
-
         ob_start();
         $this->terminal->warning('string');
 
@@ -105,11 +59,6 @@ final class TerminalTest extends TestCase
 
     public function testError(): void
     {
-        $this->assertEquals(
-            $this->terminal->error('string', false, true),
-            "\e[1;31m" . 'string' . "\e[0m"
-        );
-
         ob_start();
         $this->terminal->error('string');
 
@@ -123,18 +72,28 @@ final class TerminalTest extends TestCase
 
     public function testInfo(): void
     {
-        $this->assertEquals(
-            $this->terminal->info('string', false, true),
-            "\e[46m" . 'string' . "\e[0m"
-        );
-
         ob_start();
         $this->terminal->info('string');
 
         $this->assertEquals(
-            ob_get_contents(),
-            "\e[46m" . 'string' . "\e[0m" . PHP_EOL
+            "\e[46m" . 'string' . "\e[0m" . PHP_EOL,
+            ob_get_contents()
         );
+
+        ob_end_clean();
+    }
+
+    public function testAutocomplete(): void
+    {
+        ob_start();
+        $terminal = $this->terminal->autocomplete(['addon.id', 'addon.scheme']);
+
+        $this->assertEquals(
+            'addon.id addon.scheme ',
+            ob_get_contents()
+        );
+
+        $this->assertInstanceOf(Terminal::class, $terminal);
 
         ob_end_clean();
     }

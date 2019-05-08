@@ -6,7 +6,6 @@ namespace terminal;
  * class for terminal/cli/bash output
  */
 final class Terminal {
-    private $buffer = [];
     private $argv;
     private $argc;
     private $arguments = [];
@@ -22,30 +21,12 @@ final class Terminal {
         $this->parseArguments();
     }
 
-    public function addBuffer(string $buffer)
+    public function echo(string $string)
     {
-        $this->buffer[] = $buffer;
+        echo $string . PHP_EOL;
     }
 
-    public function getBuffer(): string
-    {
-        return implode(PHP_EOL, $this->buffer);
-    }
-
-    public function echo(string $string, bool $to_buffer = false, bool $return = false)
-    {
-        if ($return) {
-            return $string;
-        }
-
-        if ($to_buffer) {
-            $this->addBuffer($string);
-        } else {
-            echo $string . PHP_EOL;
-        }
-    }
-
-    public function diff(string $string, bool $to_buffer = false, bool $return = false)
+    public function diff(string $string)
     {
         $result_string = '';
         $separator = "\r\n";
@@ -65,62 +46,27 @@ final class Terminal {
             $line = strtok($separator);
         }
 
-        if ($to_buffer) {
-            $this->setBuffer($result_string);
-        } else {
-            echo $result_string;
-        }
+        $this->echo($result_string);
     }
 
-    public function info(string $string, bool $to_buffer = false, bool $return = false)
+    public function info(string $string)
     {
-        $output = "\e[46m" . $string . "\e[0m";
-
-        if ($return) {
-            return $output;
-        } else {
-            $this->echo($output, $to_buffer);
-        }
+        $this->echo("\e[46m" . $string . "\e[0m");    
     }
 
-    public function success(string $string, bool $to_buffer = false, bool $return = false)
+    public function success(string $string)
     {
-        $output = "\e[32m" . $string . "\e[0m";
-
-        if ($return) {
-            return $output;
-        } else {
-            $this->echo($output, $to_buffer);
-        }
+        $this->echo("\e[32m" . $string . "\e[0m");
     }
 
-    public function warning(string $string, bool $to_buffer = false, bool $return = false)
+    public function warning(string $string)
     {
-        $output = "\e[43m" . $string . "\e[0m";
-
-        if ($return) {
-            return $output;
-        } else {
-            $this->echo($output, $to_buffer);
-        }
+        $this->echo("\e[43m" . $string . "\e[0m");
     }
 
-    public function error(string $string, bool $to_buffer = false, bool $return = false)
+    public function error(string $string)
     {
-        $output = "\e[1;31m" . $string . "\e[0m";
-
-        if ($return) {
-            return $output;
-        } else {
-            $this->echo($output, $to_buffer);
-        }
-    }
-
-    public function forceOutput()
-    {
-        $this->echo(
-            $this->getBuffer()
-        );
+        $this->echo("\e[1;31m" . $string . "\e[0m");
     }
 
     /**
@@ -132,10 +78,10 @@ final class Terminal {
      * @param string $confirmation_word
      */
     public function confirm(
-        callable $success_action,
-        callable $cancel_action = null,
-        string $question = "Are you sure?\n Type 'Y' to continue: ",
-        string $confirmation_word = 'Y'
+        callable    $success_action,
+        callable    $cancel_action     = null,
+        string      $question          = "Are you sure?\n Type 'Y' to continue: ",
+        string      $confirmation_word = 'Y'
     ): void
     {
         $this->warning($question);
@@ -168,22 +114,6 @@ final class Terminal {
 
         call_user_func($result_action, $result ?: $default);
         fclose($handle);
-    }
-
-    public function expectParams(
-        array $opts,
-        callable $result_action
-    )
-    {
-//         $options = getopt('', ['addon.id:']);
-//         print_r($options);
-// die();
-//         $options = getopt(implode('', array_keys($opts)), $opts);
-// print_r($options);
-//         array_walk($options, function($option) use ($result_action) {
-//             echo 2;
-//             call_user_func($result_action, $option);
-//         });
     }
 
     /**
@@ -247,13 +177,14 @@ final class Terminal {
      */
     public function autocomplete(array $variants)
     {
-        $this->echo(implode(' ', $variants)) . ' ';
+        echo implode(' ', $variants) . ' ';
 
         return $this;
     }
 
     /**
      * Closes program execution
+     * @codeCoverageIgnore
      */
     public function exit()
     {
