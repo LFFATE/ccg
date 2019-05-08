@@ -376,6 +376,18 @@ EOD;
             );
     }
 
+    /**
+     * @covers generators\AbstractGenerator::getVariants
+     */
+    public function testGetVariants(): void
+    {
+        $variants = $this->generator->getVariants('scheme');
+        $this->assertSame(
+            ['3.0', '4.0'],
+            $variants
+        );
+    }
+
     private function _testAddonNode(string $xml, string $name, string $value): void
     {
         $actual = new DOMDocument;

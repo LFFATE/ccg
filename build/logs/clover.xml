@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1557253431">
-  <project timestamp="1557253431">
+<coverage generated="1557291595">
+  <project timestamp="1557291595">
     <file name="C:\work\ccg\app\Ccg.php">
       <class name="Ccg" namespace="global">
         <metrics complexity="12" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="72" coveredstatements="0" elements="75" coveredelements="0"/>
@@ -769,13 +769,13 @@
       </file>
       <file name="C:\work\ccg\app\generators\AbstractGenerator.php">
         <class name="generators\AbstractGenerator" namespace="generators">
-          <metrics complexity="7" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+          <metrics complexity="7" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="4" coveredelements="2"/>
         </class>
-        <line num="40" type="method" name="getVariants" visibility="public" complexity="2" crap="6.00" count="0"/>
-        <line num="42" type="stmt" count="0"/>
-        <line num="43" type="stmt" count="0"/>
+        <line num="40" type="method" name="getVariants" visibility="public" complexity="2" crap="2.15" count="1"/>
+        <line num="42" type="stmt" count="1"/>
+        <line num="43" type="stmt" count="1"/>
         <line num="46" type="stmt" count="0"/>
-        <metrics loc="48" ncloc="28" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+        <metrics loc="48" ncloc="28" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="4" coveredelements="2"/>
       </file>
       <file name="C:\work\ccg\app\generators\FileGenerator.php">
         <class name="generators\FileGenerator" namespace="generators">
@@ -1680,6 +1680,6 @@
         <metrics loc="262" ncloc="198" classes="1" methods="19" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="87" coveredstatements="51" elements="106" coveredelements="64"/>
       </file>
     </package>
-    <metrics files="43" loc="3607" ncloc="2790" classes="27" methods="180" coveredmethods="80" conditionals="0" coveredconditionals="0" statements="1229" coveredstatements="406" elements="1409" coveredelements="486"/>
+    <metrics files="43" loc="3607" ncloc="2790" classes="27" methods="180" coveredmethods="80" conditionals="0" coveredconditionals="0" statements="1229" coveredstatements="408" elements="1409" coveredelements="488"/>
   </project>
 </coverage>
