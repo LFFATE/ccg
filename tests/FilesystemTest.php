@@ -97,7 +97,6 @@ EOD;
     }
 
     /**
-     * @expectedException \InvalidArgumentException
      * @covers filesystem\Filesystem::listDirs
      */
     public function testListDirs(): void
@@ -122,5 +121,8 @@ EOD;
         rmdir(self::$testPath . '/list-dir/addon');
         rmdir(self::$testPath . '/list-dir/dir1');
         rmdir(self::$testPath . '/list-dir/path');
+
+        $this->expectException(\InvalidArgumentException::class);
+        $filesystem->listDirs(self::$testPath . '/non-existing-path-to-test');
     }
 }

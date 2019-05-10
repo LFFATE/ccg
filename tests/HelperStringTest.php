@@ -89,7 +89,7 @@ EOD;
     }
 
     /**
-     * @covers to_lower_case
+     * @covers ::to_lower_case
      */
     public function testToLowerCase(): void
     {
