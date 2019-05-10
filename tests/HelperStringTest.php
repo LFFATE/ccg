@@ -6,6 +6,9 @@ use PHPUnit\Framework\TestCase;
 
 final class HelperStringTest extends TestCase
 {
+    /**
+     * @covers ::explode_by_new_line
+     */
     public function testExplodeByLines(): void
     {
         $string = <<<EOD
@@ -35,6 +38,9 @@ EOD;
         );
     }
 
+    /**
+     * @covers ::parse_to_readable
+     */
     public function testParseToReadable(): void
     {
         $this->assertSame(
@@ -63,6 +69,9 @@ EOD;
         );
     }
 
+    /**
+     * @covers ::to_camel_case
+     */
     public function testToCamelCase(): void
     {
         $this->assertSame(
@@ -79,11 +88,17 @@ EOD;
         );
     }
 
+    /**
+     * @covers to_lower_case
+     */
     public function testToLowerCase(): void
     {
         $this->assertSame('remove-item', to_lower_case('removeItem'));
     }
 
+    /**
+     * @covers ::arguments
+     */
     public function testArguments()
     {
         $argv_test = 'ccg.php addon/create --addon.id "new_addon" --langvar "say my name \"Daniel\"" --cur "" --developer mikhail ddfgd --test';

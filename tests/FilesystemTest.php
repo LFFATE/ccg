@@ -96,6 +96,10 @@ EOD;
         $filesystem->delete($test_file_renamed);
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     * @covers filesystem\Filesystem::listDirs
+     */
     public function testListDirs(): void
     {
         mkdir(sanitize_filename(self::$testPath . '/list-dir'));
