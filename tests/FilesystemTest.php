@@ -8,25 +8,37 @@ use filesystem\Filesystem;
 
 final class FilesystemTest extends TestCase
 {
-    private $testFilename = __DIR__ . '/tmp/test';
-    protected static $testPath = __DIR__ . '/tmp/dir';
+    private $testFilename = __DIR__ . '/tmp/filesystem/test';
+    protected static $testPath = __DIR__ . '/tmp/filesystem';
+    protected $filesystem;
     private $fileContent = <<<EOD
     Test string
     towrite to file
     lorem ipsum dikit ist amet
 EOD;
 
-    public function testCanBeCreated(): void
+    public function setUp(): void
     {
-        $filesystem = new Filesystem();
-
-        $this->assertInstanceOf(
-            Filesystem::class,
-            $filesystem
-        );
+        mkdir(self::$testPath, 0777, true);
+        $this->filesystem = new Filesystem();
+        $test_file = self::$testPath . '/to_rename.js';
+        $this->filesystem->write($test_file, 'rename file');
     }
 
-    public function testCanWriteFile(): void
+    /**
+     * @covers filesystem\Filesystem::delete
+     */
+    public function tearDown(): void
+    {
+        $this->filesystem->delete(self::$testPath);
+    }
+
+    public function testCanBeCreated(): void
+    {
+        $this->assertInstanceOf(Filesystem::class, $this->filesystem);
+    }
+
+    public function testCanWriteAndDeleteFile(): void
     {
         $filesystem = new Filesystem();
 
@@ -38,20 +50,10 @@ EOD;
             $this->testFilename,
             $filesystem->read($this->testFilename)
         );
-    }
-
-    public function testExists(): void
-    {
-        $filesystem = new Filesystem();
 
         $this->assertTrue(
             $filesystem->exists($this->testFilename)
         );
-    }
-
-    public function testCanRemove(): void
-    {
-        $filesystem = new Filesystem();
 
         $is_deleted = $filesystem->delete($this->testFilename);
 
@@ -65,14 +67,14 @@ EOD;
     public function testCanRemoveDir(): void
     {
         $filesystem = new Filesystem();
-        $filesystem->write(self::$testPath . '/subdir/susubdir/tst.txt', '');
-        $filesystem->write(self::$testPath . '/subdir/txt.txt', '');
-        $filesystem->write(self::$testPath . '/file.php', '');
+        $filesystem->write(self::$testPath . '/sub/subdir/susubdir/tst.txt', '');
+        $filesystem->write(self::$testPath . '/sub/subdir/txt.txt', '');
+        $filesystem->write(self::$testPath . '/sub/file.php', '');
         
-        $filesystem->delete(self::$testPath);
+        $filesystem->delete(self::$testPath . '/sub');
 
         $this->assertFileNotExists(
-            self::$testPath
+            self::$testPath . '/sub'
         );
     }
 
@@ -89,11 +91,17 @@ EOD;
         $filesystem->rename($test_file, 'renamed.js');
         $this->assertFileNotExists($test_file);
         $this->assertFileExists($test_file_renamed);
-        
+    }
+
+    public function testRenameAlreadyExists()
+    {
+        $filesystem = new Filesystem();
+        $test_file = self::$testPath . '/to_rename.js';
+        $filesystem->write($test_file, 'rename file');
+
+        $filesystem->rename($test_file, 'renamed.js');
         $this->expectException(\InvalidArgumentException::class);
         $filesystem->rename($test_file, 'renamed.js');
-        $filesystem->rename($test_file_not_exists, 'renamed.js');
-        $filesystem->delete($test_file_renamed);
     }
 
     /**
