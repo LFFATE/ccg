@@ -97,11 +97,13 @@ EOD;
     {
         $filesystem = new Filesystem();
         $test_file = self::$testPath . '/to_rename.js';
+        $test_file_2 = self::$testPath . '/to_rename_2.js';
         $filesystem->write($test_file, 'rename file');
+        $filesystem->write($test_file_2, 'rename file');
 
         $filesystem->rename($test_file, 'renamed.js');
         $this->expectException(\InvalidArgumentException::class);
-        $filesystem->rename($test_file, 'renamed.js');
+        $filesystem->rename($test_file_2, 'renamed.js');
     }
 
     /**
