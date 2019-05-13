@@ -55,9 +55,28 @@ final class CcgTest extends TestCase
         $argv = $argv_backup;
     }
 
+    public function testAddonXmlGeneration(): void
+    {
+        $tmpPath    = static::$tmpPath;
+        $argv       = [
+            'ccg.php',
+            'addon-xml/create',
+            '--filesystem.output_path',
+            "\"$tmpPath\"",
+        ];
+
+        ob_start();
+        $this->setUpEnvAndGenerate($argv);
+        $addonXmlContent = $this->filesystem->read(
+            $this->config->get('filesystem.output_path') . 'app/addons/' . $this->config->get('addon.id') . '/addon.xml'
+        );
+        $this->assertMatchesSnapshot($addonXmlContent);
+        ob_end_clean();
+    }
+
     public function testAddonGeneration(): void
     {
-        $tmpPath    = self::$tmpPath;
+        $tmpPath    = static::$tmpPath;
         $argv       = [
             'ccg.php',
             'addon/create',
@@ -67,12 +86,20 @@ final class CcgTest extends TestCase
 
         ob_start();
         $this->setUpEnvAndGenerate($argv);
-        $this->assertMatchesSnapshot(ob_get_contents());
+        $addonXmlContent = $this->filesystem->read(
+            $this->config->get('filesystem.output_path') . 'app/addons/' . $this->config->get('addon.id') . '/addon.xml'
+        );
+        $readmeContent = $this->filesystem->read(
+            $this->config->get('filesystem.output_path') . 'app/addons/' . $this->config->get('addon.id') . '/README.md'
+        );
+        $languageContent = $this->filesystem->read(
+            $this->config->get('filesystem.output_path') . 'var/langs/' . $this->config->get('addon.default_language') . '/addons/' . $this->config->get('addon.id') . '.po'
+        );
+        $this->assertMatchesSnapshot($addonXmlContent);
+        $this->assertMatchesSnapshot($readmeContent);
+        $this->assertMatchesSnapshot($languageContent);
         ob_end_clean();
-        // echo exec("php ./ccg.php addon/create
-        //     --filesystem.output_path \"$tmpPath\"
-        //     --addon.id sd_test_addon
-        // ");
+        echo $this->config->get('filesystem.output_path') . 'var/langs/' . $this->config->get('default_language') . '/addons/' . $this->config->get('addon.id') . '.po';
     }
 
     public function tearDown(): void

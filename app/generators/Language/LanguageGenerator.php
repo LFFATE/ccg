@@ -7,7 +7,7 @@ use generators\Language\exceptions\DuplicateException;
 use mediators\AbstractMediator;
 
 /**
-  * @property string $pathTemplate
+  * @property string FILENAME
   * @property string $templatePath
   * @property string $recycleBin - buffer to which be removed all langvars from actual content
   * @property string $content
@@ -19,8 +19,7 @@ use mediators\AbstractMediator;
   */
 final class LanguageGenerator extends \generators\AbstractGenerator
 {
-    // readonly
-    private $pathTemplate = 'var/langs/${lang}/addons/${addon}.po';
+    const FILENAME = 'var/langs/${lang}/addons/${addon}.po';
     private $templatePath = '';
     private $recycleBin = '';
     private $content = '';
@@ -52,7 +51,7 @@ final class LanguageGenerator extends \generators\AbstractGenerator
 
     public function getPath(): string
     {
-        $addon_id = $this->config->getOr('addon', 'addon.id');
+        $addon_id = $this->config->get('addon.id');
 
         if (!$addon_id) {
             throw new \InvalidArgumentException('Addon id (name) not specified');
@@ -68,7 +67,7 @@ final class LanguageGenerator extends \generators\AbstractGenerator
                     $this->config->getOr('lang', 'addon.default_language'),
                     $addon_id
                 ],
-                $this->pathTemplate
+                static::FILENAME
             );
 
         return sanitize_filename($path);

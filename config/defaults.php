@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Do not edit, rewrite this params at custom.php instead
+ */
 $defaults['addon'] = [
     'edition_type'      => 'ROOT,ULT:VENDOR',
     'id'                => 'sd_new_addon',

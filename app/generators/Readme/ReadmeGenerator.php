@@ -6,14 +6,13 @@ use Config;
 use mediators\AbstractMediator;
 
 /**
-  * @property string $pathTemplate
+  * @property string FILENAME
   * @property string $content
   * @property Config $config
   */
 final class ReadmeGenerator extends \generators\AbstractGenerator
 {
-    // readonly
-    private $pathTemplate = 'app/addons/${addon}/README.md';
+    const FILENAME = 'app/addons/${addon}/README.md';
     private $templatePath = ROOT_DIR . '/resources/README.md';
     private $content = '';
     private $config;
@@ -42,14 +41,14 @@ final class ReadmeGenerator extends \generators\AbstractGenerator
      */
     public function getPath(): string
     {
-        $addon_id = $this->config->getOr('addon', 'addon.id');
+        $addon_id = $this->config->get('addon.id');
 
         if (!$addon_id) {
             throw new \InvalidArgumentException('Addon id (name) not specified');
         }
 
         $path = $this->config->get('filesystem.output_path')
-            . str_replace('${addon}', $addon_id, $this->pathTemplate);
+            . str_replace('${addon}', $addon_id, static::FILENAME);
 
         return sanitize_filename($path);
     }

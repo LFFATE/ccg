@@ -15,8 +15,7 @@ use Config;
  */
 final class AddonXmlGenerator extends \generators\AbstractGenerator implements ICanNotify
 {
-    // readonly
-    private $pathTemplate = 'app/addons/${addon}/addon.xml';
+    const FILENAME = 'app/addons/${addon}/addon.xml';
     private $templatePath = '';
     private $content;
     private $config;
@@ -72,18 +71,18 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
      */
     public function getPath(): string
     {
-        $addon_id = $this->config->getOr('addon', 'addon.id');
+        $addon_id = $this->config->get('addon.id');
 
         if (!$addon_id) {
             throw new \InvalidArgumentException('Addon id (name) not specified');
         }
 
         $path = $this->config->get('filesystem.output_path')
-            . str_replace('${addon}', $addon_id, $this->pathTemplate);
+            . str_replace('${addon}', $addon_id, static::FILENAME);
 
         return sanitize_filename($path);
     }
-
+    
     /**
      * Set initial content for generator to work with
      * @param string $content - content of input xml file
@@ -96,7 +95,7 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
             $simpleXmlElement = new \SimpleXMLElement($content);
             $this->content = new XML($simpleXmlElement);
         } catch (\Exception $error) {
-            throw new  InvalidContentException('Can\'t create xml from content');
+            throw new InvalidContentException('Can\'t create xml from content');
         }
 
         return $this;
@@ -511,11 +510,11 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
      */
     public function toString(): string
     {
-        $Dom = new \DOMDocument('1.0');
-        $Dom->preserveWhiteSpace    = false;
-        $Dom->formatOutput          = true;
-        $Dom->loadXML($this->content->asXML());
+        $dom = new \DOMDocument('1.0');
+        $dom->preserveWhiteSpace    = false;
+        $dom->formatOutput          = true;
+        $dom->loadXML($this->content->asXML());
 
-        return $Dom->saveXML();
+        return $dom->saveXML();
     }
 }

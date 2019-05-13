@@ -87,7 +87,7 @@ class Addon extends AbstractController
 
         $self = $this;
         $this->mfGenerator->each(function($generator) use ($self) {
-            // $self->terminal->success($generator->extract()->getPath() . ' was created');
+            $self->terminal->success($generator->extract()->getPath() . ' was created');
             $self->terminal->diff(
                 \Diff::toString(\Diff::compare('', $generator->extract()->toString()))
             );
