@@ -9,5 +9,8 @@ php:
 os:
   - linux
 
+before_script:
+  composer install --prefer-source --no-interaction
+  
 after_success:
   - bash <(curl -s https://codecov.io/bash)
