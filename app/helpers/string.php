@@ -39,6 +39,17 @@ function to_camel_case(string $string): string
 }
 
 /**
+ * Converts strings like addon-xml to AddonXml
+ * @param string $string
+ * 
+ * @return string
+ */
+function to_studly_caps(string $string): string
+{
+    return ucfirst(to_camel_case($string));
+}
+
+/**
  * Converts strings like addonXml to addon-xml
  * @param string $string
  * 

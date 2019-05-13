@@ -148,8 +148,8 @@ final class Terminal {
         list($generator, $command) = array_pad(explode('/', $controller), 2, '');
         $generator = (1 === preg_match('/^[\w]+/ui', $generator)) ? $generator : '';
 
-        $arguments['generator'] = to_camel_case($generator);
-        $arguments['command'] = $command;
+        $arguments['generator'] = to_studly_caps($generator);
+        $arguments['command']   = $command;
         $this->setArguments($arguments);
     }
 

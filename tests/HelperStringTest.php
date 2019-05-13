@@ -87,6 +87,25 @@ EOD;
             to_camel_case('remove')
         );
     }
+    
+    /**
+     * @covers ::to_studly_caps
+     */
+    public function testToStudlyCaps(): void
+    {
+        $this->assertSame(
+            'RemoveItem',
+            to_studly_caps('remove-item')
+        );
+        $this->assertSame(
+            'RemoveSettingsItem',
+            to_studly_caps('remove-settings-item')
+        );
+        $this->assertSame(
+            'Remove',
+            to_studly_caps('remove')
+        );
+    }
 
     /**
      * @covers ::to_lower_case

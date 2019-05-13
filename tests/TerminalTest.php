@@ -234,7 +234,7 @@ EOD
         $terminal = new Terminal();
         $arguments = $terminal->getArguments();
         $this->assertArrayHasKey('generator', $arguments);
-        $this->assertSame('generator', $arguments['generator']);
+        $this->assertSame('Generator', $arguments['generator']);
         $this->assertArrayHasKey('command', $arguments);
         $this->assertSame('command', $arguments['command']);
         $this->assertArrayHasKey('test-option', $arguments);
