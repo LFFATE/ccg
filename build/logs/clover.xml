@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1557730223">
-  <project timestamp="1557730223">
+<coverage generated="1557730959">
+  <project timestamp="1557730959">
     <file name="C:\work\ccg\app\Ccg.php">
       <class name="Ccg" namespace="global">
         <metrics complexity="12" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="48" coveredstatements="20" elements="51" coveredelements="21"/>
