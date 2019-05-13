@@ -1,5 +1,5 @@
 <?php
 
 $defaults['filesystem'] = [
-    'output_path_relative' => '/cscart/${addon.id}/'
+    'output_path' => __DIR__ . '/../cscart/${addon.id}/'
 ];

@@ -9,19 +9,15 @@ use generators\AddonXml\exceptions\InvalidContentException;
 use generators\AddonXml\exceptions\DuplicateIdException;
 use generators\Xml;
 use filesystem\Filesystem;
-
-/**
- * @todo remove dependency from filesystem use file_get_contents instead
- */
 final class AddonXmlGeneratorTest extends TestCase
 {
     private $generator;
     private $config;
-    private $testFilename = ROOT_DIR . '/tests/sources/xml/test.xml';
+    private $testFilename = __DIR__ . '/../sources/xml/test.xml';
 
     protected function setUp(): void
     {
-        $this->config = new Config([
+        $this->config = new \Config([
             'addon.id' => 'sd_addon'
         ],
         [
@@ -31,7 +27,7 @@ final class AddonXmlGeneratorTest extends TestCase
             'addon.priority' => '665',
             'addon.status' => 'active',
             'addon.auto_install' => 'ULTIMATE',
-            'filesystem.output_path_relative' => ''
+            'filesystem.output_path' => __DIR__ . '/'
         ]);
         $this->generator = new AddonXmlGenerator($this->config);
     }
@@ -39,7 +35,7 @@ final class AddonXmlGeneratorTest extends TestCase
     public function testGetPath(): void
     {
         $this->assertSame(
-            sanitize_filename(ROOT_DIR . $this->config->get('filesystem.output_path_relative') . 'app/addons/sd_addon/addon.xml'),
+            sanitize_filename($this->config->get('filesystem.output_path') . 'app/addons/sd_addon/addon.xml'),
             $this->generator->getPath()
         );
     }

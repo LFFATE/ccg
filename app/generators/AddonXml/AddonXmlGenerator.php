@@ -78,8 +78,7 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
             throw new \InvalidArgumentException('Addon id (name) not specified');
         }
 
-        $path = $this->config->get('path')
-            . $this->config->get('filesystem.output_path_relative')
+        $path = $this->config->get('filesystem.output_path')
             . str_replace('${addon}', $addon_id, $this->pathTemplate);
 
         return sanitize_filename($path);

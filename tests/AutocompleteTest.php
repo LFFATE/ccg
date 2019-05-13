@@ -10,7 +10,7 @@ use autocomplete\Autocomplete;
 
 final class AutocompleteTest extends TestCase
 {
-    protected static $sourcePath = './tests/sources/autocomplete/cscart/${addon.id}/';
+    protected static $sourcePath = __DIR__ . '/sources/autocomplete/cscart/${addon.id}/';
     protected $autocomplete;
     protected $filesystem;
     protected $config;
@@ -20,7 +20,7 @@ final class AutocompleteTest extends TestCase
         $this->config = new \Config([
         ],
         [
-            'filesystem.output_path_relative' => self::$sourcePath,
+            'filesystem.output_path' => self::$sourcePath,
         ]);
         
         $this->filesystem = new Filesystem();

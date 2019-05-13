@@ -18,7 +18,7 @@ final class ReadmeGeneratorTest extends TestCase
             'addon.id' => 'sd_addon'
         ],
         [
-            'filesystem.output_path_relative' => './',
+            'filesystem.output_path' => __DIR__ . '/',
             'developer.name' => 'Mikhail',
             'developer.company' => 'Simtechdev'
         ]);
@@ -42,7 +42,7 @@ final class ReadmeGeneratorTest extends TestCase
         $generator = new ReadmeGenerator($this->config);
 
         $this->assertSame(
-            sanitize_filename($this->config->get('path') . $this->config->get('filesystem.output_path_relative') . 'app/addons/sd_addon/README.md'),
+            sanitize_filename($this->config->get('filesystem.output_path') . 'app/addons/sd_addon/README.md'),
             $generator->getPath()
         );
     }

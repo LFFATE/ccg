@@ -63,7 +63,7 @@ class Addon extends AbstractController
 
     /**
      * help:
-     * addon create
+     * addon/create
      * creates addon.xml, language file, readme and other
      * @throws Exception if file already exists
      */
@@ -87,7 +87,7 @@ class Addon extends AbstractController
 
         $self = $this;
         $this->mfGenerator->each(function($generator) use ($self) {
-            $self->terminal->success($generator->extract()->getPath() . ' was created');
+            // $self->terminal->success($generator->extract()->getPath() . ' was created');
             $self->terminal->diff(
                 \Diff::toString(\Diff::compare('', $generator->extract()->toString()))
             );
@@ -104,8 +104,7 @@ class Addon extends AbstractController
         $self = $this;
         $this->terminal->confirm(
             function() use ($self) {
-                $addonPath = $self->config->get('path')
-                    . $self->config->get('filesystem.output_path_relative');
+                $addonPath = $self->config->get('filesystem.output_path');
 
                 $self->filesystem->delete($addonPath);
 

@@ -9,6 +9,7 @@ use terminal\Terminal;
 final class TerminalTest extends TestCase
 {
     private $terminal;
+    const EOL = "\n";
 
     protected function setUp(): void
     {
@@ -25,7 +26,7 @@ final class TerminalTest extends TestCase
 
         $this->assertEquals(
             ob_get_contents(),
-            'string' . PHP_EOL
+            'string' . $this->terminal::EOL
         );
 
         ob_end_clean();
@@ -38,7 +39,7 @@ final class TerminalTest extends TestCase
 
         $this->assertEquals(
             ob_get_contents(),
-            "\e[32m" . 'string' . "\e[0m" . PHP_EOL
+            "\e[32m" . 'string' . "\e[0m" . $this->terminal::EOL
         );
 
         ob_end_clean();
@@ -51,7 +52,7 @@ final class TerminalTest extends TestCase
 
         $this->assertEquals(
             ob_get_contents(),
-            "\e[43m" . 'string' . "\e[0m" . PHP_EOL
+            "\e[43m" . 'string' . "\e[0m" . $this->terminal::EOL
         );
 
         ob_end_clean();
@@ -64,7 +65,7 @@ final class TerminalTest extends TestCase
 
         $this->assertEquals(
             ob_get_contents(),
-            "\e[1;31m" . 'string' . "\e[0m" . PHP_EOL
+            "\e[1;31m" . 'string' . "\e[0m" . $this->terminal::EOL
         );
 
         ob_end_clean();
@@ -76,7 +77,7 @@ final class TerminalTest extends TestCase
         $this->terminal->info('string');
 
         $this->assertEquals(
-            "\e[46m" . 'string' . "\e[0m" . PHP_EOL,
+            "\e[46m" . 'string' . "\e[0m" . $this->terminal::EOL,
             ob_get_contents()
         );
 
@@ -95,10 +96,10 @@ EOD
         );
 
         $this->assertEquals(
-            'regular line' . PHP_EOL .
-            "\e[1;31m" . '-removed line' . "\e[0m" . PHP_EOL .
-            "\e[32m" . '+added line' . "\e[0m" . PHP_EOL .
-            'the end' . PHP_EOL,
+            'regular line' . $this->terminal::EOL .
+            "\e[1;31m" . '-removed line' . "\e[0m" . $this->terminal::EOL .
+            "\e[32m" . '+added line' . "\e[0m" . $this->terminal::EOL .
+            'the end' . $this->terminal::EOL,
             ob_get_contents()
         );
 

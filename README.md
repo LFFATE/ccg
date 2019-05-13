@@ -122,4 +122,4 @@ Use autocomplete:
 |name||developer.name|John Doe|
 |company||developer.company|Simtech|
 |**filesystem**|
-|Output path|Path to which the generator will place add-ons. Relative to `ccg.php`.|filesystem.output_path_relative|/cscart/${addon.id}/|
+|Output path|Path to which the generator will place add-ons.|filesystem.output_path|/home/ccg/cscart/${addon.id}/|

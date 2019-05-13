@@ -23,7 +23,7 @@ final class MultipleFileGeneratorTest extends TestCase
         ],
         [
             'lang' => 'en',
-            'filesystem.output_path_relative' => '/tests/sources/cscart/${addon.id}/'
+            'filesystem.output_path' => __DIR__ . '/../sources/cscart/${addon.id}/'
         ]);
 
         $this->filesystem = new Filesystem();

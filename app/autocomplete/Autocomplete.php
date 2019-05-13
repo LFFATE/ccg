@@ -37,8 +37,7 @@ final class Autocomplete
     public function getAddonsList()
     {
         $addonsPath = sanitize_filename(
-            $this->config->get('path')
-            . $this->config->get('filesystem.output_path_relative') . '../'
+            $this->config->get('filesystem.output_path') . '../'
         );
 
         $dirs = $this->filesystem->listDirs($addonsPath);

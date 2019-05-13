@@ -11,6 +11,7 @@ final class Terminal {
     private $arguments = [];
     protected $input_stream;
     protected $output_stream;
+    const EOL = "\n";
 
     public function __construct($input_stream = STDIN, $output_stream = STDOUT)
     {
@@ -28,7 +29,7 @@ final class Terminal {
 
     public function echo(string $string)
     {
-        echo $string . PHP_EOL;
+        echo $string . self::EOL;
     }
 
     public function diff(string $string)
