@@ -176,7 +176,7 @@ final class CcgTest extends TestCase
 
     public function testAddonXmlGeneratorAutocomplete(): void
     {
-        $argv       = [
+        $argv = [
             'ccg.php',
             'add',
             '--prev',
@@ -195,7 +195,7 @@ final class CcgTest extends TestCase
 
     public function testAddonXmlMethodAutocomplete(): void
     {
-        $argv       = [
+        $argv = [
             'ccg.php',
             'addon',
             '--prev',
@@ -204,6 +204,32 @@ final class CcgTest extends TestCase
             'addon',
             '--autocomplete',
             'y',
+        ];
+
+        ob_start();
+        $this->setUpEnvAndGenerate($argv);
+        $this->assertMatchesSnapshot(ob_get_contents());
+        ob_end_clean();
+    }
+
+    public function testGetHelp(): void
+    {
+        $argv = [
+            'ccg.php',
+            'help',
+        ];
+
+        ob_start();
+        $this->setUpEnvAndGenerate($argv);
+        $this->assertMatchesSnapshot(ob_get_contents());
+        ob_end_clean();
+    }
+
+    public function testGetAddonXmlHelp(): void
+    {
+        $argv = [
+            'ccg.php',
+            'addon-xml/help',
         ];
 
         ob_start();
