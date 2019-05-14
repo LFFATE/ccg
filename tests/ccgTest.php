@@ -318,6 +318,29 @@ final class CcgTest extends TestCase
         ob_end_clean();
     }
 
+    public function testAddonRemoveAutocomplete(): void
+    {
+        $tmpPath    = static::$tmpPath;
+        $argv       = [
+            'ccg.php',
+            'addon/remove',
+            '--filesystem.output_path',
+            "\"$tmpPath\"",
+            '--addon.id',
+            '--prev',
+            '"--addon.id"',
+            '--cur',
+            '',
+            '--autocomplete',
+            'y',
+        ];
+
+        ob_start();
+        $this->setUpEnvAndGenerate($argv);
+        $this->assertMatchesSnapshot(ob_get_contents());
+        ob_end_clean();
+    }
+
     public static function tearDownAfterClass(): void
     {
         $filesystem = new Filesystem();
