@@ -108,6 +108,55 @@ final class CcgTest extends TestCase
         ob_end_clean();
     }
 
+    public function testAddonCreateAutocomplete(): void
+    {
+        $tmpPath    = static::$tmpPath;
+        $argv       = [
+            'ccg.php',
+            'addon/create',
+            '--filesystem.output_path',
+            "\"$tmpPath\"",
+            '--addon.id',
+            'sd_new_addon',
+            '--prev',
+            'sd_new_addon',
+            '--cur',
+            '',
+            '--autocomplete',
+            'y',
+        ];
+
+        ob_start();
+        $this->setUpEnvAndGenerate($argv);
+        $this->assertMatchesSnapshot(ob_get_contents());
+        ob_end_clean();
+    }
+
+    public function testAddonCreateAutocompleteValues(): void
+    {
+        $tmpPath    = static::$tmpPath;
+        $argv       = [
+            'ccg.php',
+            'addon/create',
+            '--filesystem.output_path',
+            "\"$tmpPath\"",
+            '--addon.id',
+            'sd_new_addon',
+            '--addon.scheme',
+            '--prev',
+            '"--addon.scheme"',
+            '--cur',
+            '',
+            '--autocomplete',
+            'y',
+        ];
+
+        ob_start();
+        $this->setUpEnvAndGenerate($argv);
+        $this->assertMatchesSnapshot(ob_get_contents());
+        ob_end_clean();
+    }
+
     public function testAddonXmlUpdateSetNewSettingsItem(): void
     {
         $tmpPath    = static::$tmpPath;
