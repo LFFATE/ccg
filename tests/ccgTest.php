@@ -167,6 +167,31 @@ final class CcgTest extends TestCase
         ob_end_clean();
     }
 
+    public function testAddonXmlUpdateChangeSettingsItemAutocomplete(): void
+    {
+        $tmpPath    = static::$tmpPath;
+        $argv       = [
+            'ccg.php',
+            'addon-xml/update',
+            '--filesystem.output_path',
+            "\"$tmpPath\"",
+            '--set',
+            'settings-item',
+            '--type',
+            '--prev',
+            '"--type"',
+            '--cur',
+            '',
+            '--autocomplete',
+            'y',
+        ];
+
+        ob_start();
+        $this->setUpEnvAndGenerate($argv);
+        $this->assertMatchesSnapshot(ob_get_contents());
+        ob_end_clean();
+    }
+
     public function testAddonXmlUpdateChangeSettingsItem(): void
     {
         $tmpPath    = static::$tmpPath;
@@ -263,6 +288,33 @@ final class CcgTest extends TestCase
         ob_start();
         $this->setUpEnvAndGenerate($argv);
         $this->assertMatchesSnapshot(ob_get_contents());
+        ob_end_clean();
+    }
+
+    public function testAddonXmlRemoveSettingsItem(): void
+    {
+        $tmpPath    = static::$tmpPath;
+        $argv       = [
+            'ccg.php',
+            'addon-xml/update',
+            '--filesystem.output_path',
+            "\"$tmpPath\"",
+            '--remove',
+            'settings-item',
+            '--id',
+            'default_name',
+        ];
+
+        ob_start();
+        $this->setUpEnvAndGenerate($argv);
+        $addonXmlContent = $this->filesystem->read(
+            $this->config->get('filesystem.output_path') . 'app/addons/' . $this->config->get('addon.id') . '/addon.xml'
+        );
+        $languageContent = $this->filesystem->read(
+            $this->config->get('filesystem.output_path') . 'var/langs/' . $this->config->get('addon.default_language') . '/addons/' . $this->config->get('addon.id') . '.po'
+        );
+        $this->assertMatchesSnapshot($addonXmlContent);
+        $this->assertMatchesSnapshot($languageContent);
         ob_end_clean();
     }
 
