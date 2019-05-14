@@ -16,8 +16,6 @@ class AddonXml extends AbstractController
     private $mfGenerator;
     private static $allowedMethods = [
         'help',
-        'create',
-        'remove',
         'update'
     ];
 
@@ -55,58 +53,6 @@ class AddonXml extends AbstractController
     public static function getAllowedMethods(): array
     {
         return self::$allowedMethods;
-    }
-
-    /**
-     * help:
-     * addon-xml create
-     * creates addonXml structure and write it to file
-     * @throws Exception if file already exists
-     */
-    public function create()
-    {
-        $addonXmlFileGenerator = $this->mfGenerator
-            ->find(AddonXmlGenerator::class);
-        
-        $addonXmlGenerator = $addonXmlFileGenerator
-                ->throwIfExists('Such addon.xml already exists. Remove it first if you want to replace it.')
-                ->extract();
-                
-        $addonXmlGenerator
-            ->create();
-
-        $addonXmlFileGenerator    
-            ->write()
-            ->throwIfNotExists($addonXmlGenerator->getPath() . ' cannot be created.');
-
-        /**
-         * results
-         */
-        $this->terminal->success($addonXmlGenerator->getPath() . ' was created');
-        $this->terminal->diff(
-            \Diff::toString(\Diff::compare('', $addonXmlGenerator->toString()))
-        );
-    }
-
-    /**
-     * help:
-     * addon-xml remove
-     * removes file addon.xml
-     * @throws Exception if file doesn't exists
-     */
-    public function remove()
-    {
-        $addonXmlGenerator = $this->mfGenerator
-            ->find(AddonXmlGenerator::class)
-                ->read()
-                ->remove()
-                ->throwIfExists('File cannot be removed.')
-                ->extract();
-
-        $this->terminal->success($addonXmlGenerator->getPath() . ' was removed');
-        $this->terminal->diff(
-            \Diff::toString(\Diff::compare($addonXmlGenerator->toString(), ''))
-        );
     }
 
     /**
@@ -171,9 +117,9 @@ class AddonXml extends AbstractController
             $this->config->get('section'),
             $this->config->get('type'),
             $this->config->get('id'),
-            $this->config->getOr('default_value', 'dv') ?: '',
+            $this->config->get('default_value') ?: '',
             (function($config) {
-                $variants = $config->getOr('variants', 'v');
+                $variants = $config->get('variants');
 
                 return $variants ? explode(',', $variants) : [];
             })($this->config)
@@ -184,29 +130,6 @@ class AddonXml extends AbstractController
     {
         $addonXmlGenerator->removeSetting(
             $this->config->get('id')
-        );
-    }
-
-    /**
-     * Autocomplete addon param
-     */
-    public function createAutocomplete($prev = null, $cur = null, $arguments = [])
-    {
-        $generator = $this->mfGenerator
-            ->find(AddonXmlGenerator::class)
-                ->extract();
-
-        return $this->autocomplete->combineQueueParam(
-            $this->autocomplete->queueArgument('addon.id'),
-            $this->autocomplete->queueArgument('addon.scheme', function() use ($generator) {
-                return $generator->getVariants('scheme');
-            }),
-            $this->autocomplete->queueArgument('addon.status', function() use ($generator) {
-                return $generator->getVariants('status');
-            }),
-            $this->autocomplete->queueArgument('addon.edition_type'),
-            $this->autocomplete->queueArgument('addon.priority'),
-            $this->autocomplete->queueArgument('addon.position')
         );
     }
 
