@@ -60,27 +60,6 @@ final class CcgTest extends TestCase
         $argv = $argv_backup;
     }
 
-    public function testAddonXmlGeneration(): void
-    {
-        $tmpPath    = static::$tmpPath;
-        $argv       = [
-            'ccg.php',
-            'addon-xml/create',
-            '--filesystem.output_path',
-            "\"$tmpPath\"",
-        ];
-
-        ob_start();
-        $this->setUpEnvAndGenerate($argv);
-        $addonXmlContent = $this->filesystem->read(
-            $this->config->get('filesystem.output_path') . 'app/addons/' . $this->config->get('addon.id') . '/addon.xml'
-        );
-        $this->assertMatchesSnapshot($addonXmlContent);
-        ob_end_clean();
-        
-        static::tearDownAfterClass();
-    }
-
     public function testAddonGeneration(): void
     {
         $tmpPath    = static::$tmpPath;
@@ -223,7 +202,7 @@ final class CcgTest extends TestCase
         ob_end_clean();
     }
 
-    public function testAddonXmlGeneratorAutocomplete(): void
+    public function testAddonCreateAutocompleteGenerator(): void
     {
         $argv = [
             'ccg.php',

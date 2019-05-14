@@ -2,18 +2,6 @@
 
 
 
-[32maddon-xml create[0m
-             creates addonXml structure and write it to file
-             @throws Exception if file already exists
-
-
-
-[32maddon-xml remove[0m
-             removes file addon.xml
-             @throws Exception if file doesn\'t exists
-
-
-
 [32maddon-xml/update --addon.id <addon_id> --set <item> [...args][0m
              Sets additional field to addon xml file
              addon.id - id of the addon
