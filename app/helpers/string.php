@@ -59,7 +59,7 @@ function to_lower_case(string $string): string
 {
     return preg_replace_callback('/([A-Z]+)/', function($matches) {
         return '-' . strtolower($matches[1]);
-    }, $string);
+    }, lcfirst($string));
 }
 
 /**

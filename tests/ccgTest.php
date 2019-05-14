@@ -50,7 +50,13 @@ final class CcgTest extends TestCase
             $autocomplete
         );
 
-        $ccg->generate();
+        if ($this->terminal->isAutocomplete()) {
+            $autocompletes = $ccg->autocomplete($this->terminal->getArguments());
+            $this->terminal->autocomplete($autocompletes);
+        } else {
+            $ccg->generate();
+        }
+        
         $argv = $argv_backup;
     }
 
@@ -165,6 +171,44 @@ final class CcgTest extends TestCase
         );
         $this->assertMatchesSnapshot($addonXmlContent);
         $this->assertMatchesSnapshot($languageContent);
+        ob_end_clean();
+    }
+
+    public function testAddonXmlGeneratorAutocomplete(): void
+    {
+        $argv       = [
+            'ccg.php',
+            'add',
+            '--prev',
+            '""',
+            '--cur',
+            'add',
+            '--autocomplete',
+            'y',
+        ];
+
+        ob_start();
+        $this->setUpEnvAndGenerate($argv);
+        $this->assertMatchesSnapshot(ob_get_contents());
+        ob_end_clean();
+    }
+
+    public function testAddonXmlMethodAutocomplete(): void
+    {
+        $argv       = [
+            'ccg.php',
+            'addon',
+            '--prev',
+            '""',
+            '--cur',
+            'addon',
+            '--autocomplete',
+            'y',
+        ];
+
+        ob_start();
+        $this->setUpEnvAndGenerate($argv);
+        $this->assertMatchesSnapshot(ob_get_contents());
         ob_end_clean();
     }
 

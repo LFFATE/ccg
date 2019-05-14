@@ -113,6 +113,7 @@ EOD;
     public function testToLowerCase(): void
     {
         $this->assertSame('remove-item', to_lower_case('removeItem'));
+        $this->assertSame('remove-item', to_lower_case('RemoveItem'));
     }
 
     /**
