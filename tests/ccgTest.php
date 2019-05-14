@@ -36,7 +36,6 @@ final class CcgTest extends TestCase
         $this->filesystem           = new Filesystem();
         $this->terminal             = new Terminal();
         $this->config               = new Config($this->terminal->getArguments(), $defaults_normalized);
-        $this->filesystem           = new Filesystem();
 
         $autocomplete = new Autocomplete(
             $this->config,
@@ -72,6 +71,8 @@ final class CcgTest extends TestCase
         );
         $this->assertMatchesSnapshot($addonXmlContent);
         ob_end_clean();
+        
+        static::tearDownAfterClass();
     }
 
     public function testAddonGeneration(): void
@@ -99,11 +100,77 @@ final class CcgTest extends TestCase
         $this->assertMatchesSnapshot($readmeContent);
         $this->assertMatchesSnapshot($languageContent);
         ob_end_clean();
-        echo $this->config->get('filesystem.output_path') . 'var/langs/' . $this->config->get('default_language') . '/addons/' . $this->config->get('addon.id') . '.po';
     }
 
-    public function tearDown(): void
+    public function testAddonXmlUpdateSetNewSettingsItem(): void
     {
-        $this->filesystem->delete(__DIR__ . '/tmp/ccg');
+        $tmpPath    = static::$tmpPath;
+        $argv       = [
+            'ccg.php',
+            'addon-xml/update',
+            '--filesystem.output_path',
+            "\"$tmpPath\"",
+            '--set',
+            'settings-item',
+            '--section',
+            'general',
+            '--type',
+            'input',
+            '--id',
+            'default_name'
+        ];
+
+        ob_start();
+        $this->setUpEnvAndGenerate($argv);
+        $addonXmlContent = $this->filesystem->read(
+            $this->config->get('filesystem.output_path') . 'app/addons/' . $this->config->get('addon.id') . '/addon.xml'
+        );
+        $languageContent = $this->filesystem->read(
+            $this->config->get('filesystem.output_path') . 'var/langs/' . $this->config->get('addon.default_language') . '/addons/' . $this->config->get('addon.id') . '.po'
+        );
+        $this->assertMatchesSnapshot($addonXmlContent);
+        $this->assertMatchesSnapshot($languageContent);
+        ob_end_clean();
+    }
+
+    public function testAddonXmlUpdateChangeSettingsItem(): void
+    {
+        $tmpPath    = static::$tmpPath;
+        $argv       = [
+            'ccg.php',
+            'addon-xml/update',
+            '--filesystem.output_path',
+            "\"$tmpPath\"",
+            '--set',
+            'settings-item',
+            '--section',
+            'general',
+            '--type',
+            'selectbox',
+            '--id',
+            'default_name',
+            '--variants',
+            '"Daniels,Jack,Margarita,Martini"',
+            '--default_value',
+            'Jack'
+        ];
+
+        ob_start();
+        $this->setUpEnvAndGenerate($argv);
+        $addonXmlContent = $this->filesystem->read(
+            $this->config->get('filesystem.output_path') . 'app/addons/' . $this->config->get('addon.id') . '/addon.xml'
+        );
+        $languageContent = $this->filesystem->read(
+            $this->config->get('filesystem.output_path') . 'var/langs/' . $this->config->get('addon.default_language') . '/addons/' . $this->config->get('addon.id') . '.po'
+        );
+        $this->assertMatchesSnapshot($addonXmlContent);
+        $this->assertMatchesSnapshot($languageContent);
+        ob_end_clean();
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        $filesystem = new Filesystem();
+        $filesystem->delete(__DIR__ . '/tmp/ccg');
     }
 }

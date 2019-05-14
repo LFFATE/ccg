@@ -32,11 +32,18 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
         ],
         'item' => [
             'input',
+            'textarea',
             'password',
             'checkbox',
-            'textarea',
-            'radiogroup',
-            'file'
+            'selectbox',
+            'multiple select',
+            'multiple checkboxes',
+            'countries list',
+            'states list',
+            'file',
+            'info',
+            'header',
+            'template'
         ]
     ];
 
@@ -338,6 +345,8 @@ final class AddonXmlGenerator extends \generators\AbstractGenerator implements I
      * @throws DuplicateIdException if setting with same id already exists
      *
      * @return AddonXmlGenerator
+     * @todo setting item and variant item can be the same
+     * write test and solve this problem
      */
     private function _setSetting(
         string $section_id = 'section1',
