@@ -16,6 +16,7 @@
     - [Generate](#generate)
     - [Autocomplete](#autocomplete)
       - [Linux](#linux)
+      - [Windows](#windows)
     - [Test](#test)
   - [Contributing :fire:](#contributing-fire)
   - [TODO](#todo)
@@ -47,21 +48,21 @@ $customs['addon'] = [
 ```
 All other configs you can find at `config/defaults.php`, `config/filesystem.php` and others.
 
+**Don't change them**
+
 All this options you also can set by command line:
 ```
-~: php ccg.php addon create addon.id=custom_addon_id
+~: ./ccg.php addon create addon.id=custom_addon_id
 ```
 ---
 ### Generate
 Get help
 ```
 ~: cd /path/to/ccg
-~: php ccg.php help
+~: ./ccg.php help # for Linux
+~: php ccg.php # for Windows
 ```
-with debug
-```
-~: php ccg.php addon create debug=1
-```
+
 ---
 ### Autocomplete
 #### Linux
@@ -77,6 +78,9 @@ Use autocomplete:
 ```
 ~: ccg [Tab][Tab]
 ```
+#### Windows
+Not available
+
 ---
 ### Test
 ```
