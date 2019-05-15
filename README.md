@@ -13,6 +13,7 @@
   - [Getting started](#getting-started)
     - [Installing](#installing)
     - [Configure](#configure)
+  - [**Note: wrap the value by quotes if it contains spaces, commas and other non-word charachters**](#note-wrap-the-value-by-quotes-if-it-contains-spaces-commas-and-other-non-word-charachters)
     - [Generate](#generate)
     - [Autocomplete](#autocomplete)
       - [Linux](#linux)
@@ -46,14 +47,13 @@ $customs['addon'] = [
 ];
 
 ```
-All other configs you can find at `config/defaults.php`, `config/filesystem.php` and others.
-
-**Don't change them**
+All other configs you can find at `config/defaults.php`, `config/filesystem.php` files (**Don't change them**) and others.
 
 All this options you also can set by command line:
 ```
-~: ./ccg.php addon create addon.id=custom_addon_id
+~: ./ccg.php addon create --addon.id custom_addon_id 
 ```
+**Note: wrap the value by quotes if it contains spaces, commas and other non-word charachters**
 ---
 ### Generate
 Get help
