@@ -76,7 +76,7 @@ Update bash:
 ```
 Use autocomplete:
 ```
-~: ccg [Tab][Tab]
+~: ./ccg.php [Tab][Tab]
 ```
 #### Windows
 Not available
