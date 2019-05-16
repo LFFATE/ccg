@@ -34,17 +34,25 @@ class AddonXml extends AbstractController
         $this->autocomplete         = $autocomplete;
 
         $addonXmlGenerator      = new AddonXmlGenerator($this->config);
-        $languageGenerator      = new LanguageGenerator($this->config);
         $generatorMediator      = new GeneratorMediator();
 
-        $generatorMediator
-            ->addGenerator($addonXmlGenerator)
-            ->addGenerator($languageGenerator);
+        $generatorMediator->addGenerator($addonXmlGenerator);
 
         $this->mfGenerator = new MultipleFileGenerator($this->filesystem);
-        $this->mfGenerator
-            ->addGenerator($addonXmlGenerator)
-            ->addGenerator($languageGenerator);
+        $this->mfGenerator->addGenerator($addonXmlGenerator);
+        
+        // handle all supported languages
+        $supported_languages = $this->config->get('addon.supported_languages');
+        if ($supported_languages) {
+            $supported_languages_list = explode(',', $supported_languages);
+        }
+
+        $self = $this;
+        array_walk($supported_languages_list, function($language) use ($self, $generatorMediator) {
+            $languageGenerator = new LanguageGenerator($self->config, $language);
+            $generatorMediator->addGenerator($languageGenerator);
+            $self->mfGenerator->addGenerator($languageGenerator);
+        });
     }
 
     /**
@@ -82,7 +90,7 @@ class AddonXml extends AbstractController
 
         $old_content = [];
         $this->mfGenerator->each(function($generator) use (&$old_content) {
-            $old_content[get_class($generator->extract())] = $generator->extract()->toString();
+            $old_content[$generator->extract()->getKey()] = $generator->extract()->toString();
         });
         
         $addonXmlGenerator = $this->mfGenerator
@@ -101,9 +109,11 @@ class AddonXml extends AbstractController
             ->write()
             ->throwIfNotExists();
         
-        $this->mfGenerator->each(function($generator) use ($old_content) {
-            $this->terminal->diff(
-                \Diff::toString(\Diff::compare($old_content[get_class($generator->extract())], $generator->extract()->toString()))
+        $self = $this;
+        $this->mfGenerator->each(function($generator) use ($self, $old_content) {
+            $self->terminal->success($generator->extract()->getPath() . ' was changed');
+            $self->terminal->diff(
+                \Diff::toString(\Diff::compare($old_content[$generator->extract()->getKey()], $generator->extract()->toString()))
             );
         });
     }

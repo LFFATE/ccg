@@ -16,7 +16,10 @@ class MultipleFileGenerator implements IFileGenerator {
     public function addGenerator(AbstractGenerator $generator)
     {
         $className = (new \ReflectionClass($generator))->getShortName();
-        $this->fileGenerators[$className] = new FileGenerator($generator, $this->filesystem);
+        $this->fileGenerators[] = [
+            'type'      => $className,
+            'generator' => new FileGenerator($generator, $this->filesystem)
+        ];
 
         return $this;
     }
@@ -25,7 +28,7 @@ class MultipleFileGenerator implements IFileGenerator {
         $inputClassName = (new \ReflectionClass($className))->getShortName();
 
         $this->fileGenerators = array_filter($this->fileGenerators, function($fileGenerator) use ($inputClassName) {
-            $currentClassName = (new \ReflectionClass($fileGenerator->extract()))->getShortName();
+            $currentClassName = (new \ReflectionClass($fileGenerator['generator']->extract()))->getShortName();
 
             return $inputClassName !== $currentClassName;
         });
@@ -35,13 +38,35 @@ class MultipleFileGenerator implements IFileGenerator {
 
     public function find(string $className): AbstractFileGenerator
     {
-        $found = @$this->fileGenerators[(new \ReflectionClass($className))->getShortName()];
+        $inputClassName = (new \ReflectionClass($className))->getShortName();
+        $found = array_filter($this->fileGenerators, function($fileGenerator) use ($inputClassName) {
+            $currentClassName = (new \ReflectionClass($fileGenerator['generator']->extract()))->getShortName();
+            return $inputClassName === $currentClassName;
+        });
 
-        if ($found) {
-            return $found;
+        if (!empty($found)) {
+            return (current($found))['generator'];
         }
 
         throw new \InvalidArgumentException('There is no file generator for ' . $className);
+    }
+
+    public function filter(string $className)
+    {
+        $inputClassName = (new \ReflectionClass($className))->getShortName();
+        $filtered = new $this($this->filesystem);
+        array_walk($this->fileGenerators, function($fileGenerator) use ($filtered, $inputClassName) {
+            $currentClassName = (new \ReflectionClass($fileGenerator['generator']->extract()))->getShortName();
+            if ($inputClassName === $currentClassName) {
+                $filtered->addGenerator($fileGenerator['generator']->extract());
+            }
+        });
+
+        if (!$filtered->isEmpty()) {
+            return $filtered;
+        }
+        
+        throw new \InvalidArgumentException('There is no file generators for ' . $className);
     }
 
     public function excluding(string $className) {
@@ -54,7 +79,8 @@ class MultipleFileGenerator implements IFileGenerator {
 
     public function each(callable $callback)
     {
-        array_walk($this->fileGenerators, $callback);
+        $generatorslist = array_column($this->fileGenerators, 'generator');
+        array_walk($generatorslist, $callback);
 
         return $this;
     }
@@ -62,7 +88,7 @@ class MultipleFileGenerator implements IFileGenerator {
     public function readFromTemplate()
     {
         array_walk($this->fileGenerators, function($fileGenerator) {
-            $fileGenerator->readFromTemplate();
+            $fileGenerator['generator']->readFromTemplate();
         });
 
         return $this;
@@ -71,7 +97,7 @@ class MultipleFileGenerator implements IFileGenerator {
     public function read()
     {
         array_walk($this->fileGenerators, function($fileGenerator) {
-            $fileGenerator->read();
+            $fileGenerator['generator']->read();
         });
 
         return $this;
@@ -80,14 +106,14 @@ class MultipleFileGenerator implements IFileGenerator {
     public function exists(): bool
     {
         return array_reduce($this->fileGenerators, function($exists, $fileGenerator) {
-            return $exists && $fileGenerator->exists();
+            return $exists && $fileGenerator['generator']->exists();
         }, true);
     }
 
     public function remove()
     {
         array_walk($this->fileGenerators, function($fileGenerator) {
-            $fileGenerator->remove();
+            $fileGenerator['generator']->remove();
         });
 
         return $this;
@@ -96,7 +122,7 @@ class MultipleFileGenerator implements IFileGenerator {
     public function throwIfExists(string $message = '')
     {
         array_walk($this->fileGenerators, function($fileGenerator) use ($message) {
-            $fileGenerator->throwIfExists($message);
+            $fileGenerator['generator']->throwIfExists($message);
         });
 
         return $this;
@@ -105,7 +131,7 @@ class MultipleFileGenerator implements IFileGenerator {
     public function throwIfNotExists(string $message = '')
     {
         array_walk($this->fileGenerators, function($fileGenerator) use ($message) {
-            $fileGenerator->throwIfNotExists($message);
+            $fileGenerator['generator']->throwIfNotExists($message);
         });
 
         return $this;
@@ -114,9 +140,14 @@ class MultipleFileGenerator implements IFileGenerator {
     public function write()
     {
         array_walk($this->fileGenerators, function($fileGenerator) {
-            $fileGenerator->write();
+            $fileGenerator['generator']->write();
         });
 
         return $this;
+    }
+
+    public function isEmpty(): bool
+    {
+        return empty($this->fileGenerators);
     }
 }

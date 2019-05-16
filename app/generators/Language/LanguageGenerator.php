@@ -9,6 +9,7 @@ use mediators\AbstractMediator;
 /**
   * @property string FILENAME
   * @property string $templatePath
+  * @property string $language
   * @property string $recycleBin - buffer to which be removed all langvars from actual content
   * @property string $content
   * @property Config $config
@@ -21,6 +22,7 @@ final class LanguageGenerator extends \generators\AbstractGenerator
 {
     const FILENAME = 'var/langs/${lang}/addons/${addon}.po';
     private $templatePath = '';
+    private $language;
     private $recycleBin = '';
     private $content = '';
     private $config;
@@ -31,9 +33,10 @@ final class LanguageGenerator extends \generators\AbstractGenerator
     ];
     private static $eol = "\n";
 
-    function __construct(Config $config)
+    function __construct(Config $config, string $language = '')
     {
-        $this->config = $config;
+        $this->config   = $config;
+        $this->language =  empty($language) ? $this->config->get('addon.default_language') : $language;
     }
 
     /**
@@ -64,7 +67,7 @@ final class LanguageGenerator extends \generators\AbstractGenerator
                     '${addon}'
                 ],
                 [
-                    $this->config->getOr('lang', 'addon.default_language'),
+                    $this->language,
                     $addon_id
                 ],
                 static::FILENAME
@@ -179,13 +182,11 @@ msgstr ""
 "Country-Code: ${country-code}\n"
 EOD;
 
-        $language_code          = $this->config->getOr('language', 'addon.default_language');
-
-        if (!$language_code) {
+        if (!$this->language) {
             throw new \InvalidArgumentException('Nor language param and addon default_language are specified');
         }
 
-        $language_information   = self::$codes[$language_code];
+        $language_information   = self::$codes[$this->language];
         $po_heading = str_replace(
             [
                 '${code}',
@@ -193,7 +194,7 @@ EOD;
                 '${country-code}'
             ],
             [
-                $language_code,
+                $this->language,
                 $language_information['pack-name'],
                 $language_information['country-code']
             ],
@@ -478,6 +479,14 @@ EOD;
     public static function clearWhitespaces(string $content): string
     {
         return preg_replace('/(' . self::$eol . '{3,})/sm', str_repeat(self::$eol, 2), $content);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getKey(): string
+    {
+        return parent::getKey() . ucfirst($this->language);
     }
 
     /**

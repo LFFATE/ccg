@@ -33,6 +33,14 @@ abstract class AbstractGenerator {
     abstract public function getTemplateFilename(): string;
 
     /**
+     * Get unique generator key based on params
+     */
+    public function getKey(): string
+    {
+        return (new \ReflectionClass($this))->getShortName();
+    }
+    
+    /**
      * Get variants for setting/option
      * 
      * @return array

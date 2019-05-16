@@ -29,9 +29,6 @@ final class GeneratorMediatorTest extends TestCase
         $generatorMediator->addGenerator($addonXmlGenerator);
         $generatorMediator->addGenerator($languageGenerator);
 
-        $this->assertInstanceOf(LanguageGenerator::class, $generatorMediator->getLanguageGenerator());
-        $this->assertInstanceOf(AddonXmlGenerator::class, $generatorMediator->getAddonXmlGenerator());
-
         $this->expectException(\LogicException::class);
         $generatorMediator->addGenerator(new TestGenerator());
     }

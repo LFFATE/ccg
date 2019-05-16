@@ -13,9 +13,10 @@ $defaults['addon'] = [
     'status'            => 'active',
     'has_icon'          => 'Y',
     'default_language'  => 'en',
+    'supported_languages' => 'en,ru',
     'supplier'          => 'Simtech Development',
     'supplier_link'     => 'http://www.simtechdev.com',
-    'auto_install'      => 'MULTIVENDOR,ULTIMATE'
+    'auto_install'      => 'MULTIVENDOR,ULTIMATE',
 ];
 
 $defaults['developer'] = [

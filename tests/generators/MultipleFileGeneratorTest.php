@@ -22,7 +22,7 @@ final class MultipleFileGeneratorTest extends TestCase
             'addon.id' => 'sd_new_addon'
         ],
         [
-            'lang' => 'en',
+            'addon.default_language' => 'en',
             'filesystem.output_path' => __DIR__ . '/../sources/cscart/${addon.id}/'
         ]);
 
@@ -229,6 +229,25 @@ final class MultipleFileGeneratorTest extends TestCase
         });
 
         $this->assertSame(2, $i);
+    }
+
+    public function testFilter(): void
+    {
+        $languageGenerator      = new LanguageGenerator($this->config);
+        $languageGeneratorRu    = new LanguageGenerator($this->config, 'ru');
+        $addonXmlGenerator      = new AddonXmlGenerator($this->config);
+        
+        $this->mfGenerator
+            ->addGenerator($languageGenerator)
+            ->addGenerator($languageGeneratorRu)
+            ->addGenerator($addonXmlGenerator);
+        
+        $self = $this;
+        $this->mfGenerator->filter(LanguageGenerator::class)->each(function($generator) use ($self) {
+            $this->assertInstanceOf(LanguageGenerator::class, $generator->extract());
+        });
+
+        // $this->assertSame(2, $i);
     }
 }
 

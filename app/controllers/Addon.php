@@ -35,22 +35,32 @@ class Addon extends AbstractController
         $this->filesystem           = $filesystem;
         $this->autocomplete         = $autocomplete;
 
-        $addonXmlGenerator  = new AddonXmlGenerator($this->config);
-        $languageGenerator  = new LanguageGenerator($this->config);
-        $readmeGenerator    = new ReadmeGenerator($this->config);
+        $addonXmlGenerator      = new AddonXmlGenerator($this->config);
+        $readmeGenerator        = new ReadmeGenerator($this->config);
 
         $generatorMediator  = new GeneratorMediator();
 
         $generatorMediator
             ->addGenerator($addonXmlGenerator)
-            ->addGenerator($languageGenerator)
             ->addGenerator($readmeGenerator);
 
         $this->mfGenerator = new MultipleFileGenerator($this->filesystem);
         $this->mfGenerator
             ->addGenerator($addonXmlGenerator)
-            ->addGenerator($languageGenerator)
             ->addGenerator($readmeGenerator);
+        
+        // handle all supported languages
+        $supported_languages = $this->config->get('addon.supported_languages');
+        if ($supported_languages) {
+            $supported_languages_list = explode(',', $supported_languages);
+        }
+
+        $self = $this;
+        array_walk($supported_languages_list, function($language) use ($self, $generatorMediator) {
+            $languageGenerator = new LanguageGenerator($self->config, $language);
+            $generatorMediator->addGenerator($languageGenerator);
+            $self->mfGenerator->addGenerator($languageGenerator);
+        });
     }
     
     /**
