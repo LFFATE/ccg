@@ -27,7 +27,11 @@
 
 ---
 ## Features
-
+- Create / Update / Remove methods to set up your addon
+- Sync entities: language variables will creates right after you add some setting to addon-xml
+- Built-in diff - look at the result of the command
+- Autocomplete
+  
 ---
 ## Getting started
 ### Installing
@@ -50,7 +54,7 @@ All other configs you can find at `config/defaults.php`, `config/filesystem.php`
 
 All this options you also can set by command line:
 ```
-~: ./ccg.php addon create --addon.id custom_addon_id 
+~: ./ccg.php addon/create --addon.id custom_addon_id 
 ```
 **Note: wrap the value by quotes if it contains spaces, commas and other non-word charachters**
 
